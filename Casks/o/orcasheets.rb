@@ -1,33 +1,19 @@
-class OrcaSheets < Formula
-  desc "World's Fastest Analytics Engine on your Mac"
-  homepage "https://orcasheets.io"
+cask "orcasheets" do
+  arch arm: "arm64", intel: "x86_64"
 
-  if Hardware::CPU.intel?
-    url "https://github.com/yourusername/yourapp/releases/download/v1.0.0/orcasheets-intel.tar.gz"
-    sha256 "your_intel_sha256_checksum"
-  elsif Hardware::CPU.arm?
-    url "https://github.com/dataorchestration/orcasheets/releases/download/v0.0.1/orcasheets-arm.tar.gz"
-    sha256 "dd09cf8dba178ab4445174f2290baf05a5920afbfe2a19ff538c8cc1e05373a6"
-  end
+  version "25.10.1"
+  sha256 arm:   "b12e696003e528257223bdcab07559d75f11dbc6739ed7320419f58f14696e6a",
+         intel: "bd032bfc65d5ec8c74740ff92651380c7053b9d29eb0e23b6826f7ddcde60e1d"
 
-  version "0.0.1"
+  url "https://github.com/dataorchestration/homebrew-orcasheets/releases/download/#{version}/orcasheets_#{version}_#{arch}.dmg",
+      verified: "github.com/dataorchestration/homebrew-orcasheets/"
+  name "OrcaSheets"
+  desc "Local first Big Data Analytics Engine"
+  homepage "https://orcasheets.io/"
 
-  def install
-    libexec.install "OrcaSheets.app"
-    bin.write_exec_script "#{libexec}/OrcaSheets.app/Contents/MacOS/orcasheets"
-  end
+  depends_on macos: ">= :big_sur"
 
-  def caveats
-    <<~EOS
-      OrcaSheets.app was installed to:
-        #{opt_libexec}/OrcaSheets.app
+  app "OrcaSheets.app"
 
-      You can run it using the command:
-        orcasheets
-    EOS
-  end
-
-  test do
-    system "false"
-  end
+  zap trash: "~/Library/Application Support/OrcaSheets"
 end
