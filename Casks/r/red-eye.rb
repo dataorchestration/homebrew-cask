@@ -9,8 +9,7 @@ cask "red-eye" do
   homepage "https://www.hexedbits.com/redeye/"
 
   deprecate! date: "2024-01-21", because: :no_longer_available
-
-  depends_on macos: ">= :mojave"
+  disable! date: "2025-01-22", because: :no_longer_available
 
   app "Red Eye.app"
 end

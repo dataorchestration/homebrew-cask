@@ -1,6 +1,6 @@
 cask "openscad@snapshot" do
-  version "2024.07.14"
-  sha256 "bbf10f52d4bb8e6c5121482311854d1a702c4458c1768663c08c6b9fdc18f36e"
+  version "2025.10.21"
+  sha256 "49a4493e486c78324f1d0d3fb99618e1a3e4bde03277f8b4eaa07f0f263d06c7"
 
   url "https://files.openscad.org/snapshots/OpenSCAD-#{version}.dmg"
   name "OpenSCAD"
@@ -12,9 +12,8 @@ cask "openscad@snapshot" do
     regex(/OpenSCAD[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  deprecate! date: "2025-05-01", because: :unsigned
-
   conflicts_with cask: "openscad"
+  depends_on macos: ">= :big_sur"
 
   app "OpenSCAD.app"
   binary "#{appdir}/OpenSCAD.app/Contents/MacOS/OpenSCAD", target: "openscad"

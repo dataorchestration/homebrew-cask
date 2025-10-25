@@ -9,10 +9,10 @@ cask "ytmdesktop-youtube-music" do
         verified: "github.com/ytmdesktop/ytmdesktop/"
   end
   on_intel do
-    version "2.0.5"
-    sha256 "c1de73b67b9258be0e83383556d9e49c370d2f5dc6122e3e531cbe3f95146b7b"
+    version "2.0.10"
+    sha256 "4c401fe2c6c8b128c62bc5ff5e44f909c5230285dc82660e0b9dbff706177de0"
 
-    url "https://github.com/ytmdesktop/ytmdesktop/releases/download/v#{version}/YouTube-Music.Desktop.App-darwin-#{arch}-#{version}.zip",
+    url "https://github.com/ytmdesktop/ytmdesktop/releases/download/v#{version}/YouTube.Music.Desktop.App-darwin-#{arch}-#{version}.zip",
         verified: "github.com/ytmdesktop/ytmdesktop/"
   end
 
@@ -39,7 +39,9 @@ cask "ytmdesktop-youtube-music" do
     end
   end
 
-  depends_on macos: ">= :catalina"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "YouTube Music Desktop App.app"
 

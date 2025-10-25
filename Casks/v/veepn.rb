@@ -1,6 +1,6 @@
 cask "veepn" do
-  version "2.3.7"
-  sha256 "9cbd0e255c99377a4f818f480afa9520926eb7a42832d64bab1134a80d82cb80"
+  version "2.3.12"
+  sha256 "8d4debc21b4b557c5c9636dc381043bb90e8517f7e68b4fcfdc1705f70a2f1ce"
 
   url "https://download.veepn.com/mac/VeePN_v#{version}.dmg"
   name "VeePN"

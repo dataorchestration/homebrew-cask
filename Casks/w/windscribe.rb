@@ -1,16 +1,16 @@
 cask "windscribe" do
-  version "2.10.15"
-  sha256 "a204f64bdc1448c23c6b8b6c4609158455fd393131b74a4b25c4f0801aa3fd94"
+  version "2.17.9"
+  sha256 "846f86a5cad3314e78ade167719b15cebb46ed5d909e117b5369403726f742c9"
 
-  url "https://deploy.totallyacdn.com/desktop-apps/#{version}/Windscribe_#{version}.dmg",
+  url "https://deploy.totallyacdn.com/desktop-apps/#{version}/Windscribe_#{version}_universal.dmg",
       verified: "deploy.totallyacdn.com/desktop-apps/"
   name "Windscribe"
   desc "VPN client for secure internet access and private browsing"
   homepage "https://windscribe.com/"
 
   livecheck do
-    url "https://windscribe.com/changelog/mac"
-    regex(%r{>\sv?(\d+(?:\.\d+)+)</a>\s</h3>}i)
+    url "https://windscribe.com/install/desktop/osx"
+    strategy :header_match
   end
 
   auto_updates true

@@ -1,27 +1,5 @@
 cask "teamviewer" do
-  on_high_sierra :or_older do
-    version "15.2.2756"
-    sha256 "fe7daf80f9aee056f97d11183941470fa1c5823101a0951990340b6264a2651a"
-
-    livecheck do
-      url "https://download.teamviewer.com/download/update/macupdates.xml?id=0&lang=en&version=#{version}&os=macos&osversion=10.11.1&type=1&channel=1"
-      regex(%r{url=.*update/v?(\d+(?:\.\d+)+)/Teamviewer\.pkg}i)
-    end
-
-    pkg "TeamViewer.pkg"
-  end
-  on_mojave do
-    version "15.42.4"
-    sha256 "3357bc366cd0295dd100b790d6af6216d349d34451ea18ba08692a51eadd6cf7"
-
-    livecheck do
-      url "https://download.teamviewer.com/download/update/macupdates.xml?id=0&lang=en&version=#{version}&os=macos&osversion=10.14.1&type=1&channel=1"
-      strategy :sparkle
-    end
-
-    pkg "TeamViewer.pkg"
-  end
-  on_catalina do
+  on_catalina :or_older do
     version "15.42.4"
     sha256 "3357bc366cd0295dd100b790d6af6216d349d34451ea18ba08692a51eadd6cf7"
 
@@ -42,8 +20,8 @@ cask "teamviewer" do
     EOS
   end
   on_big_sur do
-    version "15.55.3"
-    sha256 "520150c100ecf9b9569bf82e30557adb1d0e9ca89c8f59372caead5ba9dc88fe"
+    version "15.70.6"
+    sha256 "a9e00079983d95300574004e3548aff0620dbe6bd143b6fd2f63c6d23066fc21"
 
     livecheck do
       url "https://download.teamviewer.com/download/update/macupdates.xml?id=0&lang=en&version=#{version}&os=macos&osversion=11.7&type=1&channel=1"
@@ -53,8 +31,8 @@ cask "teamviewer" do
     pkg "TeamViewer.pkg"
   end
   on_monterey :or_newer do
-    version "15.55.3"
-    sha256 "520150c100ecf9b9569bf82e30557adb1d0e9ca89c8f59372caead5ba9dc88fe"
+    version "15.70.6"
+    sha256 "a9e00079983d95300574004e3548aff0620dbe6bd143b6fd2f63c6d23066fc21"
 
     livecheck do
       url "https://download.teamviewer.com/download/update/macupdates.xml?id=0&lang=en&version=#{version}&os=macos&osversion=12.7&type=1&channel=1"
@@ -71,7 +49,6 @@ cask "teamviewer" do
 
   auto_updates true
   conflicts_with cask: "teamviewer-host"
-  depends_on macos: ">= :el_capitan"
 
   postflight do
     # postinstall launches the app
@@ -101,6 +78,7 @@ cask "teamviewer" do
             ],
             pkgutil:   [
               "com.teamviewer.AuthorizationPlugin",
+              "com.teamviewer.AuthorizationResources",
               "com.teamviewer.remoteaudiodriver",
               "com.teamviewer.teamviewer.*",
               "TeamViewerUninstaller",
@@ -115,8 +93,11 @@ cask "teamviewer" do
     "~/Library/Caches/com.teamviewer.TeamViewer",
     "~/Library/Caches/TeamViewer",
     "~/Library/Cookies/com.teamviewer.TeamViewer.binarycookies",
+    "~/Library/HTTPStorages/com.teamviewer.TeamViewer",
+    "~/Library/HTTPStorages/com.teamviewer.TeamViewer.binarycookies",
     "~/Library/Logs/TeamViewer",
     "~/Library/Preferences/com.teamviewer*",
     "~/Library/Saved Application State/com.teamviewer.TeamViewer.savedState",
+    "~/Library/WebKit/com.teamviewer.TeamViewer",
   ]
 end

@@ -1,18 +1,16 @@
 cask "mendeley-reference-manager" do
-  version "2.119.0"
-  sha256 "c98be8a15438cb1b5a2fed8e2fa8dd9122746b7e8128faeea91bf038ce27b794"
+  version "2.138.0"
+  sha256 "1afb3c2711c790d63f65fea39bab13181b2ac5c51c8566a2b64582c4af9ebaf8"
 
-  url "https://static.mendeley.com/bin/desktop/mendeley-reference-manager-#{version}-x64.dmg"
+  url "https://static.mendeley.com/bin/desktop/mendeley-reference-manager-#{version}-universal.dmg"
   name "Mendeley Reference Manager"
   desc "Research management tool"
   homepage "https://www.mendeley.com/download-reference-manager/macOS/"
 
   livecheck do
-    url "https://static.mendeley.com/bin/desktop/latest-mac.yml"
-    strategy :electron_builder
+    url :homepage
+    regex(/href=.*?mendeley-reference-manager[._-]v?(\d+(?:\.\d+)+)(?:[._-]universal)?\.dmg/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Mendeley Reference Manager.app"
 
@@ -23,8 +21,4 @@ cask "mendeley-reference-manager" do
     "~/Library/Preferences/com.elsevier.mendeley.plist",
     "~/Library/Saved Application State/com.elsevier.mendeley.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

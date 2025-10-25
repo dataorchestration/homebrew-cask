@@ -1,9 +1,9 @@
 cask "jalview" do
   arch arm: "aarch64", intel: "x64"
 
-  version "2.11.3.3"
-  sha256 arm:   "b2414604e75ed029c7b520f1442ff3e3df00f677d88dd7068141ea8126a24423",
-         intel: "47bb1f11b5fc2b94479818ae615b2752cc4286684fd8a5f5f5619a0728fb99e0"
+  version "2.11.5.0"
+  sha256 arm:   "144adb8e649954403281bde18445beafc6a0f2fd74d8d00c7141cd398345d388",
+         intel: "3f2301f322700b821fac8353ce72d286e25d2b261a0a0b7bc582875730c6618f"
 
   url "https://www.jalview.org/downloads/installers/release/Jalview-#{version.dots_to_underscores}-macos-#{arch}-java_8.dmg"
   name "Jalview"
@@ -14,9 +14,10 @@ cask "jalview" do
     url "https://www.jalview.org/downloads/installers/release/Jalview-latest-macos-x64-java_8.dmg"
     regex(/Jalview-(\d(?:_\d+)*)-macos-x64-java_8\.dmg/i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        match[0].tr("_", ".").to_s
-      end
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      match[1].tr("_", ".")
     end
   end
 

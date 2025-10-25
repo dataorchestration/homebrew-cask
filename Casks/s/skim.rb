@@ -1,6 +1,6 @@
 cask "skim" do
-  version "1.7.3"
-  sha256 "00c1c4ce58a92f406febc1a7caad38d2de034213e441c9838b167a3a8d15a1b7"
+  version "1.7.11"
+  sha256 "25f340e5819bcc77d8fab45196528bdb0991e7e9f0218fbb0caf7ec1107fd3c5"
 
   url "https://downloads.sourceforge.net/skim-app/Skim/Skim-#{version}/Skim-#{version}.dmg",
       verified: "downloads.sourceforge.net/skim-app/Skim/"
@@ -14,7 +14,6 @@ cask "skim" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Skim.app"
   binary "#{appdir}/Skim.app/Contents/SharedSupport/displayline"

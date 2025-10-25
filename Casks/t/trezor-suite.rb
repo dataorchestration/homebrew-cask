@@ -1,12 +1,11 @@
 cask "trezor-suite" do
   arch arm: "arm64", intel: "x64"
 
-  version "24.6.3"
-  sha256 arm:   "31b9b8e13645b36a9b851c3c4576ce00b982feaeb81eb783937346909e3f3063",
-         intel: "5d687ab98c864ced35866358ebcb9fcd86a91d3a442c8258796c79ac6826cf43"
+  version "25.10.2"
+  sha256 arm:   "4ac0805be1512038fa2c4f6bc829c4965e7d93a7b69bbe741d4cf037c2264576",
+         intel: "73f52da2b6d50aec2f1a4d760f98cf2844c56a6d165920f3e78d81dd71c536e9"
 
-  url "https://github.com/trezor/trezor-suite/releases/download/v#{version}/Trezor-Suite-#{version}-mac-#{arch}.dmg",
-      verified: "github.com/trezor/trezor-suite/"
+  url "https://data.trezor.io/suite/releases/desktop/latest/Trezor-Suite-#{version}-mac-#{arch}.dmg"
   name "TREZOR Suite"
   desc "Companion app for the Trezor hardware wallet"
   homepage "https://suite.trezor.io/"
@@ -17,7 +16,7 @@ cask "trezor-suite" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "Trezor Suite.app"
 

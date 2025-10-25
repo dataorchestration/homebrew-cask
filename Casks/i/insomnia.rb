@@ -1,6 +1,6 @@
 cask "insomnia" do
-  version "9.3.2"
-  sha256 "b7f9025458f17fd96a08351685efd3c05b9f49b61218eb0e30756bcc167e14da"
+  version "11.6.2"
+  sha256 "26ad3d7cac3aeeef8cccf1ddeea0af821be0df704776d54323970e7fde33e564"
 
   url "https://github.com/Kong/insomnia/releases/download/core%40#{version}/Insomnia.Core-#{version}.dmg",
       verified: "github.com/Kong/insomnia/"
@@ -8,17 +8,16 @@ cask "insomnia" do
   desc "HTTP and GraphQL Client"
   homepage "https://insomnia.rest/"
 
-  # Upstream previously used a date-based version scheme (e.g., `2023.5.8`)
-  # before switching to a typical `8.1.0` format. The date-based versions are
-  # numerically higher, so we have to avoid matching them.
   livecheck do
-    url :url
-    regex(/^core@v?(\d{1,3}(?:\.\d+)+)$/i)
+    url "https://updates.insomnia.rest/builds/check/mac?v=#{version.major}.0.0&app=com.insomnia.app&channel=stable"
+    strategy :json do |json|
+      json["name"]
+    end
   end
 
   auto_updates true
   conflicts_with cask: "insomnia@alpha"
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Insomnia.app"
 

@@ -1,6 +1,6 @@
 cask "mycard" do
-  version "3.0.70"
-  sha256 "adebc5a6d01428a0733b7f1b158618e85eeff846d3223d7772238cd1e1730cf3"
+  version "3.0.75"
+  sha256 "1d0984f4d59456cd8cee0f59c5fe04fbb7c83ced430046246d90300ffb04cef1"
 
   url "https://cdn02.moecube.com:444/downloads/MyCard-#{version}.dmg",
       verified: "cdn02.moecube.com:444/downloads/"
@@ -22,4 +22,8 @@ cask "mycard" do
     "~/Library/Preferences/com.mycard.mycard.plist",
     "~/Library/Saved Application State/com.mycard.mycard.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

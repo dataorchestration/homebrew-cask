@@ -1,6 +1,6 @@
 cask "airtool" do
-  version "2.5.4"
-  sha256 "a3568e68beacc42e3b8ea920fe27c626e4ac45c4a1d9ca59ae786bbd92c28a6c"
+  version "2.7"
+  sha256 "8d941910df92f2f5fd4fd3995def632980e12cf081337c96dd94cbd118a0af46"
 
   url "https://www.intuitibits.com/downloads/Airtool_#{version}.pkg"
   name "Airtool"
@@ -13,7 +13,7 @@ cask "airtool" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :ventura"
 
   pkg "Airtool_#{version}.pkg"
 

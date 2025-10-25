@@ -1,9 +1,27 @@
 cask "visual-studio-code" do
   arch arm: "darwin-arm64", intel: "darwin"
 
-  version "1.91.1"
-  sha256 arm:   "2c1046c5ba3d700c7d0c3ac92dd1cbb8b687cfdb54dac1801ca0d3e59341630f",
-         intel: "9ef96ee86499fb63a3a848f7c6f89df5ed84cecb0e09b0d42175a7153be077b9"
+  on_catalina :or_older do
+    version "1.97.2"
+    sha256 arm:   "567ba4fae5545586a0bff02eea263d59873fcf488368a9a9ccf3d4c22dfa8ebc",
+           intel: "cfe48cf7bce34830cb7a20ee7b5e8fbe575fe95a47ef49f62dce8ccf3087dd89"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "1.105.1"
+    sha256 arm:   "a7d105124d5e9c81ebd0bb4aafe5bb7bd396e67f0075e40469634b59ef3e2daa",
+           intel: "980f10a627fa76bc500c82bc76aa7ee393fb1877bed80612eeeb6c05578e8c07"
+
+    livecheck do
+      url "https://update.code.visualstudio.com/api/update/#{arch}/stable/latest"
+      strategy :json do |json|
+        json["productVersion"]
+      end
+    end
+  end
 
   url "https://update.code.visualstudio.com/#{version}/#{arch}/stable"
   name "Microsoft Visual Studio Code"
@@ -11,18 +29,11 @@ cask "visual-studio-code" do
   desc "Open-source code editor"
   homepage "https://code.visualstudio.com/"
 
-  livecheck do
-    url "https://update.code.visualstudio.com/api/update/#{arch}/stable/latest"
-    strategy :json do |json|
-      json["productVersion"]
-    end
-  end
-
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Visual Studio Code.app"
   binary "#{appdir}/Visual Studio Code.app/Contents/Resources/app/bin/code"
+  binary "#{appdir}/Visual Studio Code.app/Contents/Resources/app/bin/code-tunnel"
 
   uninstall launchctl: "com.microsoft.VSCode.ShipIt",
             quit:      "com.microsoft.VSCode"

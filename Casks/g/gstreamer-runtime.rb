@@ -1,6 +1,6 @@
 cask "gstreamer-runtime" do
-  version "1.24.5"
-  sha256 "5692fe8f9f1ca232647a411500919f12cb0e848372c83c2442e799a6a44fdaba"
+  version "1.26.7"
+  sha256 "914dfee3420f54f1bcff6c5b775767187919c184012bb8e27982860776164239"
 
   url "https://gstreamer.freedesktop.org/data/pkg/osx/#{version}/gstreamer-1.0-#{version}-universal.pkg"
   name "GStreamer runtime package"
@@ -11,6 +11,8 @@ cask "gstreamer-runtime" do
     url "https://gstreamer.freedesktop.org/download/"
     regex(/gstreamer[._-]1\.0[._-]v?(\d+(?:\.\d+)+)[._-]universal\.pkg/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "gstreamer-1.0-#{version}-universal.pkg"
 
@@ -32,6 +34,7 @@ cask "gstreamer-runtime" do
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-net",
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-net-restricted",
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-playback",
+    "org.freedesktop.gstreamer.universal.gstreamer-1.0-python",
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-qt5",
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-system",
     "org.freedesktop.gstreamer.universal.gstreamer-1.0-visualizers",

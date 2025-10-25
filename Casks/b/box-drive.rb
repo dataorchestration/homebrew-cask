@@ -1,6 +1,6 @@
 cask "box-drive" do
-  version "2.38.173"
-  sha256 "4a1e0810aeeb4e160152ec8f0cc04c70c758a5515241cbbfdf98b68b2ec25ba0"
+  version "2.43.205"
+  sha256 "200c5fa6d8eec5516924938d46e7fa6122fdc189044fd935e8c155faa5beaf3d"
 
   url "https://e3.boxcdn.net/desktop/releases/mac/BoxDrive-#{version}.pkg",
       verified: "e3.boxcdn.net/desktop/releases/mac/"
@@ -9,15 +9,14 @@ cask "box-drive" do
   homepage "https://www.box.com/drive"
 
   livecheck do
-    url :url
-    strategy :extract_plist do |item|
-      item["com.box.desktop"].version
+    url "https://cdn07.boxcdn.net/Autoupdate5.json"
+    strategy :json do |json|
+      json.dig("mac", "free", "version")
     end
   end
 
   auto_updates true
   conflicts_with cask: "box-sync"
-  depends_on macos: ">= :el_capitan"
 
   pkg "BoxDrive-#{version}.pkg"
 
@@ -33,8 +32,12 @@ cask "box-drive" do
             pkgutil:   "com.box.desktop.installer.*"
 
   zap trash: [
+    "~/.Box_*",
     "~/Library/Application Support/Box/Box",
+    "~/Library/Application Support/FileProvider/com.box.desktop.boxfileprovider",
     "~/Library/Containers/com.box.desktop.findersyncext",
     "~/Library/Logs/Box/Box",
+    "~/Library/Preferences/com.box.desktop.plist",
+    "~/Library/Preferences/com.box.desktop.ui.plist",
   ]
 end

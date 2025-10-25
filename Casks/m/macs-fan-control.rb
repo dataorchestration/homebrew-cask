@@ -1,6 +1,6 @@
 cask "macs-fan-control" do
-  version "1.5.16"
-  sha256 "a8a6df38ddb1de83df768bbf8cada53bee082ee385973b1e14d7f752db29cccd"
+  version "1.5.19"
+  sha256 "444477583b1127fb7a293daef698b0e8e840211a5dd2780d673469aa77b01426"
 
   url "https://github.com/crystalidea/macs-fan-control/releases/download/v#{version}/macsfancontrol.zip",
       verified: "github.com/crystalidea/macs-fan-control/"
@@ -14,7 +14,6 @@ cask "macs-fan-control" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Macs Fan Control.app"
 

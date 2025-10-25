@@ -1,19 +1,22 @@
 cask "presonus-universal-control" do
-  version "4.3.2.100484"
-  sha256 "03fbc32a8d324968fc76e246a2179d2b41c3adfd0ae9352f62e9fb8a98f8e206"
+  version "4.7.1.107907,10118"
+  sha256 "727b1140980b00f62ebfc4a2acebfa71053d6171cf3e3e1d0186df817520d4b0"
 
-  url "https://pae-web.presonusmusic.com/downloads/products/dmg/PreSonus_Universal_Control_v#{version.dots_to_underscores}.dmg",
-      verified: "pae-web.presonusmusic.com/downloads/products/dmg/"
+  url "https://www.fmicassets.com/Damroot/Original/#{version.csv.second}/PreSonus_Universal_Control_v#{version.csv.first.dots_to_underscores}.dmg",
+      verified: "fmicassets.com/Damroot/Original/"
   name "Universal Control"
   desc "PreSonus software control interface"
-  homepage "https://www.presonus.com/products/Universal-Control"
+  homepage "https://www.presonus.com/pages/universal-control"
 
+  # There is no page available specifically for the software
+  # so we return the downloads from one of the popular products
   livecheck do
-    url "https://legacy.presonus.com/products/Universal-Control/downloads"
-    regex(/Universal\s?Control\sv?(\d+(?:\.\d+)+)/i)
+    url "https://www.presonus.com/products/audiobox-usb-96-studio"
+    regex(%r{href=.*?/(\d+)/PreSonus[._-]Universal[._-]Control[._-]v?(\d+(?:[._]\d+)+)\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[1].tr("_", ".")},#{match[0]}" }
+    end
   end
-
-  depends_on macos: ">= :mojave"
 
   pkg "PreSonus Universal Control.pkg"
 

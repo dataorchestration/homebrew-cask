@@ -1,18 +1,36 @@
 cask "freetube" do
-  version "0.21.1"
-  sha256 "ba5e3b94ca6969a580819ba352093fad60c5c087bc33fc336055d2a1fd4850fb"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/FreeTubeApp/FreeTube/releases/download/v#{version}-beta/freetube-#{version}-mac-x64.dmg"
-  name "FreeTube"
-  desc "YouTube player focusing on privacy"
-  homepage "https://github.com/FreeTubeApp/FreeTube"
+  on_catalina do
+    version "0.22.1"
+    sha256 "0e9eb9db841f36671c81fedff4580c39dbbd6bd541d5158ed4897218c4134946"
 
-  livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+)/i)
+    url "https://github.com/FreeTubeApp/FreeTube/releases/download/v#{version}-beta/freetube-#{version}-mac-x64.dmg",
+        verified: "github.com/FreeTubeApp/FreeTube/"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "0.23.12"
+    sha256 arm:   "6b70398d0453186b0f2087ac684eebb0c17eb847c75f4ed4e1507cea6d8eed47",
+           intel: "93b4d0553653a7c243b7bf7fd875441b689ddc57430b5a6e88dcc2ba865eb100"
+
+    url "https://github.com/FreeTubeApp/FreeTube/releases/download/v#{version}-beta/freetube-#{version}-beta-mac-#{arch}.dmg",
+        verified: "github.com/FreeTubeApp/FreeTube/"
+
+    livecheck do
+      url :url
+      regex(/^v?(\d+(?:\.\d+)+)/i)
+    end
   end
 
-  depends_on macos: ">= :high_sierra"
+  name "FreeTube"
+  desc "YouTube player focusing on privacy"
+  homepage "https://freetubeapp.io/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "FreeTube.app"
 
@@ -24,8 +42,4 @@ cask "freetube" do
     "~/Library/Preferences/io.freetubeapp.freetube.plist",
     "~/Library/Saved Application State/io.freetubeapp.freetube.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

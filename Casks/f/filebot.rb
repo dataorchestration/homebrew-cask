@@ -1,9 +1,9 @@
 cask "filebot" do
   arch arm: "arm64", intel: "x64"
 
-  version "5.1.3"
-  sha256 arm:   "2b9fc1cf0349eadac549f26e3509fdee2e6d3296d12d85c5004be4ec1360fc99",
-         intel: "e9971b8a412deb08e7d8bccdb05b415eb099a9948bcab5127dad811b39ad7b27"
+  version "5.2.0"
+  sha256 arm:   "71bb89a968a30fa076ffd5a3e2443143f68d60b8487110915611659e7d5acad0",
+         intel: "a32ddf766a55a9831c5aefbcaeecfbc5897b641a3b2f8490d476f17d27223735"
 
   url "https://get.filebot.net/filebot/FileBot_#{version}/FileBot_#{version}_#{arch}.app.tar.xz"
   name "FileBot"
@@ -15,10 +15,11 @@ cask "filebot" do
     regex(/href=.*?FileBot[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.pkg/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "FileBot.app"
   binary "#{appdir}/FileBot.app/Contents/MacOS/filebot.sh", target: "filebot"
-  binary "#{appdir}/FileBot.app/Contents/Resources/bash_completion.d/filebot_completion",
-         target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/filebot"
+  bash_completion "#{appdir}/FileBot.app/Contents/Resources/bash_completion.d/filebot_completion", target: "filebot"
 
   zap trash: [
     "~/Library/Application Scripts/net.filebot.FileBot",

@@ -1,6 +1,6 @@
 cask "notebooks" do
-  version "3.4.2"
-  sha256 "49c9efcbc1d4041cbe6710fd973505605d3f609f617e57742cf5aede2415eba9"
+  version "3.8.4"
+  sha256 "0ebbd9497dbbe0b468c5e2758db0bf79b74913cbc32ff59dc6dab13ef7e04850"
 
   url "https://www.notebooksapp.com/Download/macOS/v#{version.major}/Notebooks.dmg"
   name "Notebooks"
@@ -11,8 +11,6 @@ cask "notebooks" do
     url "https://notebooksapp.com/Download/macOS/v#{version.major}/Notebooks#{version.major}Appcast.xml"
     strategy :sparkle, &:short_version
   end
-
-  depends_on macos: ">= :sierra"
 
   app "Notebooks.app"
 

@@ -1,9 +1,9 @@
 cask "affine" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.15.4"
-  sha256 arm:   "ac832748b0caf274eb73d3145edf736b584c11771c37d4880c73a28d5c79ffff",
-         intel: "99b5df6e10768ac32eb6951f5a9fcde227147ab9bea14dc0f0aad85503e8b4f3"
+  version "0.25.1"
+  sha256 arm:   "2cfb0c815686d2ba972889366bb39814e19958d9a483c9215ee2eb3d6237018e",
+         intel: "d859fefb2b0926b57c144b55a91ca8fce30996eb0611269f5bfef49b107f47bf"
 
   url "https://github.com/toeverything/AFFiNE/releases/download/v#{version}/affine-#{version}-stable-macos-#{arch}.zip",
       verified: "github.com/toeverything/AFFiNE/"
@@ -17,7 +17,7 @@ cask "affine" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "AFFiNE.app"
 

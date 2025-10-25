@@ -1,27 +1,29 @@
 cask "trilium-notes" do
-  version "0.63.7"
-  sha256 "c110cd7d6fdcdfec9d833937f09e611af967786e3fa838673d6274a7268b0b22"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/zadam/trilium/releases/download/v#{version}/trilium-mac-x64-#{version}.zip"
-  name "Trilium Notes"
-  desc "Personal knowledge base"
-  homepage "https://github.com/zadam/trilium"
+  version "0.99.3"
+  sha256 arm:   "9ec9a56ce8814357e22dc2ae275d168434d18eda64e8ec72443e906b241ea12f",
+         intel: "e496abdd69ff7402f9f53d8eb239f0ceda63ba3f7358bee52c7a418e6b9e715b"
+
+  url "https://github.com/TriliumNext/Trilium/releases/download/v#{version}/TriliumNotes-v#{version}-macos-#{arch}.dmg",
+      verified: "github.com/TriliumNext/Trilium/"
+  name "TriliumNext Notes"
+  desc "Hierarchical note taking application"
+  homepage "https://triliumnext.github.io/Docs/"
 
   livecheck do
     url :url
     strategy :github_latest
   end
 
-  app "trilium-mac-x64/Trilium Notes.app"
+  depends_on macos: ">= :monterey"
+
+  app "Trilium Notes.app"
 
   zap trash: [
-    "~/Library/Application Support/Trilium Notes",
     "~/Library/Application Support/trilium-data",
-    "~/Library/Preferences/com.electron.trilium-notes.plist",
-    "~/Library/Saved Application State/com.electron.trilium-notes.savedState",
+    "~/Library/Application Support/TriliumNext Notes",
+    "~/Library/Preferences/com.electron.triliumnext-notes.plist",
+    "~/Library/Saved Application State/com.electron.triliumnext-notes.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

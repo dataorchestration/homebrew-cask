@@ -1,13 +1,14 @@
 cask "feishu" do
   arch arm: "arm64", intel: "x64"
+  livecheck_arch = on_arch_conditional arm: "_m1"
 
   on_arm do
-    version "7.21.6,b1bfa841"
-    sha256 "f235ad1f29220ab0dd7da60cafd843b150e8bc3ed415c9359d9ca6d5f9b252da"
+    version "7.54.8,e9f61856"
+    sha256 "aefb1bad2d96db9fb2878d10c1e2bc66b38d4beab31fa4a727b6970b1f8d5bfb"
   end
   on_intel do
-    version "7.21.6,6c03a76e"
-    sha256 "3808a9ad2f7c6aba05bf95e284a7ca140e9f80efc1d19dd3fa0db8ca6a0dfc50"
+    version "7.54.8,0ed88891"
+    sha256 "a42e9b80a895005fba9dafd1a8bdb608c057fbad8c80fbdfb05a685b630225be"
   end
 
   url "https://sf3-cn.feishucdn.com/obj/ee-appcenter/#{version.csv.second}/Feishu-darwin_#{arch}-#{version.csv.first}-signed.dmg",
@@ -19,13 +20,16 @@ cask "feishu" do
   livecheck do
     url "https://www.feishu.cn/api/downloads"
     regex(%r{/(\h+)/Feishu[._-]darwin[._-]#{arch}[._-]v?(\d+(?:\.\d+)+)[._-]signed\.dmg}i)
-    strategy :page_match do |page|
-      page.scan(regex)
-          .map { |match| "#{match[1]},#{match[0]}" }
+    strategy :json do |json, regex|
+      match = json.dig("versions", "MacOS#{livecheck_arch}", "download_link")&.match(regex)
+      next if match.blank?
+
+      "#{match[2]},#{match[1]}"
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   # Renamed for consistency: app name is different in the Finder and in a shell.
   app "Lark.app", target: "Feishu.app"

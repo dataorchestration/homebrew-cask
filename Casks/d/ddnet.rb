@@ -1,6 +1,6 @@
 cask "ddnet" do
-  version "18.3.1"
-  sha256 "3cae00211bda14a5df95aa51f943c75de58c089e5a52c8e1623ff2c7bbd29709"
+  version "19.5"
+  sha256 "e5ca740667f49a7fbe2cc91a017eaf5bcd74147a05e19d34bfd8004717931c40"
 
   url "https://ddnet.org/downloads/DDNet-#{version}-macos.dmg"
   name "DDNet"
@@ -12,7 +12,10 @@ cask "ddnet" do
     regex(/href=.*?DDNet[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg/i)
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "DDNet.app"
   app "DDNet-Server.app"
@@ -20,6 +23,6 @@ cask "ddnet" do
   zap trash: [
     "~/Library/Preferences/DDNet-Server-Launcher.plist",
     "~/Library/Saved Application State/org.DDNetClient.app.savedState",
-    # "~/Library/Application Support/Teeworlds/" is left out on purpose because teeworlds uses it as well.
+    # "~/Library/Application Support/Teeworlds" is left out on purpose because teeworlds uses it as well.
   ]
 end

@@ -1,18 +1,13 @@
 cask "whatsapp@legacy" do
-  version "2.2425.52"
-  sha256 "acd505e9bdcd4339dd744cc8854b283f7608884a19404a8c1938ee8edd850108"
+  version "2.2437.54"
+  sha256 "a85519c5cabe3846986fe0b40c6b8b1124fc962d9c0d514087617d6528b334ab"
 
   url "https://web.whatsapp.com/desktop/mac/files/release-#{version}.zip"
   name "WhatsApp Legacy"
   desc "Legacy desktop client for WhatsApp"
   homepage "https://www.whatsapp.com/"
 
-  livecheck do
-    url "https://web.whatsapp.com/desktop/mac/releases"
-    strategy :json do |json|
-      json["name"]
-    end
-  end
+  disable! date: "2025-02-22", because: :no_longer_available
 
   auto_updates true
   conflicts_with cask: [

@@ -7,12 +7,8 @@ cask "replay" do
   desc "Time travel debugging"
   homepage "https://replay.io/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
-
-  depends_on macos: ">= :sierra"
+  deprecate! date: "2024-07-24", because: :discontinued
+  disable! date: "2025-07-24", because: :discontinued
 
   app "Replay.app"
 

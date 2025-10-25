@@ -1,8 +1,11 @@
 cask "http-toolkit" do
-  version "1.18.0"
-  sha256 "95af1be6fd0cf10988e57d03f8be8da10e9aff84420a6c12681e8d2cf07c1b7e"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}.dmg",
+  version "1.23.0"
+  sha256 arm:   "3ce52c91dd511cb275502d692d81d28237486bb94af6d1618d7c87c242999631",
+         intel: "7052b43b1de6f2d493c922a568af24f7f5b3d48d1d4ac995eedc2324fa6bb42c"
+
+  url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}-#{arch}.dmg",
       verified: "github.com/httptoolkit/httptoolkit-desktop/"
   name "HTTP Toolkit"
   desc "HTTP(S) debugging proxy, analyzer, and client"
@@ -12,6 +15,8 @@ cask "http-toolkit" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "HTTP Toolkit.app"
 
@@ -23,8 +28,4 @@ cask "http-toolkit" do
     "~/Library/Preferences/tech.httptoolkit.desktop.plist",
     "~/Library/Saved Application State/tech.httptoolkit.desktop.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

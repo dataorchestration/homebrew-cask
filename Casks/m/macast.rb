@@ -12,8 +12,6 @@ cask "macast" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :mojave"
-
   app "Macast.app"
 
   zap trash: [
@@ -21,4 +19,8 @@ cask "macast" do
     "~/Library/Preferences/cn.xfangfang.Macast.plist",
     "~/Library/Saved Application State/cn.xfangfang.Macast.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

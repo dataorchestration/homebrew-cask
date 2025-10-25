@@ -1,6 +1,6 @@
 cask "thingsmacsandboxhelper" do
-  version "3.39"
-  sha256 "84c018224f094408081e86d849000f4846588f97a655b057e6f60deee41edc62"
+  version "3.44"
+  sha256 "e16c619c67b881b02ace5261d607e4b8368c717282cd80eca88eac8e0acf67db"
 
   url "https://static.culturedcode.com/things/thingssandboxhelper/#{version}/ThingsHelper.zip"
   name "Things Helper"
@@ -13,4 +13,6 @@ cask "thingsmacsandboxhelper" do
   end
 
   app "ThingsMacSandboxHelper.app"
+
+  # No zap stanza required
 end

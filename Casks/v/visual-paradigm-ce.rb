@@ -1,9 +1,9 @@
 cask "visual-paradigm-ce" do
   arch arm: "AArch64", intel: "WithJRE"
 
-  version "17.2,20240624"
-  sha256 arm:   "08f097a10e60c82b1be64a9de4768d41d1ae42ad8a25d32a628dcb54cbaaffa9",
-         intel: "87274f72dfc3d274660d27518f8755f5bf99deb33f56643e3b93577ced1d63a5"
+  version "17.3,20251022"
+  sha256 arm:   "f98f34c958f4b36248a1fc094fbc5f35ed785b1026e6184c2b81c96f90722c9d",
+         intel: "5ddf8bcc344707e5cff5564a22fdf48b496667ed20a61f8c692f4c4443172ed0"
 
   url "https://www.visual-paradigm.com/downloads/vpce/Visual_Paradigm_CE_#{version.csv.first.dots_to_underscores}_#{version.csv.second}_OSX_#{arch}.dmg"
   name "Visual Paradigm Community Edition"
@@ -14,7 +14,10 @@ cask "visual-paradigm-ce" do
     url "https://www.visual-paradigm.com/downloads/vpce/checksum.html"
     regex(%r{/vpce(\d+(?:\.\d+)+)/(\d+)/checksum\.html}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
 

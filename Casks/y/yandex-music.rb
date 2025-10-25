@@ -1,6 +1,6 @@
 cask "yandex-music" do
-  version "5.5.0"
-  sha256 "9989b75707582f961a0b83470dc530ab836ec5af46b6346397f1689506c9f473"
+  version "5.74.1"
+  sha256 "61c38a21f25d552b1e196c5ca97d323752e3f1d5d30d1041bb4b4fad26f63716"
 
   url "https://music-desktop-application.s3.yandex.net/stable/Yandex_Music_universal_#{version}.dmg",
       verified: "music-desktop-application.s3.yandex.net/stable/"
@@ -14,7 +14,7 @@ cask "yandex-music" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Яндекс Музыка.app"
 

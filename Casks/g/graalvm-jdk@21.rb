@@ -1,22 +1,28 @@
 cask "graalvm-jdk@21" do
   arch arm: "aarch64", intel: "x64"
 
-  version "21.0.3"
-  sha256 arm:   "501b3163e663f154bd816fa889810f94004530e6fcef62e6e87554247d0952c0",
-         intel: "6d29cacd2e3b46ee33d573757f1098fec5b487a89a98f68a5315d45a4f89a1bb"
+  version "21.0.9,7"
+  sha256 arm:   "cda0e0ee16fe06ba0a3203ae77a680c6e696b592b697851e161ae92b66c683a6",
+         intel: "aaf06b193ea1a05662d4a5a05e899eb51f8881eee4319db044707e79dcabbb32"
 
-  url "https://download.oracle.com/graalvm/#{version.major}/archive/graalvm-jdk-#{version}_macos-#{arch}_bin.tar.gz",
+  url "https://download.oracle.com/graalvm/#{version.major}/archive/graalvm-jdk-#{version.csv.first}_macos-#{arch}_bin.tar.gz",
       verified: "download.oracle.com/"
   name "GraalVM Java Development Kit"
   desc "GraalVM from Oracle"
   homepage "https://www.graalvm.org/"
 
   livecheck do
-    url "https://www.oracle.com/java/technologies/downloads/"
-    regex(/graalvm\s+for\s+jdk\s+(21(?:\.\d+)+)/i)
+    url "https://java.oraclecloud.com/currentJavaReleases/#{version.major}"
+    regex(/(?:jdk[._-])?(\d+(?:\.\d+)*)(?:-\d+)?\+(\d+)/i)
+    strategy :json do |json, regex|
+      match = json["releaseFullVersion"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
   end
 
-  artifact "graalvm-jdk-#{version}+7.1", target: "/Library/Java/JavaVirtualMachines/graalvm-#{version.major}.jdk"
+  artifact "graalvm-jdk-#{version.csv.first}+#{version.csv.second}.1", target: "/Library/Java/JavaVirtualMachines/graalvm-#{version.major}.jdk"
 
   # No zap stanza required
 

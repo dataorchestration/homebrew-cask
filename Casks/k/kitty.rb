@@ -1,6 +1,6 @@
 cask "kitty" do
-  version "0.35.2"
-  sha256 "a9dc19e9b88a15067f3972fdabfbabe692814e0288c5a2d09aca896cb42694af"
+  version "0.43.1"
+  sha256 "e36d8f0f3cbaa7b49e4fb9eca5eb3f17d2d7de4666c08cf71b69a79b6ea987aa"
 
   url "https://github.com/kovidgoyal/kitty/releases/download/v#{version}/kitty-#{version}.dmg"
   name "kitty"
@@ -8,7 +8,7 @@ cask "kitty" do
   homepage "https://github.com/kovidgoyal/kitty"
 
   conflicts_with cask: "kitty@nightly"
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :big_sur"
 
   app "kitty.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

@@ -1,6 +1,6 @@
 cask "keka" do
-  version "1.4.3"
-  sha256 "c723b6e64adafdfb8bbb05a7a808facb9ad252a35a7f17d0ae3a74abafcab386"
+  version "1.6.0"
+  sha256 "6acf206a0065a4a9fd304c8e07faf7885ac771351991a409ac2ce09b26c4d35d"
 
   url "https://github.com/aonez/Keka/releases/download/v#{version}/Keka-#{version}.dmg",
       verified: "github.com/aonez/Keka/"
@@ -29,8 +29,10 @@ cask "keka" do
   end
 
   zap trash: [
+    "~/Library/Application Scripts/*.group.com.aone.keka",
     "~/Library/Application Scripts/com.aone.keka",
     "~/Library/Application Scripts/com.aone.keka.KekaFinderIntegration",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.aone.keka.sfl*",
     "~/Library/Application Support/Keka",
     "~/Library/Caches/com.aone.keka",
     "~/Library/Containers/com.aone.keka",

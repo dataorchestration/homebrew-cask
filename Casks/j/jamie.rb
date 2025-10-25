@@ -1,18 +1,15 @@
 cask "jamie" do
-  arch arm: "-arm64"
+  version "4.5.0"
+  sha256 "39014fabc16ff77b08c4e333ce3ff9f911dc7b2ea0f3da3cfbf480d978ecd946"
 
-  version "4.1.5"
-  sha256 arm:   "4da56d1aaf9f62f8cdceb225b08531075160b5388ab6b14a883aa82fda707b5f",
-         intel: "79573e4b82e63b7db9854708570da0c546176f4eeba47bde82355d03b15a17c3"
-
-  url "https://github.com/louismorgner/jamie-release/releases/download/v#{version}/jamie-#{version}#{arch}.dmg",
+  url "https://github.com/louismorgner/jamie-release/releases/download/v#{version}/jamie-#{version}-mac.zip",
       verified: "github.com/louismorgner/jamie-release/"
-  name "jamie"
+  name "Jamie"
   desc "AI-powered meeting notes"
   homepage "https://meetjamie.ai/"
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :ventura"
 
   app "jamie.app"
 

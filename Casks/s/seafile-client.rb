@@ -1,9 +1,9 @@
 cask "seafile-client" do
-  version "9.0.6"
-  sha256 "4c06bda51440403c4b10ea55bd7467b9131e3b69f1cc13fff5ac788c7272da7a"
+  version "9.0.15"
+  sha256 "d899e827e68d77503ea204884276a8accfe565d7b012e31983ced6f449647eb6"
 
-  url "https://download.seadrive.org/seafile-client-#{version}.dmg",
-      verified: "seadrive.org/"
+  url "https://s3.eu-central-1.amazonaws.com/download.seadrive.org/seafile-client-#{version}.dmg",
+      verified: "s3.eu-central-1.amazonaws.com/download.seadrive.org/"
   name "Seafile Client"
   desc "File syncing client"
   homepage "https://www.seafile.com/"
@@ -13,7 +13,7 @@ cask "seafile-client" do
     regex(%r{href=.*?/seafile[._-]client[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Seafile Client.app"
 

@@ -1,11 +1,11 @@
 cask "citrix-workspace" do
-  version "24.05.0.89"
-  sha256 "34a374300ff79466cde9119c9e9f89fb1c21d5ce94c94e697223c7cbba36d47a"
+  version "25.08.0.48"
+  sha256 "1144f3fc36dae6819278929bf58d589f1c9cd827724afbee0937fafaf921a8d6"
 
   url "https://downloadplugins.citrix.com/ReceiverUpdates/Prod/Receiver/Mac/CitrixWorkspaceAppUniversal#{version}.pkg"
   name "Citrix Workspace"
   desc "Managed desktop virtualization solution"
-  homepage "https://www.citrix.com/"
+  homepage "https://docs.citrix.com/en-us/citrix-workspace"
 
   livecheck do
     url "https://downloadplugins.citrix.com/ReceiverUpdates/Prod/catalog_macos2.xml"
@@ -15,7 +15,7 @@ cask "citrix-workspace" do
     end
   end
 
-  depends_on macos: ">= :catalina"
+  auto_updates true
 
   pkg "CitrixWorkspaceAppUniversal#{version}.pkg"
 
@@ -24,9 +24,12 @@ cask "citrix-workspace" do
               "com.citrix.ctxusbd",
               "com.citrix.CtxWorkspaceHelperDaemon",
               "com.citrix.ctxworkspaceupdater",
+              "com.citrix.devicetrust.launchagent",
               "com.citrix.ReceiverHelper",
+              "com.citrix.ReceiverUninstallHelper",
               "com.citrix.safariadapter",
               "com.citrix.ServiceRecords",
+              "com.citrix.UninstallMonitor",
             ],
             quit:      [
               "Citrix.ServiceRecords",
@@ -36,6 +39,8 @@ cask "citrix-workspace" do
             ],
             pkgutil:   [
               "com.citrix.common",
+              "com.citrix.devicetrust.client",
+              "com.citrix.devicetrust.client.ica",
               "com.citrix.enterprisebrowserinstaller",
               "com.citrix.ICAClient",
               "com.citrix.ICAClientcwa",

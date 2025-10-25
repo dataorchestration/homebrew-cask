@@ -1,6 +1,6 @@
 cask "imazing-profile-editor" do
-  version "1.9.0,298401"
-  sha256 "772df3cdc58b701e7dc74d5965a949995cdae51005b918ae9877394eb6633871"
+  version "2.1.1,379001"
+  sha256 "18027adb3ac1a91041d72f795f615fe3b44843601fa4d5c98e7ebaf693ed61ce"
 
   url "https://downloads.imazing.com/mac/iMazing-Profile-Editor/#{version.csv.first}.#{version.csv.second}/iMazing_Profile_Editor_#{version.csv.first}.#{version.csv.second}.dmg"
   name "iMazing Profile Editor"
@@ -13,7 +13,6 @@ cask "imazing-profile-editor" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "iMazing Profile Editor.app"
 

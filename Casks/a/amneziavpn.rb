@@ -1,8 +1,8 @@
 cask "amneziavpn" do
-  version "4.6.0.3"
-  sha256 "be4395c37a12b2ba96caae3b05f72babe7133f3bcee83f4ea74cbc19fe5ca2c4"
+  version "4.8.10.0"
+  sha256 "ff6de4f03606aaf2abccebc032a09a0e81577f2d48411f5c6de8856a8af9fefc"
 
-  url "https://github.com/amnezia-vpn/amnezia-client/releases/download/#{version}/AmneziaVPN_#{version}.dmg",
+  url "https://github.com/amnezia-vpn/amnezia-client/releases/download/#{version}/AmneziaVPN_#{version}_macos.zip",
       verified: "github.com/amnezia-vpn/amnezia-client/"
   name "Amnezia VPN"
   desc "VPN client"
@@ -13,15 +13,11 @@ cask "amneziavpn" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  pkg "AmneziaVPN.pkg"
 
-  app "AmneziaVPN.app"
-
-  uninstall quit:   [
-              "AmneziaVPN",
-              "AmneziaVPN-service",
-            ],
-            delete: "/Applications/AmneziaVPN.app"
+  uninstall launchctl: ["AmneziaVPN-service", "AmneziaVPN"],
+            quit:      "AmneziaVPN",
+            pkgutil:   "org.amneziavpn.package"
 
   zap trash: [
     "~/Library/Caches/AmneziaVPN.ORG",

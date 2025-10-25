@@ -1,9 +1,9 @@
 cask "sakura" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3.1.1"
-  sha256 arm:   "a66c6debedf266a248e18e5c951f33c3e7b9b3f7f26c1354dd5eb8cb8421f323",
-         intel: "6aa386c8e07e2d9ae7e7873d1acb1dcaabdda12034fb3314276f17aba5ff75e1"
+  version "3.1.7"
+  sha256 arm:   "35cafaaf6261feaee0501ba4dc9d823f1defd5595458869311c566a3d0bd8d4e",
+         intel: "82e57056ef15389650a27bb919c406834d8236883f034665cd2bdef637d98a4c"
 
   url "https://nya.globalslb.net/natfrp/client/launcher-macos/#{version}/SakuraLauncher_macOS_#{arch}.dmg",
       verified: "nya.globalslb.net/natfrp/client/launcher-macos/"
@@ -17,7 +17,7 @@ cask "sakura" do
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :ventura"
 
   app "SakuraLauncher.app"
 

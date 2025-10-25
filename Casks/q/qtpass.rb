@@ -8,7 +8,16 @@ cask "qtpass" do
   desc "Multi-platform GUI for pass, the standard unix password manager"
   homepage "https://qtpass.org/"
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "QtPass.app"
+
+  zap trash: [
+    "~/Library/Preferences/org.ijhack.QtPass.plist",
+    "~/Library/Saved Application State/org.qtpass.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -8,8 +8,6 @@ cask "mjolnir" do
   desc "Lightweight automation and productivity app"
   homepage "https://mjolnir.rocks/"
 
-  depends_on macos: ">= :sierra"
-
   app "Mjolnir.app"
 
   zap trash: [
@@ -18,4 +16,8 @@ cask "mjolnir" do
     "~/Library/Preferences/org.degutis.Mjolnir.plist",
     "~/Library/Saved Application State/org.degutis.Mjolnir.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

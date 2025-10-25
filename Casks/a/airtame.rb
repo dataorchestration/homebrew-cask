@@ -1,6 +1,6 @@
 cask "airtame" do
-  version "4.10.1"
-  sha256 "6c34b005b3373c957f80e181e9758a8fe2409fe33d2590b92f49c6e87db39c06"
+  version "4.14.0"
+  sha256 "acf501add3e533b3c8af4212d16c38a1cfaf67a3d57490d90ce7f02f3ecc2201"
 
   url "https://downloads-cdn.airtame.com/app/latest/mac/Airtame-#{version}.dmg"
   name "Airtame"
@@ -13,7 +13,6 @@ cask "airtame" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Airtame.app"
 

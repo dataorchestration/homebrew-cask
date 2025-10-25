@@ -1,6 +1,6 @@
 cask "akiflow" do
-  version "2.43.23,8f76a78a"
-  sha256 "aae56230bc0c83ee5be99a2a9e86dc31dcd58183b904fb36734aceae995a0582"
+  version "2.59.7,b3035714"
+  sha256 "325082380edcc9413b65156aac844f087131882f31523b27ffd494d054b7e565"
 
   url "https://download.akiflow.com/builds/Akiflow-#{version.csv.first}-#{version.csv.second}-universal.dmg"
   name "Akiflow"
@@ -8,17 +8,19 @@ cask "akiflow" do
   homepage "https://akiflow.com/"
 
   livecheck do
-    url "https://akiflow.com/download/latest"
+    url "https://download.akiflow.com/builds/latest-mac.yml"
     regex(/Akiflow[._-](\d+(?:\.\d+)+)[._-](\h+)[._-]universal\.dmg/i)
-    strategy :header_match do |headers, regex|
-      match = headers["location"]&.match(regex)
-      next if match.blank?
+    strategy :electron_builder do |yaml, regex|
+      yaml["files"]&.map do |item|
+        match = item["url"]&.match(regex)
+        next if match.blank?
 
-      "#{match[1]},#{match[2]}"
+        "#{match[1]},#{match[2]}"
+      end
     end
   end
 
-  depends_on macos: ">= :catalina"
+  auto_updates true
 
   app "Akiflow.app"
 

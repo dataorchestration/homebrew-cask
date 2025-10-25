@@ -1,5 +1,5 @@
 cask "google-chrome@beta" do
-  version "127.0.6533.43"
+  version "142.0.7444.53"
   sha256 :no_check
 
   url "https://dl.google.com/chrome/mac/universal/beta/googlechromebeta.dmg"
@@ -9,11 +9,15 @@ cask "google-chrome@beta" do
 
   livecheck do
     url "https://chromiumdash.appspot.com/fetch_releases?channel=Beta&platform=Mac"
-    regex(/"version":\s*"v?(\d+(?:\.\d+)+)"/i)
+    strategy :json do |json|
+      json.map do |item|
+        item["version"]
+      end
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "Google Chrome Beta.app"
 

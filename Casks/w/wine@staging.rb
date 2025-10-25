@@ -1,6 +1,6 @@
 cask "wine@staging" do
-  version "9.11"
-  sha256 "bd8ee4bf411a4fd8f11de428978a154c3e03f2b9294716f9f36b62c93164af3e"
+  version "10.6"
+  sha256 "4721403f7c9c225175c7e40034f63858d13ec77ed072d7500d819b902bd6e41b"
 
   # Current winehq packages are deprecated and these are packages from
   # the new maintainers that will eventually be pushed to Winehq.
@@ -23,7 +23,7 @@ cask "wine@staging" do
         next if release["draft"] || release["prerelease"]
         next unless release["assets"]&.any? { |asset| asset["name"]&.match?(file_regex) }
 
-        match = release["tag_name"].match(regex)
+        match = release["tag_name"]&.match(regex)
         next if match.blank?
 
         match[1]
@@ -31,12 +31,13 @@ cask "wine@staging" do
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   conflicts_with cask: [
     "wine-stable",
     "wine@devel",
   ]
   depends_on cask: "gstreamer-runtime"
-  depends_on macos: ">= :catalina"
 
   app "Wine Staging.app"
   dir_path = "#{appdir}/Wine Staging.app/Contents/Resources"
@@ -48,9 +49,6 @@ cask "wine@staging" do
   binary "#{dir_path}/wine/bin/regedit"
   binary "#{dir_path}/wine/bin/regsvr32"
   binary "#{dir_path}/wine/bin/wine"
-  binary "#{dir_path}/wine/bin/wine-preloader"
-  binary "#{dir_path}/wine/bin/wine64"
-  binary "#{dir_path}/wine/bin/wine64-preloader"
   binary "#{dir_path}/wine/bin/wineboot"
   binary "#{dir_path}/wine/bin/winecfg"
   binary "#{dir_path}/wine/bin/wineconsole"

@@ -1,8 +1,8 @@
 cask "font-iosevka-slab" do
-  version "30.3.2"
-  sha256 "dff20106f377f283e2a42f408a02e5d9d549ad838f561ec8dc7427f4737b0167"
+  version "33.3.3"
+  sha256 "a34b3ea27050ebf4573bd1781d06a038749bd205f96d7a786b5f573a23cb8755"
 
-  url "https://github.com/be5invis/Iosevka/releases/download/v#{version}/PkgTTC-IosevkaSlab-#{version}.zip"
+  url "https://github.com/be5invis/Iosevka/releases/download/v#{version}/SuperTTC-IosevkaSlab-#{version}.zip"
   name "Iosevka Slab"
   homepage "https://github.com/be5invis/Iosevka/"
 
@@ -11,15 +11,7 @@ cask "font-iosevka-slab" do
     strategy :github_latest
   end
 
-  font "IosevkaSlab-Bold.ttc"
-  font "IosevkaSlab-ExtraBold.ttc"
-  font "IosevkaSlab-ExtraLight.ttc"
-  font "IosevkaSlab-Heavy.ttc"
-  font "IosevkaSlab-Light.ttc"
-  font "IosevkaSlab-Medium.ttc"
-  font "IosevkaSlab-Regular.ttc"
-  font "IosevkaSlab-SemiBold.ttc"
-  font "IosevkaSlab-Thin.ttc"
+  font "IosevkaSlab.ttc"
 
   # No zap stanza required
 end

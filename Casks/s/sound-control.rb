@@ -1,6 +1,6 @@
 cask "sound-control" do
-  version "3.1.10"
-  sha256 "7ac23e0013ae38cfa746342891d46a1e1a21cb16784c9de5f26a3bf505294c11"
+  version "3.3.2"
+  sha256 "2cb799b098433edd0d4ef165992275e77de580eb3e94e63dbe2abb4de150b005"
 
   url "https://s3.amazonaws.com/staticz.net/downloads/soundcontrol/SoundControl_#{version}.dmg",
       verified: "s3.amazonaws.com/staticz.net/downloads/soundcontrol/"
@@ -9,14 +9,8 @@ cask "sound-control" do
   homepage "https://staticz.com/soundcontrol/"
 
   livecheck do
-    url :homepage
-    regex(%r{/download/(\d+)}i)
-    strategy :page_match do |page, _regex|
-      version = page[/Sound Control v?(\d+(?:\.\d+)+) Release Notes/i, 1]
-      next if version.blank?
-
-      version.to_s
-    end
+    url "http://staticz.net/updates/soundcontrol#{version.major}.rss"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

@@ -12,7 +12,7 @@ cask "touchswitcher" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  auto_updates true
 
   app "TouchSwitcher.app"
 

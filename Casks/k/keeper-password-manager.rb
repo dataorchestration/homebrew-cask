@@ -1,5 +1,5 @@
 cask "keeper-password-manager" do
-  version "16.11.1,17182212651363"
+  version "17.4"
   sha256 :no_check
 
   url "https://keepersecurity.com/desktop_electron/Darwin/KeeperSetup.dmg"
@@ -8,8 +8,8 @@ cask "keeper-password-manager" do
   homepage "https://keepersecurity.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://docs.keeper.io/en/release-notes/desktop"
+    regex(/Release\s+v?(\d+(?:\.\d+)+)/i)
   end
 
   app "Keeper Password Manager.app"

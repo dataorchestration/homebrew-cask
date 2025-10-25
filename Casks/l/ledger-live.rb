@@ -1,6 +1,6 @@
 cask "ledger-live" do
-  version "2.83.0"
-  sha256 "313041adedda346d5e2bb8e7038faa2fcf1ec0b241e13f6a74d78227cda97784"
+  version "2.131.1"
+  sha256 "41b8a5d85196a6aee871cf3ab97d49b42d4a4151c760338d85b8164f4b3e9a38"
 
   url "https://download.live.ledger.com/ledger-live-desktop-#{version}-mac.dmg"
   name "Ledger Live"
@@ -8,11 +8,12 @@ cask "ledger-live" do
   homepage "https://www.ledger.com/ledger-live"
 
   livecheck do
-    url "https://download.live.ledger.com/latest/mac"
-    strategy :header_match
+    url "https://download.live.ledger.com/latest-mac.yml"
+    strategy :electron_builder
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Ledger Live.app"
 

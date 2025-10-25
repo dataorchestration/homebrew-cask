@@ -1,6 +1,6 @@
 cask "firefly-shimmer" do
-  version "2.1.15"
-  sha256 "72d839552c21e33b9e8d2b5775d074f7dfea6a4e520e2aec27da15e68777bbeb"
+  version "2.2.2"
+  sha256 "123a710a8e42a717c29df2f96b722e2507b2ee5593aa699893aee4947dedbb06"
 
   url "https://github.com/iotaledger/firefly/releases/download/desktop-shimmer-#{version}/firefly-shimmer-desktop-#{version}.dmg",
       verified: "github.com/iotaledger/firefly/"
@@ -14,7 +14,6 @@ cask "firefly-shimmer" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Firefly Shimmer.app"
 

@@ -1,6 +1,6 @@
 cask "sketch@beta" do
-  version "100.1,180159"
-  sha256 "2a34db2f1f7eb16b5defa10d4992eae03347231a34ba8d19a628789373fbe1af"
+  version "2025.3,218997"
+  sha256 "10ca35d1d187a27f2f6268471c535f5eac846b1219c06376cddef81c3caacfb9"
 
   url "https://beta-download.sketch.com/sketch-#{version.csv.first}-#{version.csv.second}.zip"
   name "Sketch"
@@ -13,7 +13,7 @@ cask "sketch@beta" do
   end
 
   auto_updates true
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :sonoma"
 
   app "Sketch Beta.app"
 

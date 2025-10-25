@@ -1,6 +1,6 @@
 cask "forklift" do
-  version "4.1.5"
-  sha256 "cb0faae59a476346ecd1ddb48d1010caadd8ffc01330c11d05bbe74ec93fb603"
+  version "4.4.3"
+  sha256 "87b103b014a1a63b8ddb1604bf14f38cd55405199b61035ce59d55ea26123834"
 
   url "https://download.binarynights.com/ForkLift/ForkLift#{version}.zip"
   name "ForkLift"
@@ -13,7 +13,7 @@ cask "forklift" do
   end
 
   auto_updates true
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :sonoma"
 
   app "ForkLift.app"
 

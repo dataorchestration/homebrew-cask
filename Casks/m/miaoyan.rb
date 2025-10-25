@@ -1,12 +1,24 @@
 cask "miaoyan" do
-  version "1.15.0"
-  sha256 "abc279f16ac3543598320d31cd693e405b78ff92dbcaa21bb2df96301c17b13c"
+  version "2.1.6"
+  sha256 "d936f2d4913b71343e24a0cb6147a371847a2b8afaa7ff8fe24c54e16f2e4108"
 
-  url "https://github.com/tw93/MiaoYan/releases/download/V#{version}/MiaoYan.dmg",
-      verified: "github.com/tw93/MiaoYan/"
+  url "https://gw.alipayobjects.com/os/k/app/MiaoYan_V#{version}.zip",
+      verified: "gw.alipayobjects.com/"
   name "MiaoYan"
   desc "Markdown editor"
   homepage "https://miaoyan.app/"
+
+  livecheck do
+    url "https://miaoyan.app/appcast.xml"
+    strategy :sparkle do |items|
+      items.map(&:nice_version)
+    end
+  end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "MiaoYan.app"
 

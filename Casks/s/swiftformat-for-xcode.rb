@@ -1,13 +1,30 @@
 cask "swiftformat-for-xcode" do
-  version "0.54.1"
-  sha256 "3babe7c530091c358a339c5e17dd7de4a613fc51d7434a567cffecd16fcdec46"
+  version "0.58.5"
+  sha256 "a571481010d49df7db957fde1443944a52e75de7a20aa76c70dd5212b961c5a6"
 
-  url "https://github.com/nicklockwood/SwiftFormat/releases/download/#{version}/SwiftFormat.for.Xcode.zip"
+  url "https://github.com/nicklockwood/SwiftFormat/releases/download/#{version}/SwiftFormat.for.Xcode.app.zip"
   name "SwiftFormat for Xcode"
   desc "Xcode Extension for reformatting Swift code"
   homepage "https://github.com/nicklockwood/SwiftFormat"
 
-  depends_on macos: ">= :mojave"
+  # Not every GitHub release provides a file for macOS or each arch
+  # so we check multiple recent releases instead of only the "latest" release.
+  livecheck do
+    url :url
+    regex(/SwiftFormat[._-]for[._-]Xcode(?:\.app)?\.zip/i)
+    strategy :github_releases do |json, regex|
+      json.map do |release|
+        next if release["draft"] || release["prerelease"]
+
+        release["assets"]&.map do |asset|
+          match = asset["name"]&.match(regex)
+          next if match.blank?
+
+          release["tag_name"]&.[](/^v?(\d+(?:\.\d+)+)$/i, 1)
+        end
+      end.flatten
+    end
+  end
 
   app "SwiftFormat for Xcode.app"
 

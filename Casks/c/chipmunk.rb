@@ -1,8 +1,11 @@
 cask "chipmunk" do
-  version "3.12.9"
-  sha256 "1d5547529f86b7059a162eb63b5b029f66395622ff85882bc32401c36f32cf3f"
+  arch arm: "-arm64"
 
-  url "https://github.com/esrlabs/chipmunk/releases/download/#{version}/chipmunk@#{version}-darwin-portable.tgz"
+  version "3.19.1"
+  sha256 arm:   "7308d84b3a30ec91b670ecfa5c842b85018df66093a3e51be771b2f251e5cbe0",
+         intel: "b9a6bc12cb58f2272dedf6d7db0d884687bc02557699f0d05703215093742e3b"
+
+  url "https://github.com/esrlabs/chipmunk/releases/download/#{version}/chipmunk@#{version}-darwin#{arch}-portable.tgz"
   name "Chipmunk Log Analyzer & Viewer"
   desc "Log analysis tool"
   homepage "https://github.com/esrlabs/chipmunk/"
@@ -13,6 +16,7 @@ cask "chipmunk" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "chipmunk.app"
 

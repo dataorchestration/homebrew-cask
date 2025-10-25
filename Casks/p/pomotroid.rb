@@ -7,6 +7,8 @@ cask "pomotroid" do
   desc "Timer application"
   homepage "https://github.com/Splode/pomotroid"
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Pomotroid.app"
 
   zap trash: [
@@ -14,4 +16,8 @@ cask "pomotroid" do
     "~/Library/Preferences/com.splode.pomotroid.plist",
     "~/Library/Saved Application State/com.splode.pomotroid.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

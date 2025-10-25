@@ -1,6 +1,6 @@
 cask "streamlink-twitch-gui" do
-  version "2.5.2"
-  sha256 "bb653d1d358e462fb80f238fe031fa7842fd064d829a67a1fc8f184bb6933a1a"
+  version "2.5.3"
+  sha256 "164179e26ef07cc821e718a9a965ed58815de22be080d0fe32e90356a9b850fe"
 
   url "https://github.com/streamlink/streamlink-twitch-gui/releases/download/v#{version}/streamlink-twitch-gui-v#{version}-macOS.tar.gz"
   name "Streamlink Twitch GUI"
@@ -8,7 +8,6 @@ cask "streamlink-twitch-gui" do
   homepage "https://github.com/streamlink/streamlink-twitch-gui/"
 
   depends_on formula: "streamlink"
-  depends_on macos: ">= :high_sierra"
 
   app "Streamlink Twitch GUI.app"
 
@@ -17,4 +16,8 @@ cask "streamlink-twitch-gui" do
     "~/Library/Caches/streamlink-twitch-gui",
     "~/Library/Logs/streamlink-twitch-gui",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

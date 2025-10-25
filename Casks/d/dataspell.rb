@@ -1,9 +1,9 @@
 cask "dataspell" do
   arch arm: "-aarch64"
 
-  version "2024.1.3,241.18034.23"
-  sha256 arm:   "fa8f9c77b2fab31ea383a492c7a061e4b297e6581df4a5c116de9aec4a52c86d",
-         intel: "132c1e67c18d676844a26ad95fcd68942965157222f7dc931c15117e96d29a84"
+  version "2025.2.2,252.27397.107"
+  sha256 arm:   "a2a9cc1c0c515399206568e66add7693718918cef58fc16025effde3d768371b",
+         intel: "9573f0450a6eb1877bf53705533c886962ea5985c83c7a2ef642cea796b8eae0"
 
   url "https://download.jetbrains.com/python/dataspell-#{version.csv.first}#{arch}.dmg"
   name "DataSpell"
@@ -13,17 +13,29 @@ cask "dataspell" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=DS&latest=true&type=release"
     strategy :json do |json|
-      json["DS"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["DS"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "DataSpell.app"
-  binary "#{appdir}/DataSpell.app/Contents/MacOS/dataspell"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/dataspell.wrapper.sh"
+  binary shimscript, target: "dataspell"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/DataSpell.app/Contents/MacOS/dataspell' "$@"
+    EOS
+  end
 
   zap trash: [
     "~/Library/Application Support/DataSpell*",

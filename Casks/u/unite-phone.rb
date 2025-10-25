@@ -1,18 +1,19 @@
 cask "unite-phone" do
-  version "2024.5.0"
-  sha256 "2e571ff57401afebd473dab67ad4b64cc1e482e02af5a4c0c20db02985d52204"
+  version "2025.9.2"
+  sha256 "b79fc7a2977b72b69c8b238740c4d5c81073d0a94fcd3cb36b26d5d50e794b26"
 
-  url "https://update.unitephone.nl/download/unite_phone-#{version}-universal.dmg",
+  url "https://update.unitephone.nl/updates/unite_phone-#{version}-universal-mac.zip",
       user_agent: :fake
   name "Unite Phone"
   desc "Video and voice calling application"
   homepage "https://unitephone.nl/"
 
   livecheck do
-    url "https://unitephone.nl/unitephone-app/macos"
-    regex(/unite_phone[._-]v?(\d+(?:\.\d+)*)[._-]universal\.dmg/i)
-    strategy :header_match
+    url "https://update.unitephone.nl/updates/latest-mac.yml"
+    strategy :electron_builder
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Unite Phone.app"
 

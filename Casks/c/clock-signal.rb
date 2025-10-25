@@ -1,14 +1,12 @@
 cask "clock-signal" do
-  version "2024-06-03"
-  sha256 "289efd3482ba65b528d0759dd678d3d3b7be69251f79d5ff4252f49b4b51ec9a"
+  version "2025-10-19"
+  sha256 "dff01a7aa39ed95152a86e412509d1b213b3efb63167c13a8b15b2d54f2bc4fc"
 
   url "https://github.com/TomHarte/CLK/releases/download/#{version}/Clock.Signal.MacOS.#{version}.zip"
   name "Clock Signal"
   name "CLK"
   desc "Latency-hating emulator of 8- and 16-bit platforms"
   homepage "https://github.com/TomHarte/CLK"
-
-  depends_on macos: ">= :high_sierra"
 
   app "Clock Signal.app"
 

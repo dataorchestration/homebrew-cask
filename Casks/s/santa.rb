@@ -1,35 +1,39 @@
 cask "santa" do
-  version "2024.5"
-  sha256 "cf8b1855e6a8ded93f6ea8c924c40b867229d4c5bb4cdc5820ee9db43b96f1e8"
+  version "2025.9"
+  sha256 "52345d7038a1829e2502ed050a82d49ab7503e2c2a9f1f4460c8e49d961dcd61"
 
-  url "https://github.com/google/santa/releases/download/#{version}/santa-#{version}.dmg"
+  url "https://github.com/northpolesec/santa/releases/download/#{version}/santa-#{version}.dmg"
   name "Santa"
   desc "Binary authorization system"
-  homepage "https://github.com/google/santa"
-
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  homepage "https://github.com/northpolesec/santa"
 
   pkg "santa-#{version}.pkg"
 
-  uninstall launchctl: [
-              "com.google.santa",
-              "com.google.santa.bundleservice",
-              "com.google.santa.metricservice",
-              "com.google.santa.syncservice",
-              "com.google.santad",
+  uninstall early_script: {
+              executable:   "/Applications/Santa.app/Contents/MacOS/Santa",
+              args:         ["--unload-system-extension"],
+              sudo:         true,
+              must_succeed: false,
+            },
+            launchctl:    [
+              "com.northpolesec.santa",
+              "com.northpolesec.santa.bundleservice",
+              "com.northpolesec.santa.metricservice",
+              "com.northpolesec.santa.syncservice",
+              "com.northpolesec.santad",
             ],
-            kext:      "com.google.santa-driver",
-            pkgutil:   "com.google.santa",
-            delete:    [
+            pkgutil:      "com.northpolesec.santa",
+            delete:       [
               "/Applications/Santa.app",
               "/usr/local/bin/santactl",
             ]
 
-  # No zap stanza required
-
-  caveats "For #{token} to use EndpointSecurity, it must be granted Full Disk Access under " \
-          "System Preferences → Security & Privacy → Privacy"
+  zap delete: [
+        "/var/db/santa",
+        "/var/log/santa*",
+      ],
+      trash:  [
+        "/private/etc/asl/com.northpolesec.santa.asl.conf",
+        "/private/etc/newsyslog.d/com.northpolesec.santa.newsyslog.conf",
+      ]
 end

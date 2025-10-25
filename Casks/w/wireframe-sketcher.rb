@@ -1,19 +1,23 @@
 cask "wireframe-sketcher" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "7.1.1"
-  sha256 arm:   "9bf23a643558a5a0b2ed1e9cd265ab7227cd31b2ae1ffb7e5c26c5806b2995ec",
-         intel: "a951781e8cf1de233296a663d59151cfad7ffae1b333ea9e9891c4474039a24f"
+  version "7.4.0"
+  sha256 arm:   "e1a9a0cbe60ff5831b931b1e67a1af21965dbcb737f1d2abeddae7121e819858",
+         intel: "645be5411c4eb074dc8556516e0ddb7f18f389ad1bef72e0393faa718c5f45f1"
 
-  url "https://wireframesketcher.com/downloads/studio/WireframeSketcher-#{version}-macosx.#{arch}.zip"
+  url "https://wireframesketcher.com/downloads/studio/dist/WireframeSketcher-#{version}-macosx.#{arch}.zip"
   name "WireframeSketcher"
   desc "Tool for creating wireframes, mockups and prototypes"
   homepage "https://wireframesketcher.com/"
 
   livecheck do
     url "https://wireframesketcher.com/updates/"
-    regex(/version.*?(\d+(?:\.\d+)+)/i)
+    regex(/Current\s+version\s+is\s+v?(\d+(?:\.\d+)+)/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :big_sur"
 
   app "WireframeSketcher.app"
 

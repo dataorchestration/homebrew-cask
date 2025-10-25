@@ -1,9 +1,9 @@
 cask "lazycat" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.96"
-  sha256  arm:   "8bfb3c6c64d62ee2fb91778e7db3cf8fb0ce90efa4f579aac10521c20ae9cb48",
-          intel: "3f00f3bbb8d86c86424e4ec2b9d2d0194ec0c63eceae300ed5b3bce1e9349a71"
+  version "1.5.0"
+  sha256 arm:   "76774b40293f921f8b276640b2d28fb0c32cdd152c7e78a943ebe81cedd51fdc",
+         intel: "9d1934ffe976384a2707f88c56587beac97e0238816d6200f4b531d9760ef49f"
 
   url "https://dl.lazycat.cloud/client/desktop/stable/lzc-client-desktop_v#{version}_#{arch}.dmg"
   name "LazyCat"
@@ -13,11 +13,11 @@ cask "lazycat" do
   livecheck do
     url "https://dl.lazycat.cloud/client/desktop/lzc-client-desktop_#{arch}.dmg.metadata.json"
     strategy :json do |json|
-      json["buildVersion"].delete_prefix("v")
+      json["buildVersion"]&.delete_prefix("v")
     end
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "懒猫微服.app"
 

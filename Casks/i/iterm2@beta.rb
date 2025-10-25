@@ -1,7 +1,7 @@
 cask "iterm2@beta" do
   # NOTE: "2" is not a version number, but an intrinsic part of the product name
-  version "3.5.4beta1"
-  sha256 "510c84bd52e90dcbfa803ff28578812c9c8e3d7a31f119bf627e6e80adca76ea"
+  version "3.6.6beta1"
+  sha256 "cf05a50072cbe5c767b8ac1c7882f3377f4bed664a0da64cf1b51e61c332ba2d"
 
   url "https://iterm2.com/downloads/beta/iTerm2-#{version.dots_to_underscores}.zip"
   name "iTerm2"
@@ -9,7 +9,11 @@ cask "iterm2@beta" do
   homepage "https://iterm2.com/"
 
   livecheck do
-    url "https://iterm2.com/appcasts/testing_modern.xml"
+    # workaround for
+    # - https://github.com/Homebrew/homebrew-cask/pull/104019
+    # - https://github.com/gnachman/iterm2-website/issues/82
+    # url "https://iterm2.com/appcasts/testing_modern.xml"
+    url "https://raw.githubusercontent.com/gnachman/iterm2-website/master/source/appcasts/testing_modern.xml"
     strategy :sparkle, &:version
   end
 
@@ -18,7 +22,7 @@ cask "iterm2@beta" do
     "iterm2",
     "iterm2@nightly",
   ]
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "iTerm.app"
 

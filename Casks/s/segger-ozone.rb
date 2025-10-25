@@ -1,9 +1,9 @@
 cask "segger-ozone" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3.34a"
-  sha256 arm:   "a43eef46154c5ed86ce9108cb007d543e58c30796b73a2bf588dfd2a5fb69e38",
-         intel: "cdf9d8b39547d9b2af64556fc2f39039942b6659e8567165469e61b13cfb77cd"
+  version "3.40c"
+  sha256 arm:   "bbeca1589884df351c11bcfbdcdefe84712034f30ad1fa2e58fcf4dc8a155f77",
+         intel: "7f2ca678323444fdd8e0e9ae665adce1f3ca699e7f7c5b2dc3d71e844cc7f345"
 
   url "https://www.segger.com/downloads/jlink/Ozone_MacOSX_V#{version.no_dots}_#{arch}.pkg",
       using: :post,

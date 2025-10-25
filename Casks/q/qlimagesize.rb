@@ -7,7 +7,7 @@ cask "qlimagesize" do
   desc "Display image info and preview unsupported formats in QuickLook"
   homepage "https://github.com/Nyx0uf/qlImageSize"
 
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2024-11-11", because: :discontinued
 
   qlplugin "qlImageSize.qlgenerator"
 

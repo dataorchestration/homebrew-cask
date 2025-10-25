@@ -1,30 +1,28 @@
 cask "canon-eos-utility" do
-  version "3.18.5.13,0200007089,9"
-  sha256 "dd911c4cc74fe25d675cb321071dbe816afce2259f80966b90540bdd5921243a"
+  version "3.19.0.12,0200007310,0"
+  sha256 "c13cf1f3de7fd85ed506cd41e67b57a680c07b944d310c82b8e0b17d97e16f92"
 
   url "https://gdlp01.c-wss.com/gds/#{version.csv.third}/#{version.csv.second}/01/EU-Installset-M#{version.csv.first}.dmg.zip",
       verified: "gdlp01.c-wss.com/"
   name "Canon EOS Utility"
   desc "Communication with Canon EOS cameras"
-  homepage "https://my.canon/en/support/0200653802/1"
+  homepage "https://app.ssw.imaging-saas.canon/app/en/eu.html"
 
-  # Upstream provides an in-app update mechanism. To use this for livecheck we must access
-  # the appcast feed that provides download links, and then use the links provided with
-  # the HeaderMatch strategy to find the latest full version.
+  # The upstream data for the in-app updater uses redirecting URLs, so we have
+  # to find and fetch the URL for macOS to be able to match the cask `version`
+  # parts from the file URL in the `location` header of the response.
   livecheck do
     url "https://gdlp01.c-wss.com/rmds/ic/autoupdate/common/tls_eu_updater_url.xml"
-    regex(%r{http.*?/(\d+)/(\d+)/\d+/EU[._-]Installset[._-]v?M?(\d+(?:\.\d+)+)\.dmg\.zip}i)
-    strategy :page_match do |page, regex|
-      match = page.match(/<Component\sID="[^"]+mac_14[^"]+".*\n?.*(https.*)\n/i)
-      next if match.blank?
-
-      url = match[1].strip
+    regex(%r{/(\d+)/(\d+)/\d+/EU[._-]Installset[._-]v?M?(\d+(?:\.\d+)+)\.dmg\.zip}i)
+    strategy :xml do |xml, regex|
+      # NOTE: The macOS identifier will need to be manually updated when
+      # releases become available for newer macOS versions.
+      url = xml.elements["//Component[contains(@ID,'mac_15')]"]&.text&.strip
       next if url.blank?
 
-      headers = Homebrew::Livecheck::Strategy.page_headers(url)
-      next if headers.blank?
+      merged_headers = Homebrew::Livecheck::Strategy.page_headers(url).reduce(&:merge)
 
-      match = headers[0]["location"].match(regex)
+      match = merged_headers["location"]&.match(regex)
       next if match.blank?
 
       "#{match[3]},#{match[2]},#{match[1]}"
@@ -38,6 +36,7 @@ cask "canon-eos-utility" do
   uninstall delete: [
               "/Applications/Canon Utilities/CameraSurveyProgram",
               "/Applications/Canon Utilities/EOS Lens Registration Tool",
+              "/Applications/Canon Utilities/EOS Network Setting Tool",
               "/Applications/Canon Utilities/EOS Utility",
               "/Applications/Canon Utilities/EOS Web Service Registration Tool",
               "/Library/Application Support/Canon_Inc_IC/ImageBrowser EX Shared/Camera/{A2E97706-9B71-482d-92F1-70B1D010B943}.plist",

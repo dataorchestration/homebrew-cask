@@ -1,6 +1,6 @@
 cask "tower" do
-  version "11.1,405,2fc8ee02"
-  sha256 "53903a97ff05a27efec985e2d243ce134edf50fc184cdabd12f25e4ee430041c"
+  version "14.5,497,3c2a101a"
+  sha256 "e9d8ccf91267fc2e6978e1042b45731b7bd180d5d16a6a97dc0cf2a0a0bfb0b1"
 
   url "https://www.git-tower.com/apps/tower3-mac/#{version.csv.second}-#{version.csv.third}/Tower-#{version.csv.first}-#{version.csv.second}.zip"
   name "Tower"
@@ -8,15 +8,18 @@ cask "tower" do
   homepage "https://www.git-tower.com/"
 
   livecheck do
-    url "https://www.git-tower.com/updates/tower3-mac/stable/releases/latest/download"
-    regex(%r{(\d+(?:\.\d+)*)-([a-z0-9]+)/Tower-(\d+(?:\.\d+)+)-(\d+(?:\.\d+)*)\.zip}i)
-    strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[2]},#{match[0]},#{match[1]}" }
+    url "https://updates.fournova.com/tower3-mac/stable/updates"
+    regex(%r{/tower3-mac/(?:\d+(?:\.\d+)*)-([a-z0-9]+)/}i)
+    strategy :sparkle do |item, regex|
+      match = item.url.match(regex)
+      next if match.blank?
+
+      "#{item.nice_version},#{match[1]}"
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "Tower.app"
   binary "#{appdir}/Tower.app/Contents/MacOS/gittower"

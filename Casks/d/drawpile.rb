@@ -1,26 +1,40 @@
 cask "drawpile" do
-  on_el_capitan :or_older do
-    version "2.1.7"
-    sha256 "820ec2837d3c7ea4e190a64cbb1d0fdecb3797bf968277b3b7ca0cc5d758987f"
+  arch arm: "arm64", intel: "x86_64"
+
+  on_big_sur :or_older do
+    version "2.2.1"
+    sha256 "d4b29c78da9a64eb8a5526c464f9647b48a99b60cace0ce3eaf06a4e484dec60"
+
+    url "https://github.com/drawpile/Drawpile/releases/download/#{version}/Drawpile-#{version}.dmg",
+        verified: "github.com/drawpile/Drawpile"
 
     livecheck do
       skip "Legacy version"
     end
+
+    caveats do
+      requires_rosetta
+    end
   end
-  on_sierra :or_newer do
-    version "2.1.20"
-    sha256 "fe7f93c2f3ec9505b8a4f044093b67bae0c80fc8d6613ba2d0dfad5243cfdf44"
+  on_monterey :or_newer do
+    version "2.2.2"
+    sha256 arm:   "59b1ff5b42bb1ded49be5070f290429a37d0d7a723fed07a6ec51ec79cdea7a9",
+           intel: "56d484ea4ea32fccbc6015eedb5d80f1f4f77fa018b8724e2d9499368c70a922"
+
+    url "https://github.com/drawpile/Drawpile/releases/download/#{version}/Drawpile-#{version}-#{arch}.dmg",
+        verified: "github.com/drawpile/Drawpile"
 
     livecheck do
-      url "https://drawpile.net/files/osx/"
-      regex(/href=.*?Drawpile[ ._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+      url :url
+      strategy :github_latest
     end
   end
 
-  url "https://drawpile.net/files/osx/Drawpile%20#{version}.dmg"
   name "Drawpile"
   desc "Collaborative drawing app"
   homepage "https://drawpile.net/"
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Drawpile.app"
 
@@ -30,8 +44,4 @@ cask "drawpile" do
     "~/Library/Preferences/net.drawpile.DrawpileClient.plist",
     "~/Library/Saved Application State/net.drawpile.DrawpileClient.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

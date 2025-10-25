@@ -1,5 +1,5 @@
 cask "vox" do
-  version "3.6.1"
+  version "3.7.4"
   sha256 :no_check
 
   url "https://vox.rocks/app-download?app=vox"
@@ -8,8 +8,10 @@ cask "vox" do
   homepage "https://vox.rocks/mac-music-player"
 
   livecheck do
-    url "https://api.appcenter.ms/v0.1/public/sparkle/apps/bcf930e2-32da-0f52-2b12-6c3557ba50d7"
-    strategy :sparkle, &:short_version
+    url :url
+    strategy :extract_plist do |item|
+      item["com.coppertino.Vox"]&.short_version
+    end
   end
 
   auto_updates true

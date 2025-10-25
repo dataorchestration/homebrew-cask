@@ -9,7 +9,7 @@ cask "jiggler" do
 
   livecheck do
     url :homepage
-    regex(/<h1>.+(\d+(?:\.\d+))\s/i)
+    regex(/<h1>.+(\d+(?:\.\d+)+)\s/i)
   end
 
   app "Jiggler.app"

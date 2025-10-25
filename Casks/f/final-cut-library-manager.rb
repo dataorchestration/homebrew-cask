@@ -9,8 +9,7 @@ cask "final-cut-library-manager" do
   homepage "https://www.arcticwhiteness.com/finalcutlibrarymanager/"
 
   deprecate! date: "2024-04-03", because: :discontinued
-
-  depends_on macos: ">= :sierra"
+  disable! date: "2025-04-03", because: :discontinued
 
   app "Final Cut Library Manager.app"
 

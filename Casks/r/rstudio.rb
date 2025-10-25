@@ -1,6 +1,6 @@
 cask "rstudio" do
-  version "2024.04.2,764"
-  sha256 "d0ddd3958d036b1d09436d70743a11d9e746c934a30fd89a395d58d0925d023d"
+  version "2025.09.1,401"
+  sha256 "a91d243c118c3295597da35a02abae5c970e115705109bbf09872c95f4e14623"
 
   url "https://download1.rstudio.org/electron/macos/RStudio-#{version.csv.first}-#{version.csv.second}.dmg",
       verified: "download1.rstudio.org/electron/macos/"
@@ -10,8 +10,9 @@ cask "rstudio" do
 
   livecheck do
     url "https://posit.co/download/rstudio-desktop/"
-    strategy :page_match do |page|
-      match = page.match(/RStudio[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.dmg/i)
+    regex(/RStudio[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]}"
@@ -19,7 +20,7 @@ cask "rstudio" do
   end
 
   conflicts_with cask: "rstudio@daily"
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :big_sur"
 
   app "RStudio.app"
 
@@ -28,7 +29,7 @@ cask "rstudio" do
   caveats <<~EOS
     #{token} depends on R. The R Project provides official binaries:
 
-      brew install --cask r
+      brew install --cask r-app
 
     Alternatively, the Homebrew-compiled version of R omits the GUI app:
 

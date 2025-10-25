@@ -1,6 +1,6 @@
 cask "kaleidoscope" do
-  version "5.0.1,6406"
-  sha256 "8b86267f00e0293f9c9b4fe4642b268ad9b863024bf14eb3899b864965e1d921"
+  version "6.3.1,8835"
+  sha256 "695f4372403507b1973a7759a64d85a8dd28950e675dca92507882677b6fa3d1"
 
   url "https://updates.kaleidoscope.app/v#{version.major}/prod/Kaleidoscope-#{version.csv.first}-#{version.csv.second}.app.zip"
   name "Kaleidoscope"
@@ -9,13 +9,7 @@ cask "kaleidoscope" do
 
   livecheck do
     url "https://updates.kaleidoscope.app/v#{version.major}/prod/appcast"
-    regex(/Kaleidoscope[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.app\.zip/i)
-    strategy :sparkle do |item, regex|
-      match = item.url.match(regex)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
-    end
+    strategy :sparkle
   end
 
   auto_updates true

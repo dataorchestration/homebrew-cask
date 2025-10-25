@@ -1,6 +1,6 @@
 cask "godspeed" do
-  version "1.6.7"
-  sha256 "2f726c4f1a9b80efe2f35310b4cb54771bbf2aaf9e57238e9726ecea2df73f7b"
+  version "1.9.16"
+  sha256 "ebd44959e4ad4bd6189d50f25864d58ed093e8fadd43b4e0ee4bac53f3b0a605"
 
   url "https://app-updates.godspeedapp.com/#{version}%2FGodspeed.zip"
   name "Godspeed"
@@ -15,7 +15,7 @@ cask "godspeed" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Godspeed.app"
 

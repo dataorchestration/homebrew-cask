@@ -1,6 +1,6 @@
 cask "geogebra" do
-  version "6.0.848.0"
-  sha256 "d70ded7aa7ed7c69a78a43844925f6f8c8fd3ce500b8b0606abe2b8277d5f7f8"
+  version "6.0.903.0"
+  sha256 "c7d09f4de607b382069f6951f12529bdf6014d387286e909dfe9dcdabb192c2f"
 
   url "https://download.geogebra.org/installers/#{version.major_minor}/GeoGebra-Classic-#{version.major}-MacOS-Portable-#{version.dots_to_hyphens}.zip"
   name "GeoGebra"
@@ -18,13 +18,15 @@ cask "geogebra" do
     end
   end
 
-  auto_updates true
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  depends_on macos: ">= :monterey"
 
   app "GeoGebra Classic #{version.major}.app"
 
   uninstall quit:       "org.geogebra.mathapps",
             login_item: "GeoGebra",
-            pkgutil:    "org.geogebra6.mac"
+            pkgutil:    "org.geogebra#{version.major}.mac"
 
   zap trash: [
     "~/Library/GeoGebra",

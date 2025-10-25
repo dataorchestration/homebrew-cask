@@ -1,9 +1,9 @@
 cask "mqttx" do
   arch arm: "-arm64"
 
-  version "1.10.0"
-  sha256 arm:   "8b76d7deda6e5e46e010087f8234564d6c35b3dc3c37db8a771d56609c27276d",
-         intel: "75c070d14239abcf1f515d8d79518a7c4f6e9a7e300fc3a342c5e07c4c9bbf5d"
+  version "1.12.1"
+  sha256 arm:   "f83cdbae6f300d0e4d89f1bacee8717d67acefeca049759c5e6e3509819a32c0",
+         intel: "ee3687d4b395968d4348c59e8682663699cbe87731544c216f301702b8f904c5"
 
   url "https://github.com/emqx/MQTTX/releases/download/v#{version}/MQTTX-#{version}#{arch}.dmg",
       verified: "github.com/emqx/MQTTX/"
@@ -15,6 +15,8 @@ cask "mqttx" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "MQTTX.app"
 

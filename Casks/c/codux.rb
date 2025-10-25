@@ -1,9 +1,9 @@
 cask "codux" do
   arch arm: "arm64", intel: "x64"
 
-  version "15.30.0"
-  sha256 arm:   "5bd510adbe4b5f4af4bab4f082837279649393c9d076912db54979f9228e0c6b",
-         intel: "78fc8e0e6120596f155186db65fda60b45eaa86186a4c708f1d7362bc3347656"
+  version "15.42.0"
+  sha256 arm:   "ddc8ca080956e8a27b82b85d6e3381447e3c975c9d22d0b04a1f004efe6a6909",
+         intel: "15bf4ce82f2c0477abe7fe5c8172f0f684d7a7069e7f9461565893758f0ff092"
 
   url "https://github.com/wixplosives/codux-versions/releases/download/#{version}/Codux-#{version}.#{arch}.dmg",
       verified: "github.com/wixplosives/codux-versions/"
@@ -11,12 +11,9 @@ cask "codux" do
   desc "React IDE built to visually edit component styling and layouts"
   homepage "https://www.codux.com/"
 
-  livecheck do
-    url "https://www.codux.com/download"
-    regex(/href=.*?Codux[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.dmg/i)
-  end
+  deprecate! date: "2025-10-25", because: :unmaintained
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Codux.app"
 

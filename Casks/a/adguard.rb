@@ -1,6 +1,6 @@
 cask "adguard" do
-  version "2.14.1.1603"
-  sha256 "82a104904e5f280d9fcdb75b251da126a88dbd1525ad36d974bfe678fb32fd9e"
+  version "2.17.3.2020"
+  sha256 "96e54df2746f9ce1e53ae1bae5bfa14f067a7590cd566b346961fed7c70070f8"
 
   url "https://static.adguard.com/mac/release/AdGuard-#{version}.dmg"
   name "AdGuard"
@@ -16,7 +16,6 @@ cask "adguard" do
 
   auto_updates true
   conflicts_with cask: "adguard@nightly"
-  depends_on macos: ">= :catalina"
 
   pkg "AdGuard.pkg"
 

@@ -1,6 +1,6 @@
 cask "elgato-wave-link" do
-  version "1.10.1.2293"
-  sha256 "d6829107c01adc5cc92e059e23e1891d1e2c53a1da0f50cb4ddd7989fc9bee7b"
+  version "2.0.7.3795"
+  sha256 "8a848a60758990a48807c7f983fb22e33e4e5207243a2aaf31777714bcaa97c9"
 
   url "https://edge.elgato.com/egc/macos/wavelink/#{version.major_minor_patch}/WaveLink_#{version}.pkg",
       user_agent: :fake
@@ -14,8 +14,6 @@ cask "elgato-wave-link" do
       json.dig("Manual", "Version")
     end
   end
-
-  depends_on macos: ">= :catalina"
 
   pkg "WaveLink_#{version}.pkg"
 

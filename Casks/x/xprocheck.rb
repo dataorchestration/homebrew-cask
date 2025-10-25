@@ -1,9 +1,8 @@
 cask "xprocheck" do
-  version "1.5,2023.04"
-  sha256 "882c1ee83a3bee4372d7afcd9a65b3fa8342282534cbdf21565fe0aa4c87839d"
+  version "1.7,2025.06"
+  sha256 "72178e9e80b36f84e4213926a9d26c9f909f81540efc5077bd8cdd82ac8ffe3f"
 
-  url "https://eclecticlightdotcom.files.wordpress.com/#{version.csv.second.major}/#{version.csv.second.minor}/xprocheck#{version.csv.first.no_dots}.zip",
-      verified: "eclecticlightdotcom.files.wordpress.com/"
+  url "https://eclecticlight.co/wp-content/uploads/#{version.csv.second.major}/#{version.csv.second.minor}/xprocheck#{version.csv.first.no_dots}.zip"
   name "XProCheck"
   desc "Anti-malware scan logging tool"
   homepage "https://eclecticlight.co/consolation-t2m2-and-log-utilities/"
@@ -15,15 +14,14 @@ cask "xprocheck" do
       item = xml.elements["//dict[key[text()='AppName']/following-sibling::*[1][text()='XProCheck']]"]
       next unless item
 
-      version = item.elements["key[text()='Version']"]&.next_element&.text&.strip
-      match = item.elements["key[text()='URL']"]&.next_element&.text&.strip&.match(regex)
+      version = item.elements["key[text()='Version']"]&.next_element&.text
+      url = item.elements["key[text()='URL']"]&.next_element&.text
+      match = url.strip.match(regex) if url
       next if version.blank? || match.blank?
 
-      "#{version},#{match[1]}.#{match[2]}"
+      "#{version.strip},#{match[1]}.#{match[2]}"
     end
   end
-
-  depends_on macos: ">= :catalina"
 
   app "xprocheck#{version.csv.first.no_dots}/XProCheck.app"
 

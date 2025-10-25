@@ -1,9 +1,9 @@
 cask "jdk-mission-control" do
   arch arm: "aarch64", intel: "x64"
 
-  version "9.0.0,10"
-  sha256 arm:   "d1e30411eacf88e313e2200f1c5a16c612094fe54c004ca8dec6514a39c91e29",
-         intel: "64d9899a57355a484fe3cc9d2854c46366c7e961bcb90d0cd60b91140fab540f"
+  version "9.1.1,02"
+  sha256 arm:   "f5821aba0a913212e5d401ce9ead3810a411c4a3d20dd4a53bb8b4bc38960f16",
+         intel: "cffdcbf09f720139c0a799e4248a94b73401f66e8d824eb9b81f6e2988ed2cba"
 
   url "https://download.java.net/java/GA/jmc#{version.major}/#{version.csv.second}/binaries/jmc-#{version.csv.first}_macos-#{arch}.tar.gz"
   name "JDK Mission Control"
@@ -12,11 +12,13 @@ cask "jdk-mission-control" do
 
   livecheck do
     url :homepage
-    regex(%r{href=.*?/(\d+)/binaries/jmc[._-]v?(\d+(?:\.\d+)*)[._-]macos[._-]#{arch}\.tar\.gz}i)
+    regex(%r{href=.*?/(\d+)/binaries/jmc[._-]v?(\d+(?:\.\d+)*)[._-]macos[._-]#{arch}\.t}i)
     strategy :page_match do |page, regex|
       page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
     end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "jmc-#{version.csv.first}_macos-#{arch}/JDK Mission Control.app"
 

@@ -1,9 +1,9 @@
 cask "audacity" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3.5.1"
-  sha256 arm:   "7f80a8a5ffed98a01b5f0c8a7ee57331bdabbd7812d9a944c25f350a1b28c633",
-         intel: "e89b17ed5236c11fdf85100b5bd7867632b318dd1acc90ca45c32a564d43d217"
+  version "3.7.5"
+  sha256 arm:   "20beb5515153a0df8cb02c270a39a90efbfaaa5f2d21fe1db06c7b0d987ea653",
+         intel: "d9ba4c5b61030151953bfd0c0611fbb340208d3a3f149a9a6c297155e1f57289"
 
   url "https://github.com/audacity/audacity/releases/download/Audacity-#{version}/audacity-macOS-#{version}-#{arch}.dmg",
       verified: "github.com/audacity/audacity/"
@@ -15,8 +15,6 @@ cask "audacity" do
     url :url
     regex(/^Audacity[._-]v?(\d+(?:\.\d+)+)$/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Audacity.app"
 

@@ -1,6 +1,6 @@
 cask "zenmap" do
-  version "7.95"
-  sha256 "fc069b88f6b64cbb56b02a644075d78df603d9417d3947ff32acc0566439de3c"
+  version "7.98"
+  sha256 "461bb256780aa8c5e76f95010b780e5fd58743dd74432b17c97a1ca525722b7b"
 
   url "https://nmap.org/dist/nmap-#{version}.dmg"
   name "Zenmap"
@@ -8,11 +8,11 @@ cask "zenmap" do
   homepage "https://nmap.org/zenmap/"
 
   livecheck do
-    url "https://nmap.org/dist/?C=M;O=D"
+    url "https://nmap.org/download.html"
     regex(/href=.*?nmap[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  conflicts_with formula: "nmap"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   pkg "nmap-#{version}.mpkg"
 

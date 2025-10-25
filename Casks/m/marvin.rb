@@ -2,9 +2,9 @@ cask "marvin" do
   arch arm: "-arm64"
   hostname_arch = on_arch_conditional arm: "amarm", intel: "amazingmarvin"
 
-  version "1.65.0"
-  sha256 arm:   "749617692387e9f8738b6c59ada2cf02ff2b5eea93546c25765966d6c82cd68d",
-         intel: "d8b18a2324e4fe66b34b5dcfcd12db7c5353ba85c260bab306156d29f5ae36fa"
+  version "1.68.0"
+  sha256 arm:   "6f5fbb35bf2d343862361cc4dd36e256e14ac27cb0c90be056a6c6726102f643",
+         intel: "15aacff378b01eba9c00939cfde835414d4aeeab9eeeea67b8e3e0e598321add"
 
   url "https://#{hostname_arch}.s3.amazonaws.com/Marvin-#{version}#{arch}-mac.zip",
       verified: "#{hostname_arch}.s3.amazonaws.com/"
@@ -17,9 +17,12 @@ cask "marvin" do
     strategy :electron_builder
   end
 
+  auto_updates true
+
   app "Marvin.app"
 
   zap trash: [
+    "~/Library/Application Support/Caches/marvin-updater",
     "~/Library/Application Support/Marvin",
     "~/Library/Logs/Marvin",
     "~/Library/Preferences/com.amazingmarvin.marvindesktop.plist",

@@ -1,21 +1,21 @@
 cask "tableau-public" do
-  version "2024.1.3"
-  sha256 "4d411d447e60266f89de40ec4ba12b3d713fd2769d18892a96ff195f5368dc37"
+  arch arm: "-arm64"
 
-  url "https://downloads.tableau.com/public/TableauPublic-#{version.dots_to_hyphens}.dmg",
+  version "2025.2.3"
+  sha256 arm:   "b1f486da4ee3a2f05e2f9dab57586eecaf5d3f2fbc7c8fb724cbcbdbc6f70ae0",
+         intel: "da7e48fb0f4730797146231526fa7942e2177e4dcfad3d08cf9ab41e26b19afb"
+
+  url "https://downloads.tableau.com/esdalt/#{version}/TableauPublic-#{version.dots_to_hyphens}#{arch}.pkg",
       user_agent: "curl/8.7.1"
   name "Tableau Public"
   desc "Explore, create and publicly share data visualisations online"
   homepage "https://public.tableau.com/s/"
 
   livecheck do
-    url "https://downloads.tableau.com/TableauAutoUpdate.xml"
-    strategy :xml do |xml|
-      xml.get_elements("//version").map { |item| item.attributes["releaseNotesVersion"] }
-    end
+    cask "tableau"
   end
 
-  pkg "Tableau Public.pkg"
+  pkg "TableauPublic-#{version.dots_to_hyphens}#{arch}.pkg"
 
   uninstall pkgutil: [
     "com.tableausoftware.FLEXNet.*",

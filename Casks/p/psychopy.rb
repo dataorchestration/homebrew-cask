@@ -1,15 +1,21 @@
 cask "psychopy" do
-  version "2024.1.5"
-  sha256 "98cbcef6ea40fba188b31e461ccd4232810d1dfb486ea722118ce1b1095253b7"
+  version "2025.2.1"
+  sha256 "74a3eead753b34319a6cfdeec736e263ddb07f06bf5c33498eb6696ee3a1a523"
 
-  url "https://github.com/psychopy/psychopy/releases/download/#{version.major_minor_patch}/StandalonePsychoPy-#{version}-macOS.dmg"
+  url "https://github.com/psychopy/psychopy/releases/download/#{version.csv.first.major_minor_patch}/StandalonePsychoPy-#{version.csv.first}-macOS#{"_#{version.csv.second}" if version.csv.second}-3.10.dmg",
+      verified: "github.com/psychopy/psychopy/"
   name "PsychoPy"
   desc "Create experiments in behavioral science"
-  homepage "https://github.com/psychopy/psychopy"
+  homepage "https://www.psychopy.org/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://www.psychopy.org/download.html"
+    regex(/StandalonePsychoPy[._-]v?(\d+(?:\.\d+)+)[._-]macOS[._-]?(\d+(?:[._-]\d+)+)?[._-](?:py)?3\.10\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map do |match|
+        match[1].present? ? "#{match[0]},#{match[1]}" : match[0]
+      end
+    end
   end
 
   app "PsychoPy.app"
@@ -19,4 +25,8 @@ cask "psychopy" do
     "~/Library/Preferences/org.opensciencetools.psychopy.plist",
     "~/Library/Saved Application State/org.opensciencetools.psychopy.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

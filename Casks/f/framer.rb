@@ -1,9 +1,9 @@
 cask "framer" do
   arch arm: "arm64", intel: "x64"
 
-  version "2024.24.1"
-  sha256 arm:   "b336363cc62845d408fa1e5d69c1448dd9a26f9425bbed58445245cc99aac04e",
-         intel: "ecbe6448fa6564a2b897cf1a4535be07221cce883b12827f61bff87e9be1d024"
+  version "2025.42.1"
+  sha256 arm:   "df177d11dc1787ac2ee8fd828a1ecc9915455e37c5e9641835bbdd175db542db",
+         intel: "f3ad5e0ab33bb3aaf788dd9936bff96da2c7607a833817f1aea74975ebdc59c4"
 
   url "https://updates.framer.com/electron/darwin/#{arch}/Framer-#{version}.zip"
   name "Framer"
@@ -16,7 +16,7 @@ cask "framer" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :monterey"
 
   app "Framer.app"
 

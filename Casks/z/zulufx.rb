@@ -1,9 +1,9 @@
 cask "zulufx" do
   arch arm: "aarch64", intel: "x64"
 
-  version "22.0.1,22.30.13"
-  sha256 arm:   "59717400c20e50f77192698b247f6cda3a5238893a831d39641865eb4f1b6523",
-         intel: "ecdd7de2babe08b44427854da02c73a1bf4a136b250f9323c510746983b129b1"
+  version "25.0.0,25.28.85"
+  sha256 arm:   "18932eb770ede21416efa8dd4d0d96b2e073bc196b1be061976b4bb96c207fb9",
+         intel: "0d0ddb398d25f212cf84d8fdfca016c7172e2d4ff051c1886096577139a3ecad"
 
   url "https://cdn.azul.com/zulu/bin/zulu#{version.csv.second}-ca-fx-jdk#{version.csv.first}-macosx_#{arch}.dmg",
       referer: "https://www.azul.com/downloads/"
@@ -23,8 +23,6 @@ cask "zulufx" do
       end
     end
   end
-
-  depends_on macos: ">= :mojave"
 
   pkg "Double-Click to Install Azul Zulu JDK #{version.major}.pkg"
 

@@ -1,9 +1,9 @@
 cask "flox" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "1.2.0"
-  sha256 arm:   "79f318c30ab748087465d673844aadd573b9f1159bb04daba2e4bb0852e5c32d",
-         intel: "c2c133ee492b6d37fdf52c4511684e2976bbe0801713721b71e7b37c8a4d4508"
+  version "1.7.5"
+  sha256 arm:   "c1d4807461af527708dc98d0a24a127c648ccabd45bc2ecb3b3e8cff9dd45ab1",
+         intel: "670dfb88ae8f552802d986e6070e15bd11c56d1106d293aa11cb7896a4f80e93"
 
   url "https://downloads.flox.dev/by-env/stable/osx/flox-#{version}.#{arch}-darwin.pkg"
   name "flox"
@@ -16,7 +16,6 @@ cask "flox" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   pkg "flox-#{version}.#{arch}-darwin.pkg"
 

@@ -1,6 +1,6 @@
 cask "bean" do
-  version "3.7.0"
-  sha256 "0a9efdddf8cf86c1748be828cf7fbf86083b5f22d2941df6357ac5a79f14e3ae"
+  version "3.7.4"
+  sha256 "1ac18506804f2c8e4abcfd3bff7ef4e2dd24f1244ea7645faf4254a5a506a64b"
 
   url "https://www.bean-osx.com/releases/Bean-Install-#{version.dots_to_hyphens}.zip"
   name "Bean"
@@ -8,14 +8,11 @@ cask "bean" do
   homepage "https://www.bean-osx.com/Bean.html"
 
   livecheck do
-    url :homepage
-    regex(%r{href=.*?/Bean[._-]Install[._-]v?(\d+(?:-\d+)+)\.zip}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex)&.map { |match| match[0].tr("-", ".") }
+    url "https://www.bean-osx.com/releases/availableVersion.xml"
+    strategy :xml do |xml|
+      xml.elements["//availableVersion"]&.text&.strip
     end
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Bean-Install-#{version.dots_to_hyphens}/Bean.app"
 

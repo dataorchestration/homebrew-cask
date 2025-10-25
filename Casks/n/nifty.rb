@@ -1,5 +1,5 @@
 cask "nifty" do
-  version "3.92.7"
+  version "3.116.2"
   sha256 :no_check
 
   url "https://nifty-apps.s3.amazonaws.com/Nifty.dmg",
@@ -12,8 +12,6 @@ cask "nifty" do
     url :url
     strategy :extract_plist
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Nifty.app"
 

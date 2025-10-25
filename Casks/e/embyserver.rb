@@ -1,9 +1,9 @@
 cask "embyserver" do
   arch arm: "arm64", intel: "x64"
 
-  version "4.8.8.0"
-  sha256 arm:   "0f4cb2a08d7f8c9010ce9f4cba335d6cff1a6efe0cf4a03dc0d19c53fa8f93d3",
-         intel: "15d6c4a0797c805cf9b8edffc9c062abb33c01710faa2749755052c15fcc6a39"
+  version "4.9.1.80"
+  sha256 arm:   "0c87e49a831f19fe2f5e96ad4cb3ee474d1c899200eca9230344653bfbbbf8d4",
+         intel: "ee417b4bb4cdd8e4daa34146c1a40e384a575d210ef99b0f7abb39a574cc1f61"
 
   url "https://github.com/MediaBrowser/Emby.Releases/releases/download/#{version}/embyserver-osx-#{arch}-#{version}.zip",
       verified: "github.com/MediaBrowser/Emby.Releases/"
@@ -16,7 +16,7 @@ cask "embyserver" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "EmbyServer.app"
 

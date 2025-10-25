@@ -1,9 +1,9 @@
 cask "blender" do
   arch arm: "arm64", intel: "x64"
 
-  version "4.1.1"
-  sha256 arm:   "548dcd489446c3618818d9a543644cefe0b903743c24c30221674b13f681c798",
-         intel: "87f7f1480edebba2a0e5b05b6fafd2621fed85ba4a101d954fd0932fce5a4aab"
+  version "4.5.3"
+  sha256 arm:   "73ea841053b55404bb3a71a9a22366f1f8821787fe5c899f8b55a7fff929d01b",
+         intel: "c1fd8f30eef1b37918659ad65c504d30cebd3e5bac74dd54f7df1a311aeebe18"
 
   url "https://download.blender.org/release/Blender#{version.major_minor}/blender-#{version}-macos-#{arch}.dmg"
   name "Blender"
@@ -16,7 +16,7 @@ cask "blender" do
   end
 
   conflicts_with cask: "blender@lts"
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Blender.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

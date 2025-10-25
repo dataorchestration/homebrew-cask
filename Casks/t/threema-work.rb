@@ -1,5 +1,5 @@
 cask "threema-work" do
-  version "1.2.43"
+  version "1.2.49"
   sha256 :no_check
 
   url "https://releases.threema.ch/web-electron/v1/release/Threema-Work-Latest.dmg"
@@ -11,8 +11,6 @@ cask "threema-work" do
     url "https://threema.ch/en/work/changelog"
     regex(/>\s*Threema\s+Work\s+v?(\d+(?:\.\d+)+)\s+for\s+Desktop\s*</i)
   end
-
-  depends_on macos: ">= :catalina"
 
   app "Threema Work.app"
 

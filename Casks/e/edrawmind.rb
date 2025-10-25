@@ -1,17 +1,17 @@
 cask "edrawmind" do
-  version "11.0.5,5378"
-  sha256 "eadd4e013bd0267597810d0564ae72f776b0ceb8a26869554050695f9c1949b5"
+  version "12.4.2"
+  sha256 "b6978800c65a8591661bf53c8fdaf23e109a91a968e4c5b874586fe91e9eeef8"
 
-  url "https://download.edrawsoft.com/cbs_down/edrawmind_full#{version.csv.second}.zip"
+  url "https://download.wondershare.com/cbs_down/edrawmind_#{version}_full5378.zip",
+      verified: "download.wondershare.com/"
   name "EdrawMind"
   desc "Mind mapping software"
   homepage "https://www.edrawsoft.com/edrawmind/"
 
   livecheck do
-    url "https://www.edrawsoft.com/download-edrawmind.html"
-    strategy :page_match do |page|
-      match = page.match(/for\s+Mac.*?(\d+(?:\.\d+)+).*?edrawmind[._-]full(\d+)\./m)
-      "#{match[1]},#{match[2]}" if match
+    url "https://crm.wondershare.com/api/v1/support/5378/release-versions"
+    strategy :json do |json|
+      json["data"]&.filter_map { |item| item["version_name"] }
     end
   end
 

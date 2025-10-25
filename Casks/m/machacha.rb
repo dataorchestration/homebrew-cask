@@ -8,6 +8,7 @@ cask "machacha" do
   homepage "http://www.julifos.com/soft/machacha/"
 
   deprecate! date: "2024-07-05", because: :unmaintained
+  disable! date: "2025-07-05", because: :unmaintained
 
   app "MacHacha.app"
 

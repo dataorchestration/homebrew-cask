@@ -1,8 +1,11 @@
 cask "pyzo" do
-  version "4.16.0"
-  sha256 "c5ffd971deb376ececd74e9767779e48ab177c0634b470b20ccf9f1ab4575299"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/pyzo/pyzo/releases/download/v#{version}/pyzo-#{version}-macos_x86_64.dmg",
+  version "4.20.0"
+  sha256 arm:   "6af555adbe3a3b3e42639b5b171c1c047f7517f9d6f6baacb4e21c60596d0803",
+         intel: "14f4be6d69afd0db8502e8e706c4d207a8df4aea3718666efb66ec3c5cb1f040"
+
+  url "https://github.com/pyzo/pyzo/releases/download/v#{version}/pyzo-#{version}-macos_#{arch}.dmg",
       verified: "github.com/pyzo/pyzo/"
   name "Pyzo"
   desc "Python IDE focused on interactivity and introspection"
@@ -11,8 +14,4 @@ cask "pyzo" do
   app "pyzo.app"
 
   zap trash: "~/Library/Application Support/pyzo"
-
-  caveats do
-    requires_rosetta
-  end
 end

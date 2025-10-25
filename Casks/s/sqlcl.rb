@@ -1,15 +1,15 @@
 cask "sqlcl" do
-  version "24.2.0.180.1721"
-  sha256 :no_check
+  version "25.3.0.274.1210"
+  sha256 "4ce293bc11685050ea37baa3abac986018746df4baea492cdb8deaebee7e8ba7"
 
-  url "https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip"
+  url "https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-#{version}.zip"
   name "sqlcl"
   desc "Oracle SQLcl is the modern command-line interface for the Oracle Database"
-  homepage "https://www.oracle.com/sqlcl"
+  homepage "https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/"
 
   livecheck do
     url "https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/"
-    regex(/p>Version.*?(\d+(?:\.\d+)+)/i)
+    regex(/href=.*?sqlcl[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
   stage_only true

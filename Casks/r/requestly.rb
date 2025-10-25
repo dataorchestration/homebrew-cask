@@ -1,9 +1,9 @@
 cask "requestly" do
   arch arm: "-arm64"
 
-  version "1.6.1"
-  sha256 arm:   "2574911b66301240ba4a424378ab42178ebdc92a1575854f90ce16642a4e2f31",
-         intel: "f1da77e8202d041e0f346a16cc6a91ba94f475006a7289e0af6ed43e078b48da"
+  version "25.10.8"
+  sha256 arm:   "00938f9c46cc94ac92109c2143b87223fb966670de962eaace560267a91ea393",
+         intel: "e4a774110ced6994ac7d7e9586860f6194f385faaed001c5e3194e3c72ad62e7"
 
   url "https://github.com/requestly/requestly-desktop-app/releases/download/v#{version}/Requestly-#{version}#{arch}.dmg",
       verified: "github.com/requestly/requestly-desktop-app/"
@@ -11,7 +11,10 @@ cask "requestly" do
   desc "Intercept and modify HTTP requests"
   homepage "https://requestly.com/"
 
-  depends_on macos: ">= :high_sierra"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
 
   app "Requestly.app"
 

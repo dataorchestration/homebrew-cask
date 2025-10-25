@@ -1,9 +1,9 @@
 cask "pinegrow" do
   arch arm: "ARM64", intel: "X64"
 
-  version "7.93"
-  sha256 arm:   "99da5c2e5f1dcea8719a730ff8dcbbb585b24559fe3c5bdb72f8c5fefc4606e9",
-         intel: "1d463da96aae5cc43b5968e16db97406730ca399f4e8a4ec54deb76cfd95a796"
+  version "8.5"
+  sha256 arm:   "5cfc3a1d79d0ae226278970968b98c921422ef9abceb65c76e3907bb83413cf2",
+         intel: "e4c65bd150877ec598a6ae301552e78b6974497052a05c83f84ec5beb999602c"
 
   url "https://download.pinegrow.com/PinegrowMac#{arch}.#{version}.dmg"
   name "Pinegrow"

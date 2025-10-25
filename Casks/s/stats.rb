@@ -1,16 +1,6 @@
 cask "stats" do
-  on_mojave :or_older do
-    version "2.8.26"
-    sha256 "1a4b44ba02520683b0a6c192388f593c36dde4d15c784a22dccf0caefe81e8b7"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_catalina :or_newer do
-    version "2.11.2"
-    sha256 "56064288538cb4e12fbb1b7e27a6d886a51f2a9f201fa8ccd4bb9f9c2ca8050d"
-  end
+  version "2.11.57"
+  sha256 "85918c16169cf89653212ce2f7196a1c524236f1925db6fab2dc90eef379d6cc"
 
   url "https://github.com/exelban/stats/releases/download/v#{version}/Stats.dmg"
   name "Stats"
@@ -18,7 +8,6 @@ cask "stats" do
   homepage "https://github.com/exelban/stats"
 
   auto_updates true
-  depends_on macos: ">= :mojave"
 
   app "Stats.app"
 
@@ -27,9 +16,12 @@ cask "stats" do
   zap delete: "/Library/LaunchDaemons/eu.exelban.Stats.SMC.Helper.plist",
       trash:  [
         "~/Library/Application Scripts/eu.exelban.Stats.LaunchAtLogin",
+        "~/Library/Application Scripts/eu.exelban.Stats.Widgets",
         "~/Library/Caches/eu.exelban.Stats",
         "~/Library/Containers/eu.exelban.Stats.LaunchAtLogin",
+        "~/Library/Containers/eu.exelban.Stats.Widgets",
         "~/Library/Cookies/eu.exelban.Stats.binarycookies",
+        "~/Library/Group Containers/eu.exelban.Stats.widgets",
         "~/Library/HTTPStorages/eu.exelban.Stats",
         "~/Library/Preferences/eu.exelban.Stats.plist",
       ]

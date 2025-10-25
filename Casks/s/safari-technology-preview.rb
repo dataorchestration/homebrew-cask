@@ -1,34 +1,34 @@
 cask "safari-technology-preview" do
   # when adjusting the on_{os} scoping, also update the livecheck regex
-  on_sonoma :or_older do
-    version "198,062-20835-20240703-E4CA0D96-97C7-4ABC-9664-DA019810C41F"
-    sha256 "e3d331ea236563a7ac9a8c481378f24513cd4972422045afb246d3f83f7fabfc"
+  on_sequoia :or_older do
+    version "230,093-84141-20251015-f7c3ff61-6dda-4a47-8132-815980bc321d"
+    sha256 "d0b0360058dabbbccf73ced744c234287c6904f0d90eee3f08091f89c018535f"
 
     livecheck do
       url :homepage
       regex(%r{
-        href=.*?/([^/]+)/Safari(?:%20)?Technology(?:%20)?Preview\.dmg
-        .*?macOS(?:\s|&nbsp;)*14[\s.<]
+        href=.*?/([^/]+)/Safari(?:%20|\+)?Technology(?:%20|\+)?Preview\.dmg
+        .*?macOS(?:\s|&nbsp;)*15[\s.<]
       }ix)
       strategy :page_match do |page, regex|
-        release = page[%r{>\s*Release\s*</p>\s*<p[^>]*>\s*(\d+)\s*<}i, 1]
+        release = page[%r{>\s*Release\s*</p>\s*<p[^>]*>\s*(\d+)[^<]*<}i, 1]
         id = page[regex, 1]
         "#{release},#{id}"
       end
     end
   end
-  on_sequoia :or_newer do
-    version "198,062-20841-20240703-D251DC61-C7EA-44EE-881F-CE8C65E9BA56"
-    sha256 "bce86e12204d4a56daefb4266384f9f723cac75a692efadd5edf547046447065"
+  on_tahoe :or_newer do
+    version "230,093-84139-20251015-e6088f46-5989-424b-a5cb-238e038c1ea2"
+    sha256 "4adde96cc9155370447148e134e713b26a9fb05455e6ec1e2c88d39c3f6fd61b"
 
     livecheck do
       url :homepage
       regex(%r{
-        href=.*?/([^/]+)/Safari(?:%20)?Technology(?:%20)?Preview\.dmg
-        .*?macOS(?:\s|&nbsp;)*15[\s.<]
+        href=.*?/([^/]+)/Safari(?:%20|\+)?Technology(?:%20|\+)?Preview\.dmg
+        .*?macOS(?:\s|&nbsp;)*26[\s.<]
       }ix)
       strategy :page_match do |page, regex|
-        release = page[%r{>\s*Release\s*</p>\s*<p[^>]*>\s*(\d+)\s*<}i, 1]
+        release = page[%r{>\s*Release\s*</p>\s*<p[^>]*>\s*(\d+)[^<]*<}i, 1]
         id = page[regex, 1]
         "#{release},#{id}"
       end
@@ -41,7 +41,7 @@ cask "safari-technology-preview" do
   homepage "https://developer.apple.com/safari/resources/"
 
   auto_updates true
-  depends_on macos: ">= :sonoma"
+  depends_on macos: ">= :sequoia"
 
   pkg "Safari Technology Preview.pkg"
 

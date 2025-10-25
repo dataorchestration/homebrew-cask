@@ -1,6 +1,6 @@
 cask "scrivener" do
-  version "3.3.6,16305,1013"
-  sha256 "57800e892f8eb518b7f09184f9fd960df2b58c0e1e07211f8aaa57acc99b1c54"
+  version "3.5,17311,11"
+  sha256 "cac192cd32c0495a4b7431d9f64630a640b5d1a605095ac41d83d167e4db5a69"
 
   url "https://scrivener.s3.amazonaws.com/mac_updates/Scrivener_#{version.csv.third}_#{version.csv.second}.zip",
       verified: "scrivener.s3.amazonaws.com/"
@@ -17,7 +17,7 @@ cask "scrivener" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Scrivener.app"
 

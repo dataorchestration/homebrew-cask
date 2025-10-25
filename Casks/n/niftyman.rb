@@ -19,4 +19,8 @@ cask "niftyman" do
     "~/Library/Application Support/Niftyman",
     "~/Library/Preferences/com.shadowfax.niftyman.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

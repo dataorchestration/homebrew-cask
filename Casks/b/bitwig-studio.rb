@@ -1,6 +1,6 @@
 cask "bitwig-studio" do
-  version "5.1.9"
-  sha256 "d76318b7d3c38ca41bef7001be193c763f65b9e0994b11dcdd0b5fe2e03d7136"
+  version "5.3.13"
+  sha256 "ae0da0ec157bc79c7de34bf25a71063ea80c120347eb7bed4f90cb59023055b2"
 
   url "https://www.bitwig.com/dl/Bitwig%20Studio/#{version}/installer_mac"
   name "Bitwig Studio"
@@ -11,8 +11,6 @@ cask "bitwig-studio" do
     url "https://www.bitwig.com/download/"
     regex(/Bitwig\s*Studio\s*v?(\d+(?:\.\d+)+)/i)
   end
-
-  depends_on macos: ">= :mojave"
 
   app "Bitwig Studio.app"
 

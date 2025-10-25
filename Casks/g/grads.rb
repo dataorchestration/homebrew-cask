@@ -25,13 +25,10 @@ cask "grads" do
   caveats do
     requires_rosetta
     <<~EOS
-      In order to use the GrADS tools, you will need
-      the GrADS fonts and maps data sets, and may need
-      to set some environmental variables.
+      In order to use the GrADS tools, you will need the GrADS fonts and maps data sets
+      and may need to set some environment variables. For more information, see:
 
-      See the documentation at:
-
-      #{staged_path}/grads-#{version}/bin/INSTALL
+        http://cola.gmu.edu/grads/downloads.php
     EOS
   end
 end

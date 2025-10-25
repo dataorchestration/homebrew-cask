@@ -1,13 +1,5 @@
 cask "commandpost" do
-  on_mojave :or_older do
-    version "1.2.16"
-    sha256 "a874240a9c37a77da47c7e3c33342f3cc4d415d3bb146bee4b49b0776e8e08a8"
-
-    livecheck do
-      skip "Legacy version"
-    end
-  end
-  on_catalina do
+  on_catalina :or_older do
     version "1.4.13"
     sha256 "dd0ddbf94722174760c82870f537b299ce0b1b6265875aa558d515df4338a816"
 
@@ -16,8 +8,8 @@ cask "commandpost" do
     end
   end
   on_big_sur :or_newer do
-    version "1.4.27"
-    sha256 "c879eb95f6271b54cb6beb3aa04b36d670955df34f7dfe962bdaea75363b19f5"
+    version "1.5.2"
+    sha256 "5168abc1c458220822dc17ec4f835c425c82b13066cbfde861fa5ddeb958ca84"
   end
 
   url "https://github.com/CommandPost/CommandPost/releases/download/#{version}/CommandPost_#{version}.dmg",
@@ -27,7 +19,6 @@ cask "commandpost" do
   homepage "https://commandpost.io/"
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "CommandPost.app"
   binary "#{appdir}/CommandPost.app/Contents/Frameworks/hs/cmdpost"

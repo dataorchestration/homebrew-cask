@@ -1,13 +1,23 @@
 cask "positron" do
-  version "2024.07.0-49"
-  sha256 "471ef0fc5cd22afab5933ff1fee85550523c632a06e721aa5f081c617ccf53f8"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/posit-dev/positron/releases/download/#{version}/Positron-#{version}.dmg"
+  version "2025.10.1-4"
+  sha256 arm:   "ef7496447feb62c07c7423f46c40a5bfe7af4b7781d4efa116ffa685869de4c9",
+         intel: "0583ec9afa01199443f616964065fbe21c6d2ba5123170d69ace83afdf9cb38f"
+
+  url "https://cdn.posit.co/positron/releases/mac/#{arch}/Positron-darwin-#{version}-#{arch}.zip"
   name "Positron"
   desc "Data science IDE"
-  homepage "https://github.com/posit-dev/positron"
+  homepage "https://positron.posit.co/"
 
-  depends_on macos: ">= :catalina"
+  livecheck do
+    url "https://cdn.posit.co/positron/releases/mac/#{arch}/releases.json"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
+
+  depends_on macos: ">= :big_sur"
 
   app "Positron.app"
 

@@ -1,6 +1,6 @@
 cask "deckset" do
-  version "2.0.32,2687"
-  sha256 "3c52df5cd033ea973d83827905d5207f8bf97e9852bbec69f113b9f62cb39a14"
+  version "2.0.44,2772"
+  sha256 "530592cd5cd6fb1e71922c210009f7dfe316ce55fd10c8e8d58caaa3d4004195"
 
   url "https://dl.decksetapp.com/Deckset+#{version.csv.first}+(#{version.csv.second}).dmg"
   name "Deckset"
@@ -12,7 +12,7 @@ cask "deckset" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
 
   app "Deckset.app"
 

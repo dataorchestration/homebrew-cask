@@ -1,6 +1,6 @@
 cask "lifesize" do
-  version "3.0.16"
-  sha256 "307371adf3467c480886eaee452ba1204d3fc8bc58fe653fb28129d9ed063f09"
+  version "3.0.18"
+  sha256 "93967bf314406a4408f3e8c808cbd7d0676530107360d9f460643aeb471e4e33"
 
   url "https://download.lifesizecloud.com/Lifesize-#{version}-mac.zip",
       verified: "download.lifesizecloud.com/"
@@ -27,4 +27,8 @@ cask "lifesize" do
     "~/Library/Preferences/com.lifesize.cloud.plist",
     "~/Library/Saved Application State/com.lifesize.cloud.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

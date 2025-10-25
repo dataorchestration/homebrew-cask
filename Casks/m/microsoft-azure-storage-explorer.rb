@@ -1,15 +1,17 @@
 cask "microsoft-azure-storage-explorer" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.34.0"
-  sha256 arm:   "1ca063d72237c3f3c52e47a88e56177dcee398e5214d382804cd019d430adb57",
-         intel: "036a9029e3b883ded8de9d9bdde3f63dd86d3403b7ed767b1efc3037c9d37bc4"
+  version "1.40.0"
+  sha256 arm:   "45e657a6e4b8bd6333e1fd3fa2371de048d71515b9be9ef581742906d3fb4750",
+         intel: "bd781e5f137a24414071dd34f5ec2f4f72ae8c50b810e69cd52f408dc58a7957"
 
   url "https://github.com/microsoft/AzureStorageExplorer/releases/download/v#{version}/StorageExplorer-darwin-#{arch}.zip",
       verified: "github.com/microsoft/AzureStorageExplorer/"
   name "Microsoft Azure Storage Explorer"
   desc "Explorer for Azure Storage"
   homepage "https://azure.microsoft.com/en-us/features/storage-explorer/"
+
+  depends_on macos: ">= :big_sur"
 
   app "Microsoft Azure Storage Explorer.app"
 

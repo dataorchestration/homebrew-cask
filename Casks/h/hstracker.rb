@@ -1,6 +1,6 @@
 cask "hstracker" do
-  version "2.7.10"
-  sha256 "2e5dc17e8bca3bfcd3f1761bf59cb8e781540c34fdfc27d14d4c9365681f9463"
+  version "3.3.14"
+  sha256 "6a171e4249fc47af0bd63916bf38a8372a438d0d938ce119019b1068ae522577"
 
   url "https://github.com/HearthSim/HSTracker/releases/download/#{version}/HSTracker.app.zip",
       verified: "github.com/HearthSim/HSTracker/"
@@ -9,12 +9,13 @@ cask "hstracker" do
   homepage "https://hsdecktracker.net/"
 
   livecheck do
-    url :url
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    url "https://hsdecktracker.net/hstracker/appcast2.xml"
+    strategy :sparkle do |items|
+      items.map(&:short_version)
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "HSTracker.app"
 

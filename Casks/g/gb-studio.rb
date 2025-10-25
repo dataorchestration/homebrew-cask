@@ -1,9 +1,9 @@
 cask "gb-studio" do
   arch arm: "apple-silicon", intel: "intel"
 
-  version "4.0.0"
-  sha256 arm:   "c78df6f5ee1759364e6ca5c0c57f0f6fbdc4627655aadc560a75bc77f70f5074",
-         intel: "f289eda2a9cfa9ff5f39e8bc615d7e41be97935b6b8a414095adc4f014895dbb"
+  version "4.1.3"
+  sha256 arm:   "95712c8ec4bcf940fd6058536f278197fd3fe2e0471c297bcf76afc442aacca6",
+         intel: "8111b041246b5f5b81b1e3ab1f33304715a5a51400be91dc04d6d00d5dc2c935"
 
   url "https://github.com/chrismaltby/gb-studio/releases/download/v#{version}/gb-studio-mac-#{arch}.zip",
       verified: "github.com/chrismaltby/gb-studio/"

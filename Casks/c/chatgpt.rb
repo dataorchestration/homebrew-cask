@@ -1,6 +1,6 @@
 cask "chatgpt" do
-  version "1.2024.179,1720463250"
-  sha256 "c6f6d77e5fe0c31c70e3080653a0f7eb30899aa3c3c8a887f0242ba627e9614d"
+  version "1.2025.280,1760143344"
+  sha256 "a57f57f6e1987eb178dfcdc3bf7ccf83bff7ae853c48a4dcbbf5d4ac3d87541b"
 
   url "https://persistent.oaistatic.com/sidekick/public/ChatGPT_Desktop_public_#{version.csv.first}_#{version.csv.second}.dmg",
       verified: "persistent.oaistatic.com/sidekick/public/"
@@ -8,9 +8,13 @@ cask "chatgpt" do
   desc "OpenAI's official ChatGPT desktop app"
   homepage "https://chatgpt.com/"
 
+  # Some older items in the Sparkle feed have a more recent pubDate, so it's necessary to
+  # work with all of the items in the feed (not just the newest one).
   livecheck do
     url "https://persistent.oaistatic.com/sidekick/public/sparkle_public_appcast.xml"
-    strategy :sparkle
+    strategy :sparkle do |items|
+      items.map(&:nice_version)
+    end
   end
 
   auto_updates true
@@ -22,6 +26,7 @@ cask "chatgpt" do
   uninstall quit: "com.openai.chat"
 
   zap trash: [
+    "~/Library/Application Support/ChatGPT",
     "~/Library/Application Support/com.openai.chat",
     "~/Library/Caches/com.openai.chat",
     "~/Library/HTTPStorages/com.openai.chat",

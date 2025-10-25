@@ -1,6 +1,6 @@
 cask "plex" do
-  version "1.96.0.177,dc5df788"
-  sha256 "4296f7322a82057ce61a414678283b200a4ffb38f49ba6f1db20d20d86eb3394"
+  version "1.110.0.351,4e48eb83"
+  sha256 "d28444cd82d9ca29551f83bd3e3c128c4f5e7cd69f3e615ca14716796c61558d"
 
   url "https://downloads.plex.tv/plex-desktop/#{version.csv.first}-#{version.csv.second}/macos/Plex-#{version.csv.first}-#{version.csv.second}-universal.zip"
   name "Plex"
@@ -9,14 +9,12 @@ cask "plex" do
 
   livecheck do
     url "https://plex.tv/api/downloads/6.json"
-    regex(/"version"\s*:\s*"(\d(?:\.\d+)*)-([a-f0-9]{8})"/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+    strategy :json do |json|
+      json.dig("computer", "MacOS", "version")&.tr("-", ",")
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Plex.app"
 

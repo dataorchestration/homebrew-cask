@@ -1,6 +1,6 @@
 cask "alcom" do
-  version "0.1.9"
-  sha256 "5acd4c0291c7a9ee1bfee6ebb9f556c9b6fc9cfb1539132275081707b276812d"
+  version "1.1.4"
+  sha256 "0996a39acc9dffb70c42b2622d828ccaf6d053728d81260810ca261f534050d3"
 
   url "https://github.com/vrc-get/vrc-get/releases/download/gui-v#{version}/ALCOM-#{version}-universal.dmg",
       verified: "github.com/vrc-get/vrc-get/"
@@ -12,8 +12,6 @@ cask "alcom" do
     url :url
     regex(/^gui[._-]v?(\d+(?:\.\d+)+)$/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "ALCOM.app"
 

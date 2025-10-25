@@ -7,10 +7,7 @@ cask "no-ip-duc" do
   desc "Keeps current IP address in sync"
   homepage "https://www.noip.com/download?page=mac"
 
-  livecheck do
-    url "https://www.noip.com/client/macos/appcast.xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2025-03-31", because: :unmaintained
 
   app "No-IP DUC.app"
 
@@ -19,4 +16,8 @@ cask "no-ip-duc" do
     "~/Library/HTTPStorages/com.noip.No-IP-DUC",
     "~/Library/Preferences/com.noip.No-IP-DUC.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "microsoft-teams" do
-  version "24165.1406.2974.9471"
-  sha256 "ee6789c1509902a8687dd63991dce449e521291bd8edaab3f9bad3d6848c7d8f"
+  version "25275.2602.4021.9366"
+  sha256 "35bd8ae4044d755bea19dc08bc28953f484032e6891f8feee8a37cb37afd4042"
 
   url "https://statics.teams.cdn.office.net/production-osx/#{version}/MicrosoftTeams.pkg",
       verified: "statics.teams.cdn.office.net/production-osx/"
@@ -43,7 +43,6 @@ cask "microsoft-teams" do
             quit:      "com.microsoft.autoupdate2",
             pkgutil:   [
               "com.microsoft.MSTeamsAudioDevice",
-              "com.microsoft.package.Microsoft_AutoUpdate.app",
               "com.microsoft.teams2",
             ],
             delete:    [
@@ -55,25 +54,21 @@ cask "microsoft-teams" do
             ]
 
   zap trash: [
-        "~/Library/Application Scripts/com.microsoft.teams2",
-        "~/Library/Application Scripts/com.microsoft.teams2.launcher",
-        "~/Library/Application Scripts/com.microsoft.teams2.notificationcenter",
+        "~/Library/Application Scripts/*.com.microsoft.teams",
+        "~/Library/Application Scripts/com.microsoft.teams*",
         "~/Library/Application Support/com.microsoft.teams",
         "~/Library/Application Support/Microsoft/Teams",
         "~/Library/Application Support/Teams",
         "~/Library/Caches/com.microsoft.teams",
-        "~/Library/Containers/com.microsoft.teams2",
-        "~/Library/Containers/com.microsoft.teams2.launcher",
-        "~/Library/Containers/com.microsoft.teams2.notificationcenter",
+        "~/Library/Containers/com.microsoft.teams*",
         "~/Library/Cookies/com.microsoft.teams.binarycookies",
         "~/Library/Group Containers/*.com.microsoft.teams",
         "~/Library/HTTPStorages/com.microsoft.teams",
         "~/Library/HTTPStorages/com.microsoft.teams.binarycookies",
         "~/Library/Logs/Microsoft Teams Helper (Renderer)",
         "~/Library/Logs/Microsoft Teams",
-        "~/Library/Preferences/com.microsoft.teams.plist",
-        "~/Library/Saved Application State/com.microsoft.teams.savedState",
-        "~/Library/Saved Application State/com.microsoft.teams2.savedState",
+        "~/Library/Preferences/com.microsoft.teams*.plist",
+        "~/Library/Saved Application State/com.microsoft.teams*.savedState",
         "~/Library/WebKit/com.microsoft.teams",
       ],
       rmdir: "~/Library/Application Support/Microsoft"

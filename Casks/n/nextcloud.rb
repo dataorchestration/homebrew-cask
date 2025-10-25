@@ -8,31 +8,22 @@ cask "nextcloud" do
     end
   end
   on_monterey :or_newer do
-    version "3.13.2"
-    sha256 "11078c6ce49835d8e202b8a376a7f78f363cd594e49a36439f87601e728eb499"
+    version "4.0.0"
+    sha256 "35c6eec1215a9f4f8bb2efdafcd1ca7e42e04ffa39b0e64bcf0b6de43732502e"
 
     livecheck do
-      url :url
-      regex(/^Nextcloud[._-]v?(\d+(?:\.\d+)+)\.pkg$/i)
-      strategy :github_latest do |json, regex|
-        json["assets"]&.map do |asset|
-          match = asset["name"]&.match(regex)
-          next if match.blank?
-
-          match[1]
-        end
-      end
+      url "https://download.nextcloud.com/desktop/releases/Mac/Installer/"
+      regex(/href=.*?Nextcloud[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
     end
   end
 
-  url "https://github.com/nextcloud-releases/desktop/releases/download/v#{version}/Nextcloud-#{version}.pkg",
-      verified: "github.com/nextcloud-releases/desktop/"
+  url "https://download.nextcloud.com/desktop/releases/Mac/Installer/Nextcloud-#{version}.pkg"
   name "Nextcloud"
   desc "Desktop sync client for Nextcloud software products"
   homepage "https://nextcloud.com/"
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  conflicts_with cask: "nextcloud-vfs"
 
   pkg "Nextcloud-#{version}.pkg"
   binary "/Applications/Nextcloud.app/Contents/MacOS/nextcloudcmd"

@@ -1,9 +1,9 @@
 cask "mixxx" do
   arch arm: "arm", intel: "intel"
 
-  version "2.4.1"
-  sha256 arm:   "c9ad0bd7c02ac02a70d1d36a30f197945bdde2073b5dbf1e67badb310e3abd95",
-         intel: "b4d43050b9462b510218c75a730e8c46f059ed9d723caf7fedae469e519d1c7e"
+  version "2.5.3"
+  sha256 arm:   "76c062aa41a445f0e1c67423a7679e1c6dc2893bea7d1425087b00744e9ff43e",
+         intel: "933d2d7b0d24dbb2b1e1360d62d2b91de26ae44d5cec491b86188ad4210b1bb8"
 
   url "https://downloads.mixxx.org/releases/#{version}/mixxx-#{version}-macos#{arch}.dmg"
   name "Mixxx"
@@ -16,7 +16,6 @@ cask "mixxx" do
   end
 
   conflicts_with cask: "mixxx@snapshot"
-  depends_on macos: ">= :sierra"
 
   app "Mixxx.app"
 

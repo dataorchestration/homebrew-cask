@@ -1,8 +1,11 @@
 cask "supernotes" do
-  version "3.1.3"
-  sha256 "cd705b5bbf1b9268f12b6654916ed0db0a5c13dbae30ed28c803c79dc9c58260"
+  arch arm: "-arm64"
 
-  url "https://download.supernotes.app/Supernotes-#{version}.dmg"
+  version "3.2.1"
+  sha256 arm:   "1975824ec7d23cf8147378fa681ce2d000b77b55867dd8cf06b1c123913860c0",
+         intel: "e61787cd9a37aee7ba973d782c87e21b89556e2c4eea9db2d9906c91ceba9faa"
+
+  url "https://download.supernotes.app/Supernotes-#{version}#{arch}.dmg"
   name "Supernotes"
   desc "Collaborative note-taking app"
   homepage "https://supernotes.app/"
@@ -15,7 +18,6 @@ cask "supernotes" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Supernotes.app"
 

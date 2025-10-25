@@ -1,9 +1,9 @@
 cask "geomap" do
   arch arm: "Silicon", intel: "Intel"
 
-  version "3.7.2"
-  sha256 arm:   "8863385520eb4bff2b0b2a9a3fd639ab88d68616b8792db863f6a927933cacd2",
-         intel: "fe33677cb601bb5a29c6dee1669b6596754a2fd11b37c6b99c281cfa633cb7cf"
+  version "3.7.6"
+  sha256 arm:   "cba24e5298046e5ca8e52ae5119cf0e98621f39da53d69a29160260cceec821a",
+         intel: "5d6165e25147c149934219917e331263fca09c2fbd26fc623ac16ec7ee18d96c"
 
   url "https://app.geomapapp.org/MapApp/GeoMapApp-#{version}-#{arch}.dmg"
   name "GeoMapApp"

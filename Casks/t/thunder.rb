@@ -1,6 +1,6 @@
 cask "thunder" do
-  version "5.40.2.66331"
-  sha256 "5fb22363d26f79532f3553e57b177e6123a3eb7b0c5e1fc4fc1838c7d18eafb0"
+  version "5.80.1.66541"
+  sha256 "1a43b912d9fae80e0e041c8eed4090484ccc3d64e3b9ab08a4290c6fa7ce05a8"
 
   url "https://down.sandai.net/mac/thunder_#{version}.dmg",
       verified: "down.sandai.net/mac/"
@@ -11,11 +11,11 @@ cask "thunder" do
 
   livecheck do
     url "https://dl.xunlei.com"
-    regex(/thunder[._-](\d+(?:\.\d+)+)\.dmg/i)
+    regex(/thunder[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Thunder.app"
 

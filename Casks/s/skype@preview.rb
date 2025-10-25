@@ -1,21 +1,16 @@
 cask "skype@preview" do
-  version "8.124.76.101"
-  sha256 "de2d0165610b3fcbdfa58617d10ed9c48a062f35e88ffe6a27f19ee62ee761d7"
+  version "8.150.76.125"
+  sha256 "087789265cb1d2947032613358b274c73ddafd87b3e65fce033b23e301621e90"
 
-  url "https://endpoint920510.azureedge.net/s4l/s4l/download/mac/Skype-#{version}.dmg",
-      verified: "endpoint920510.azureedge.net/s4l/s4l/download/mac/"
+  url "https://download.skype.com/s4l/download/mac/Skype-#{version}.dmg"
   name "Skype Preview"
   desc "Video chat, voice call and instant messaging application"
-  homepage "https://www.skype.com/en/insider/"
+  homepage "https://www.skype.com/"
 
-  livecheck do
-    url "https://go.skype.com/mac.preview.download"
-    strategy :header_match
-  end
+  deprecate! date: "2025-05-05", because: :discontinued
 
   auto_updates true
   conflicts_with cask: "skype"
-  depends_on macos: ">= :high_sierra"
 
   app "Skype.app"
 

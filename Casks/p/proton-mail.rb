@@ -1,18 +1,25 @@
 cask "proton-mail" do
-  arch arm: "arm64", intel: "x64"
+  version "1.9.1"
+  sha256 "53e234b6d4e80e22cb8c468a96f75bec7844e1d32b2ebc9cdb9d465c156c4043"
 
-  version "1.0.5"
-  sha256 arm:   "4a366e7fc63db684eec8bd1e511c2f51fd6fd6f98aea1c6093a27d9d79549165",
-         intel: "4a366e7fc63db684eec8bd1e511c2f51fd6fd6f98aea1c6093a27d9d79549165"
-
-  url "https://github.com/ProtonMail/inbox-desktop/releases/download/#{version}/Proton.Mail-#{version}-#{arch}.dmg",
-      verified: "github.com/ProtonMail/inbox-desktop/"
+  url "https://proton.me/download/mail/macos/#{version}/ProtonMail-desktop.dmg"
   name "Proton Mail"
   desc "Client for Proton Mail and Proton Calendar"
   homepage "https://proton.me/mail"
 
+  livecheck do
+    url "https://proton.me/download/mail/macos/version.json"
+    strategy :json do |json|
+      json["Releases"]&.map do |item|
+        next unless item["CategoryName"]&.match?("Stable")
+
+        item["Version"]
+      end
+    end
+  end
+
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Proton Mail.app"
 

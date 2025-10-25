@@ -9,10 +9,12 @@ cask "copyclip" do
 
   livecheck do
     url :url
-    strategy :extract_plist do |versions|
-      versions.values.filter_map(&:short_version).first
+    strategy :extract_plist do |item|
+      item["com.fiplab.copyclip#{version.major}"]&.short_version
     end
   end
+
+  auto_updates true
 
   app "CopyClip #{version.major}.app"
 

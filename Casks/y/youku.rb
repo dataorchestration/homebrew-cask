@@ -1,8 +1,9 @@
 cask "youku" do
-  version "9.2.52.1001"
-  sha256 "b4bfc553704863aa75da5cc1773c81db719c3439ba1eb53e194e6dfb55d8eaa3"
+  version "9.2.67.1001"
+  sha256 "c06a2889024f1393d02a92de7cf5ffd9fbb3ea9183356e3addc51e2368db9c5d"
 
-  url "https://pcclient.download.youku.com/iku_electron_client/youkuclient_setup_#{version}.dmg"
+  url "https://pcclient.download.youku.com/iku_electron_client/youkuclient_setup_#{version}.dmg",
+      user_agent: :fake
   name "Youku"
   name "优酷"
   desc "Chinese video streaming and sharing platform"
@@ -12,8 +13,6 @@ cask "youku" do
     url :homepage
     regex(/youkuclient[._-]setup[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
-
-  depends_on macos: ">= :mojave"
 
   app "优酷.app"
 

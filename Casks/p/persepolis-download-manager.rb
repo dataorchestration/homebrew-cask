@@ -1,11 +1,14 @@
 cask "persepolis-download-manager" do
-  version "4.3.0"
-  sha256 "343286a5972c8added71af90177e1a45cb19a18691314b958ba2edff2dd44564"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/persepolisdm/persepolis/releases/download/#{version}/persepolis_#{version}_macos.dmg",
+  version "5.2.0"
+  sha256 arm:   "092f7975e97ac73aff29d3b0fb084ba6ab4cb5529d6a7a6c8385676ec3468669",
+         intel: "ce91acdba96448d00c7e712960a2670c0e9173a6fc9c382dbeca9ac258f9e319"
+
+  url "https://github.com/persepolisdm/persepolis/releases/download/#{version}/persepolis_#{version}_macos_#{arch}.dmg",
       verified: "github.com/persepolisdm/persepolis/"
   name "Persepolis"
-  desc "GUI for aria2"
+  desc "Download manager"
   homepage "https://persepolisdm.github.io/"
 
   livecheck do
@@ -19,8 +22,4 @@ cask "persepolis-download-manager" do
     "~/.persepolis",
     "~/Library/Application Support/persepolis_download_manager",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

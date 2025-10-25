@@ -1,6 +1,6 @@
 cask "trainerroad" do
-  version "2024.26.1.334"
-  sha256 "359c08cd1f777403ee49fcfdd7c742155f83ec909266f3c309095fa2ee2fe0b8"
+  version "2025.41.0.411"
+  sha256 "3e77e4625ae1af1ac9357d5b07a1d02b52afd04ec2ce07bc4dd81660830d38df"
 
   url "https://trainrdtrcmn01un1softw01.blob.core.windows.net/installers/mac/v001/Production/TrainerRoad-#{version}.dmg",
       verified: "trainrdtrcmn01un1softw01.blob.core.windows.net/"
@@ -10,10 +10,16 @@ cask "trainerroad" do
 
   livecheck do
     url "https://trainrdtrcmn01un1softw01.blob.core.windows.net/installers/mac/v001/Production/latest-mac.yml"
-    regex(/url:\s*TrainerRoad[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
-  end
+    regex(/TrainerRoad[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :electron_builder do |yaml, regex|
+      yaml["files"]&.map do |item|
+        match = item["url"]&.match(regex)
+        next if match.blank?
 
-  depends_on macos: ">= :el_capitan"
+        match[1]
+      end
+    end
+  end
 
   app "TrainerRoad.app"
 

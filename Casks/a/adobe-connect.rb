@@ -1,22 +1,27 @@
 cask "adobe-connect" do
-  version "11,2024.4.729"
-  sha256 "2a40d19250cb924c42f39a6ad4c2467d297f2ff164ebaab520646408fa3fd834"
+  version "2025.8.157,11"
+  sha256 "cf03616ec0fe090d59c32c65e31ea870d8f20d2a2bbe629c6eb39ff653eefa28"
 
-  url "https://download.adobe.com/pub/connect/updaters/meeting/#{version.csv.first.dots_to_underscores}/AdobeConnect_#{version.csv.second.dots_to_underscores}.dmg"
+  # TODO: Remove the leading `0` from the minor version when Adobe updates the URL pattern.
+  # url "https://download.adobe.com/pub/connect/updaters/meeting/#{version.csv.second}/AdobeConnect_#{version.csv.first.dots_to_underscores}.dmg"
+  url "https://download.adobe.com/pub/connect/updaters/meeting/#{version.csv.second}/AdobeConnect_#{version.csv.first.major}_0#{version.csv.first.minor}_#{version.csv.first.patch}.dmg"
   name "Adobe Connect"
   desc "Virtual meeting client"
   homepage "https://www.adobe.com/products/adobeconnect.html"
 
   livecheck do
-    url "https://www.adobe.com/go/ConnectMac11Plus"
-    regex(%r{/(\d+(?:[._]\d+)*)/AdobeConnect[._-]?(\d+(?:[._]\d+)+)\.dmg}i)
-    strategy :header_match do |headers, regex|
-      match = headers["location"]&.match(regex)
-      next if match.blank?
+    url "https://helpx.adobe.com/adobe-connect/connect-downloads-updates.html"
+    regex(/macOS.*?v?(\d+(?:\.\d+)+)[< "]/im)
+    strategy :page_match do |page, regex|
+      version = page.scan(regex)&.flatten&.first
+      directory = page.scan(/href=.*ConnectMac(\d+)Plus/i)&.flatten&.first
+      next if version.blank? || directory.blank?
 
-      "#{match[1].tr("_", ".")},#{match[2].tr("_", ".")}"
+      "#{version},#{directory}"
     end
   end
+
+  no_autobump! because: "livecheck fails during CI workflow"
 
   auto_updates true
 

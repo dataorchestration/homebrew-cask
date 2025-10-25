@@ -12,7 +12,7 @@ cask "macjournal" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :mojave"
+  auto_updates true
 
   app "MacJournal.app"
 

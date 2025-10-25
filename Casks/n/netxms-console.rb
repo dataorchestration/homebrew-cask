@@ -1,19 +1,21 @@
 cask "netxms-console" do
   arch arm: "-aarch64"
 
-  version "5.0.5"
-  sha256 arm:   "487f37c47d5922f4b52a91ef59d2c39619331faf7c2f8e2f6e7d8724f596ab08",
-         intel: "75ddcbde1edbacf108423f7f1b282bd6015fe5ed9330083d6aa840147e9d11a4"
+  version "5.2.6"
+  sha256 arm:   "bb8137ea261f50848f7a0be15bf85e63e56a98a4369ab53ac510d4e1e75230ba",
+         intel: "a5fa9e1ad510f058fb5fc278d6141ff3b423da1d77405a8580796915f8e4afc4"
 
-  url "https://netxms.org/download/releases/#{version.major_minor}/nxmc-#{version}#{arch}.dmg"
+  url "https://netxms.com/download/releases/#{version.major_minor}/nxmc-#{version}#{arch}.dmg"
   name "NetXMS Management Console"
   desc "Network and infrastructure monitoring and management system"
-  homepage "https://netxms.org/"
+  homepage "https://netxms.com/"
 
   livecheck do
     url "https://netxms.com/downloads/"
     regex(/href=.*?nxmc[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "NetXMS Console (#{version}).app"
 

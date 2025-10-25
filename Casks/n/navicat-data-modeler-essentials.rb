@@ -11,8 +11,6 @@ cask "navicat-data-modeler-essentials" do
     cask "navicat-data-modeler"
   end
 
-  depends_on macos: ">= :mojave"
-
   app "Navicat Data Modeler Essentials.app"
 
   zap trash: [
@@ -20,4 +18,8 @@ cask "navicat-data-modeler-essentials" do
     "~/Library/Preferences/com.prect.NavicatDataModelerEssentials#{version.major}.plist",
     "~/Library/Saved Application State/com.prect.NavicatDataModelerEssentials#{version.major}.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

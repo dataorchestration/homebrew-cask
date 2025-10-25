@@ -1,25 +1,28 @@
 cask "metasploit" do
-  version "6.4.18,20240715102928"
-  sha256 "0250129d9e9e90a5659cd6fb76502cf891ec7be8d66e42baef92dad41a46c9cd"
+  version "6.4.95,20251024055553"
+  sha256 "e2be822198e441e95e601610bbf4f057721d37e81e9fc493fbdcfa606057f08f"
 
-  url "https://osx.metasploit.com/metasploit-framework-#{version.csv.first}-#{version.csv.second}.git.2.1f11010-1rapid7-1.x86_64.pkg"
+  url "https://osx.metasploit.com/metasploit-framework-#{version.csv.first}-#{version.csv.second}-1rapid7-1.x86_64.pkg"
   name "Metasploit Framework"
   desc "Penetration testing framework"
   homepage "https://www.metasploit.com/"
 
   livecheck do
     url "https://osx.metasploit.com/LATEST"
-    strategy :page_match do |page|
-      match = page.match(/metasploit[._-]framework[._-]v?(\d+(?:\.\d+)+)[._-](\d+).*\.pkg/i)
+    regex(/metasploit[._-]framework[._-]v?(\d+(?:\.\d+)+)[._-](\d+(?:\.git\.\d+\.\h+)?).*\.pkg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]}"
     end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   depends_on formula: "nmap"
 
-  pkg "metasploit-framework-#{version.csv.first}-#{version.csv.second}.git.2.1f11010-1rapid7-1.x86_64.pkg"
+  pkg "metasploit-framework-#{version.csv.first}-#{version.csv.second}-1rapid7-1.x86_64.pkg"
   binary "/opt/metasploit-framework/bin/msfbinscan"
   binary "/opt/metasploit-framework/bin/msfconsole"
   binary "/opt/metasploit-framework/bin/msfd"

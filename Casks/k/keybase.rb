@@ -2,12 +2,12 @@ cask "keybase" do
   arch arm: "arm64-"
 
   on_arm do
-    version "6.3.0,20240528152652,16b027d126"
-    sha256 "9a90649bd60260a27bd0de2834584547eb7cf90a93fd48d2eb24aad32cdf8cee"
+    version "6.5.4,20250917154415,52400b6f28"
+    sha256 "6e76006267d80b40e182d3110bb18c940a05aca41b9bb29a2a4ccc64967f8745"
   end
   on_intel do
-    version "6.3.0,20240528151149,16b027d126"
-    sha256 "695d6d9a5588e125e74513f57537ceddad96481bb7116f490d8ba5e4d8b65667"
+    version "6.5.4,20250917153314,52400b6f28"
+    sha256 "4dc3a84c3ba33467928b5c340d2296ad6d368009b47f4e24cb8baa75ae90da44"
   end
 
   url "https://prerelease.keybase.io/darwin-#{arch}updates/Keybase-#{version.csv.first}-#{version.csv.second}%2B#{version.csv.third}.zip"
@@ -17,11 +17,8 @@ cask "keybase" do
 
   livecheck do
     url "https://prerelease.keybase.io/update-darwin-#{arch}prod-v2.json"
-    strategy :page_match do |page|
-      match = page.match(/Keybase[._-]v?(\d+(?:\.\d+)+)[._-](\d+)%2B([0-9a-f]+)\.zip/i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]},#{match[3]}"
+    strategy :json do |json|
+      json["version"]&.tr("-+", ",")
     end
   end
 
@@ -51,9 +48,11 @@ cask "keybase" do
             ]
 
   zap trash: [
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/keybase.*.sfl*",
         "~/Library/Application Support/Keybase",
         "~/Library/Caches/Keybase",
         "~/Library/Group Containers/keybase",
+        "~/Library/LaunchAgents/keybase.*.plist",
         "~/Library/Logs/Keybase*",
         "~/Library/Preferences/keybase*",
       ],

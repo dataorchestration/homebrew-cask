@@ -1,6 +1,6 @@
 cask "media-center" do
-  version "32.00.58"
-  sha256 "dab21b062e35562b6320c5e0b6c9faa9618b4a60d6947ef6fa3d501514dcf201"
+  version "34.00.71"
+  sha256 "34a2ab90fd419fb161058abb6ddc5109b6a3b1e6482617340c4e0d9b0fdc8588"
 
   url "https://files.jriver-cdn.com/mediacenter/channels/v#{version.major}/stable/MediaCenter#{version.no_dots}-Universal.dmg",
       verified: "files.jriver-cdn.com/mediacenter/"
@@ -22,7 +22,7 @@ cask "media-center" do
 
   zap trash: [
     "~/Documents/JRiver/",
-    "~/Library/Application Support/J River/",
+    "~/Library/Application Support/J River",
     "~/Library/Caches/com.jriver.MediaCenter#{version.major}",
     "~/Library/Cookies/com.jriver.MediaCenter#{version.major}*",
     "~/Library/Preferences/com.jriver.MediaCenter#{version.major}.plist",

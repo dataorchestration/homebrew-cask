@@ -1,6 +1,6 @@
 cask "olympus" do
-  version "4175"
-  sha256 "6a47614163cfee3f06aa8f6a21811a2f2893025aa729ca2045a0996d422ae652"
+  version "5205"
+  sha256 "febf2f913432821dab1243376110c27a6757acdbe555b50709d7e604e1d34a35"
 
   url "https://dev.azure.com/EverestAPI/Olympus/_apis/build/builds/#{version}/artifacts?artifactName=macos.main&$format=zip",
       verified: "dev.azure.com/EverestAPI/Olympus/_apis/build/builds/"
@@ -12,10 +12,12 @@ cask "olympus" do
     url "https://dev.azure.com/EverestAPI/Olympus/_apis/build/builds"
     strategy :json do |json|
       json["value"]&.map do |build|
-        build["id"].to_s if build["sourceBranch"] == "refs/heads/stable"
+        build["id"]&.to_s if build["sourceBranch"] == "refs/heads/stable"
       end
     end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   container nested: "macos.main/dist.zip"
 

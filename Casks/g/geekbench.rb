@@ -1,23 +1,11 @@
 cask "geekbench" do
-  on_sierra :or_older do
-    version "4.4.4"
-    sha256 "1fc2b87742cd27deaa184a753a57bfc5a8c81de34524e9fd318d6875be6ac5c9"
-  end
-  on_high_sierra do
-    version "5.5.1"
-    sha256 "04b06cb642e51230a3dfd07ce2d3a4ea696cb349583737622749174dc8747313"
-  end
-  on_mojave do
-    version "5.5.1"
-    sha256 "04b06cb642e51230a3dfd07ce2d3a4ea696cb349583737622749174dc8747313"
-  end
-  on_catalina do
+  on_catalina :or_older do
     version "5.5.1"
     sha256 "04b06cb642e51230a3dfd07ce2d3a4ea696cb349583737622749174dc8747313"
   end
   on_big_sur :or_newer do
-    version "6.3.0"
-    sha256 "ec87fb39b798cac6245f5667bee82649d363d07dc34ed7c0f8969586c04ecd41"
+    version "6.5.0"
+    sha256 "6705638d99ff1e1e0cd1f108f89f7d4e53df79f6230f375e447639f25832136d"
   end
 
   url "https://cdn.geekbench.com/Geekbench-#{version}-Mac.zip"
@@ -36,6 +24,7 @@ cask "geekbench" do
 
   zap trash: [
     "~/Library/Caches/com.primatelabs.Geekbench#{version.major}",
+    "~/Library/HTTPStorages/com.primatelabs.Geekbench#{version.major}",
     "~/Library/Preferences/com.primatelabs.Geekbench#{version.major}.plist",
     "~/Library/Saved Application State/com.primeatelabs.Geekbench#{version.major}.savedState",
   ]

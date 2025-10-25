@@ -1,6 +1,6 @@
 cask "tg-pro" do
-  version "2.92"
-  sha256 "fa3fddc5324ec5e25f2f86a3aac2c0c11efbe5aa3705dfc6c26895fa74ebea6d"
+  version "2.99"
+  sha256 "030734f369c0473ea675ae067396670e16ce06aec2c96b76094ffca736ec4b1e"
 
   url "https://www.tunabellysoftware.com/resources/TG%20Pro%20#{version}.dmg"
   name "TG Pro"
@@ -13,7 +13,7 @@ cask "tg-pro" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "TG Pro.app"
 

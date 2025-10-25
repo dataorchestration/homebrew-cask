@@ -1,9 +1,9 @@
 cask "goland" do
   arch arm: "-aarch64"
 
-  version "2024.1.4,241.18034.61"
-  sha256 arm:   "6dd71b3993b005e3557ad6ddb4d9ed87068be5225df19422e4b0e3fdd0fbbd10",
-         intel: "e2b2ae8d52700335d539b28179410b2567c78f6c8121a742e4df208180b55884"
+  version "2025.2.4,252.27397.100"
+  sha256 arm:   "d122e1f1109f31373d4a479b99278f569da7cf3b9fea88b1b2077c6d598813bf",
+         intel: "0a54191caca25c4ef4f82a2fd44bbd90b44a59054034aa586e5c53d6fe7257b6"
 
   url "https://download.jetbrains.com/go/goland-#{version.csv.first}#{arch}.dmg"
   name "Goland"
@@ -13,17 +13,29 @@ cask "goland" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release"
     strategy :json do |json|
-      json["GO"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["GO"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "GoLand.app"
-  binary "#{appdir}/GoLand.app/Contents/MacOS/goland"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/goland.wrapper.sh"
+  binary shimscript, target: "goland"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/GoLand.app/Contents/MacOS/goland' "$@"
+    EOS
+  end
 
   zap trash: [
     "~/Library/Application Support/JetBrains/GoLand",

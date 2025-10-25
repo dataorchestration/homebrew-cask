@@ -2,28 +2,29 @@ cask "audio-hijack" do
   sha256 :no_check
 
   on_ventura :or_older do
-    version "4.3.3"
+    version "4.3.5"
 
-    url "https://rogueamoeba.com/audiohijack/download/AudioHijack.zip"
+    url "https://cdn.rogueamoeba.com/audiohijack/download/AudioHijack-ACE.zip"
 
-    # NOTE: The `system` value will need to be kept up to date with the latest
-    # macOS Ventura version (e.g. 1366 for 13.6.6).
+    # The ACE release supports macOS 11 to 14.3.1, so we use the highest
+    # supported macOS version in the URL.
     livecheck do
-      url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=1366&bundleid=com.rogueamoeba.audiohijack&platform=osx&version=#{version.no_dots}8000"
+      url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=1431&bundleid=com.rogueamoeba.audiohijack&platform=osx&version=#{version.no_dots}8000"
       strategy :sparkle
     end
   end
   on_sonoma :or_newer do
-    version "4.4.2"
+    version "4.5.3"
 
-    url "https://rogueamoeba.com/audiohijack/download/AudioHijack-ARK.zip"
+    url "https://cdn.rogueamoeba.com/audiohijack/download/AudioHijack.zip"
 
-    # NOTE: The `system` value will need to be kept up to date with the latest
-    # macOS version (e.g. 1441 for 14.4.1).
     livecheck do
-      url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=1441&bundleid=com.rogueamoeba.audiohijack&platform=osx&version=#{version.no_dots}8000"
+      url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=999&bundleid=com.rogueamoeba.audiohijack&platform=osx&version=#{version.no_dots}8000"
       strategy :sparkle
     end
+
+    # NOTE: See https://www.rogueamoeba.com/support/knowledgebase/?showCategory=Audio+Hijack
+    caveats "Audio Hijack #{version} requires macOS 14.5 or higher."
   end
 
   name "Audio Hijack"
@@ -39,9 +40,9 @@ cask "audio-hijack" do
 
   zap trash: [
     "~/Library/Application Support/Audio Hijack #{version.major}",
-    "~/Library/Caches/com.rogueamoeba.audiohijack/",
-    "~/Library/HTTPStorages/com.rogueamoeba.audiohijack/",
+    "~/Library/Caches/com.rogueamoeba.audiohijack",
+    "~/Library/HTTPStorages/com.rogueamoeba.audiohijack",
     "~/Library/Preferences/com.rogueamoeba.audiohijack.plist",
-    "~/Library/WebKit/com.rogueamoeba.audiohijack/",
+    "~/Library/WebKit/com.rogueamoeba.audiohijack",
   ]
 end

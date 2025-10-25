@@ -1,33 +1,61 @@
 cask "ghdl" do
-  arch arm: "llvm", intel: "mcode"
+  macos_version = nil
+  version "5.1.1"
 
-  version "4.1.0"
-  sha256 arm:   "f46cfeee85c4d76720f5c0d6ad283754bc1dae57ce9f1a3942086bc270094ddc",
-         intel: "8521aafad389eb769de25db13ecaaaade8444431447eb5e801dc2fcf981cdeed"
+  on_ventura :or_older do
+    macos_version = 13
+    arch arm: "x86_64", intel: "x86_64"
 
-  url "https://github.com/ghdl/ghdl/releases/download/v#{version}/ghdl-macos-11-#{arch}.tgz"
+    sha256 "4c35a9d6028d11cbfc7b2a98e0cdb28a56e268e5f586d7246904fec40bc8193a"
+
+    caveats do
+      requires_rosetta
+    end
+  end
+  on_sonoma :or_newer do
+    arch arm: "aarch64", intel: "x86_64"
+
+    on_arm do
+      on_sonoma do
+        macos_version = 14
+
+        sha256 "e858a3ee3cee22c976354ee7a66ab6377beec1a9383462f0ba583a8df73f46c1"
+      end
+      on_sequoia :or_newer do
+        macos_version = 15
+
+        sha256 "0445652a460d01ab94d3a95fa88f398ae9550973daf5873f66c2480d2c73e209"
+      end
+    end
+    on_intel do
+      macos_version = 13
+
+      sha256 "4c35a9d6028d11cbfc7b2a98e0cdb28a56e268e5f586d7246904fec40bc8193a"
+    end
+  end
+
+  url "https://github.com/ghdl/ghdl/releases/download/v#{version}/ghdl-llvm-#{version}-macos#{macos_version}-#{arch}.tar.gz",
+      verified: "github.com/ghdl/ghdl/"
   name "ghdl"
   desc "VHDL 2008/93/87 simulator"
-  homepage "https://github.com/ghdl/ghdl/"
+  homepage "https://ghdl.github.io/ghdl/"
 
   livecheck do
     url :url
     strategy :github_latest
   end
 
-  binary "bin/ghdl"
-  binary "bin/ghwdump"
+  depends_on macos: ">= :ventura"
 
-  postflight do
-    puts "Creating library symlinks in #{HOMEBREW_PREFIX}/include and #{HOMEBREW_PREFIX}/lib"
-    File.symlink("#{staged_path}/include/ghdl", "#{HOMEBREW_PREFIX}/include/ghdl")
-    File.symlink("#{staged_path}/lib/ghdl", "#{HOMEBREW_PREFIX}/lib/ghdl")
+  directory = "ghdl-llvm-#{version}-macos#{macos_version}-#{arch}"
+
+  ghdlbins = ["ghdl", "ghwdump", "ghdl1-llvm"]
+  ghdlbins.each do |bin|
+    binary "#{directory}/bin/#{bin}"
   end
 
-  uninstall_postflight do
-    puts "Removing library symlinks in #{HOMEBREW_PREFIX}/include and #{HOMEBREW_PREFIX}/lib"
-    File.unlink("#{HOMEBREW_PREFIX}/include/ghdl", "#{HOMEBREW_PREFIX}/lib/ghdl")
-  end
+  binary "#{directory}/include/ghdl", target: "#{HOMEBREW_PREFIX}/include/ghdl"
+  binary "#{directory}/lib/ghdl", target: "#{HOMEBREW_PREFIX}/lib/ghdl"
 
   # No zap stanza required
 end

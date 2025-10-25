@@ -12,5 +12,9 @@ cask "ipynb-quicklook" do
     strategy :github_latest
   end
 
+  deprecate! date: "2025-09-22", because: :no_longer_meets_criteria
+
   qlplugin "ipynb-quicklook.qlgenerator"
+
+  # No zap stanza required
 end

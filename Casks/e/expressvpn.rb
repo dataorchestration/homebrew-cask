@@ -1,6 +1,6 @@
 cask "expressvpn" do
-  version "11.58.0.82183"
-  sha256 "112952bf751c2fdf0781fab807e038c1db96727dff47af451a0220b779032428"
+  version "11.70.0.90675"
+  sha256 "9872744c64784d6c09c73522e50a8b76e0bb19b8f0351da1568068a7dbb0ccfe"
 
   url "https://www.expressvpn.works/clients/mac/expressvpn_mac_#{version}_release.pkg"
   name "ExpressVPN"
@@ -11,6 +11,8 @@ cask "expressvpn" do
     url "https://www.expressvpn.works/clients/latest/mac"
     strategy :header_match
   end
+
+  auto_updates true
 
   pkg "expressvpn_mac_#{version}_release.pkg"
 

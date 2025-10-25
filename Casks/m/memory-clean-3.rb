@@ -1,6 +1,6 @@
 cask "memory-clean-3" do
   # NOTE: "3" is not a version number, but an intrinsic part of the product name
-  version "1.0.24,10.24"
+  version "1.0.24"
   sha256 :no_check
 
   url "https://fiplab.com/app-download/Memory_Clean_3.zip"
@@ -10,8 +10,12 @@ cask "memory-clean-3" do
 
   livecheck do
     url :url
-    strategy :extract_plist
+    strategy :extract_plist do |item|
+      item["com.fiplab.memoryclean3"]&.short_version
+    end
   end
+
+  auto_updates true
 
   app "Memory Clean 3.app"
 

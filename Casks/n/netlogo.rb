@@ -1,8 +1,11 @@
 cask "netlogo" do
-  version "6.4.0"
-  sha256 "c4147815eaa093770cb99e641a244d0800b8b5089c734999f14fa1b81e3b00fe"
+  arch arm: "aarch64", intel: "x86_64"
 
-  url "https://ccl.northwestern.edu/netlogo/#{version}/NetLogo-#{version}.dmg"
+  version "7.0.2"
+  sha256 arm:   "3c14a641733bd7a17c1cb4273ec65bd6cf2986b02e623a38c9d9ba1eec575999",
+         intel: "4f9dd40700f8fe6d1a57d42eadc880ac8cb409b87606386888eedcd1ffde80af"
+
+  url "https://ccl.northwestern.edu/netlogo/#{version}/NetLogo-#{version}-#{arch}.dmg"
   name "NetLogo"
   desc "Multi-agent programmable modelling environment"
   homepage "https://ccl.northwestern.edu/netlogo/"

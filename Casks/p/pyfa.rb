@@ -1,6 +1,6 @@
 cask "pyfa" do
-  version "2.59.2"
-  sha256 "e3a366c4411c78279f49b11f090c17ef2ccba053524a72ad5da15594a6090aab"
+  version "2.64.2"
+  sha256 "5dc3c45461d81dfa58903dd5753b1849dfe071bc2506082792a4fe1f665c45db"
 
   url "https://github.com/pyfa-org/Pyfa/releases/download/v#{version}/pyfa-v#{version}-mac.zip"
   name "pyfa"
@@ -12,6 +12,8 @@ cask "pyfa" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "pyfa.app"
 
   zap trash: [
@@ -19,4 +21,8 @@ cask "pyfa" do
     "~/Library/Preferences/org.pyfaorg.pyfa.plist",
     "~/Library/Saved Application State/org.pyfaorg.pyfa.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

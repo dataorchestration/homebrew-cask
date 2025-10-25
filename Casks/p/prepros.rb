@@ -1,15 +1,20 @@
 cask "prepros" do
-  version "7.26.0"
-  sha256 "5231ca24adaf7840a491a34fe1ab648e554ddee86db980d358b1b22d7c2947f8"
+  arch arm: "-Mac"
 
-  url "https://downloads.prepros.io/v#{version.major}/#{version}/Prepros-#{version}.zip"
+  version "7.27.0"
+  sha256 arm:   "53788d72c2d49299cd6fbda01c4d21fc9c13fdf54a1d18c050d84bb35c96f52f",
+         intel: "3ed0fde46da8d961e209116a50cc681c1e32a8de0909a2730d9da70fc11302c3"
+
+  url "https://downloads.prepros.io/v#{version.major}/#{version}/Prepros#{arch}-#{version}.zip"
   name "Prepros"
   desc "Web development companion"
   homepage "https://prepros.io/"
 
   livecheck do
-    url "https://prepros.io/downloads/stable/mac"
-    strategy :header_match
+    url "https://prepros.io/api/v#{version.major}/version/darwin/stable"
+    strategy :json do |json|
+      json.dig("data", "version")
+    end
   end
 
   app "Prepros.app"

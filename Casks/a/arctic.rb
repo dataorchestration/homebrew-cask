@@ -1,6 +1,6 @@
 cask "arctic" do
-  version "24.2.1,27,20240702025314"
-  sha256 "9fa31298553c873f31d3f9a347bc848cea984310e6ebf00b332a7876ef9a9e44"
+  version "25.2.0,56,20250926102928"
+  sha256 "5fcb71c093f34fdf70afdcbf4130d8a9201e6a6820d9f589dcf99a6b75741279"
 
   url "https://updates.hedge.video/arctic/macos/updates/production/Arctic_#{version.csv.third}_v#{version.csv.first}b#{version.csv.second}/Arctic-#{version.csv.second}.zip"
   name "Arctic"
@@ -9,12 +9,16 @@ cask "arctic" do
 
   livecheck do
     url "https://updates.hedge.video/arctic/macos/appcast/arctic-prod.xml"
-    strategy :sparkle do |item|
-      date = item.url[/Arctic[._-](\d+)[._-]/, 1]
+    regex(/Arctic[._-](\d+)[._-]/i)
+    strategy :sparkle do |item, regex|
+      date = item.url[regex, 1]
+      next if date.blank?
+
       "#{item.short_version},#{item.version},#{date}"
     end
   end
 
+  auto_updates true
   depends_on macos: ">= :big_sur"
 
   app "Arctic.app"

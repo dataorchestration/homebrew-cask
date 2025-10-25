@@ -1,6 +1,6 @@
 cask "ticktick" do
-  version "6.0.00,364"
-  sha256 "28d875cd9ac764526e3b84727a2af31072424cddc13486f196b87f567d1d429b"
+  version "6.4.00,448"
+  sha256 "716464c28be9c146d85842b9fa2be004ab0ef57f6c6ee037d37c014e232db456"
 
   url "https://ticktick-download-mac.s3.amazonaws.com/download/mac/TickTick_#{version.csv.first}_#{version.csv.second}.dmg",
       verified: "ticktick-download-mac.s3.amazonaws.com/download/mac/"
@@ -9,17 +9,11 @@ cask "ticktick" do
   homepage "https://www.ticktick.com/home"
 
   livecheck do
-    url "https://www.ticktick.com/static/getApp/download?type=mac"
-    strategy :header_match do |headers|
-      match = headers["location"].match(/TickTick[._-]v?(\d+(?:\.\d+)+)[_-](\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
-    end
+    url "https://pull.ticktick.com/mac/release_note/mac_appcast.xml"
+    strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "TickTick.app"
 

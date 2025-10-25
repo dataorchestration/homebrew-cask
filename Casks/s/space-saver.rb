@@ -13,4 +13,9 @@ cask "space-saver" do
   end
 
   app "Space Saver.app"
+
+  zap trash: [
+    "~/Library/Preferences/com.mariogt.space-saver.plist",
+    "~/Library/Saved Application State/com.mariogt.space-saver.savedState",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "godot-mono" do
-  version "4.2.2"
-  sha256 "c3449e432de65d938bb7421930b288034d4ede82b9fdb9c1d03a200d5f15e7f6"
+  version "4.5.1"
+  sha256 "f00ee565e9d3682584117ef8865f5ff6d8f571fbf2733075ee06b9e0953261b8"
 
   url "https://github.com/godotengine/godot/releases/download/#{version}-stable/Godot_v#{version}-stable_mono_macos.universal.zip",
       verified: "github.com/godotengine/godot/"
@@ -14,8 +14,8 @@ cask "godot-mono" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :big_sur"
   depends_on cask: "dotnet-sdk"
-  depends_on macos: ">= :sierra"
 
   app "Godot_mono.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

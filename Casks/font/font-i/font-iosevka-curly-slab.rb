@@ -1,8 +1,8 @@
 cask "font-iosevka-curly-slab" do
-  version "30.3.2"
-  sha256 "5310bfb763f0e69faab0dc977ec90f889a96ccf91fd25acbe44c5defb7757e05"
+  version "33.3.3"
+  sha256 "4c0b1bf0d8c637d1d1f331389e4c2ea7e55d8ec40b391c3e1ad726e362df477c"
 
-  url "https://github.com/be5invis/Iosevka/releases/download/v#{version}/PkgTTC-IosevkaCurlySlab-#{version}.zip"
+  url "https://github.com/be5invis/Iosevka/releases/download/v#{version}/SuperTTC-IosevkaCurlySlab-#{version}.zip"
   name "Iosevka Curly Slab"
   homepage "https://github.com/be5invis/Iosevka/"
 
@@ -11,15 +11,7 @@ cask "font-iosevka-curly-slab" do
     strategy :github_latest
   end
 
-  font "IosevkaCurlySlab-Bold.ttc"
-  font "IosevkaCurlySlab-ExtraBold.ttc"
-  font "IosevkaCurlySlab-ExtraLight.ttc"
-  font "IosevkaCurlySlab-Heavy.ttc"
-  font "IosevkaCurlySlab-Light.ttc"
-  font "IosevkaCurlySlab-Medium.ttc"
-  font "IosevkaCurlySlab-Regular.ttc"
-  font "IosevkaCurlySlab-SemiBold.ttc"
-  font "IosevkaCurlySlab-Thin.ttc"
+  font "IosevkaCurlySlab.ttc"
 
   # No zap stanza required
 end

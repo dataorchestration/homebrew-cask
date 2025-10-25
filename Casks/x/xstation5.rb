@@ -8,10 +8,7 @@ cask "xstation5" do
   desc "Desktop trading platform"
   homepage "https://www.xtb.com/"
 
-  livecheck do
-    url "https://desktopxstation5.xtb.com/prod/update/mac/latest-mac.yml"
-    strategy :electron_builder
-  end
+  disable! date: "2025-03-17", because: :no_longer_available
 
   app "xStation5.app"
 
@@ -22,4 +19,8 @@ cask "xstation5" do
     "~/Library/Preferences/xStation5.desktop.x64.plist",
     "~/Library/Saved Application State/xStation5.desktop.x64.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

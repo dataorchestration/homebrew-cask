@@ -1,6 +1,6 @@
 cask "mindmac" do
-  version "1.9.17"
-  sha256 "d31860b22c63e23cd36366060e4b895a3d4601adeab60c894a42db43c7b5b17d"
+  version "1.9.28"
+  sha256 "cc5f87c6b53d9f332c681ab6bc02befc2e3ed86a984b222581f75877e65665c0"
 
   url "https://github.com/MindMacApp/MindMac/releases/download/#{version}/MindMac_#{version}.dmg",
       verified: "github.com/MindMacApp/MindMac/"
@@ -9,8 +9,8 @@ cask "mindmac" do
   homepage "https://mindmac.app/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://mindmacapp.github.io/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true

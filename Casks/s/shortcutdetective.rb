@@ -7,10 +7,8 @@ cask "shortcutdetective" do
   desc "Detects which app receives a keyboard shortcut (hotkey)"
   homepage "https://www.irradiatedsoftware.com/labs/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-15", because: :unmaintained
+  disable! date: "2025-07-15", because: :unmaintained
 
   app "ShortcutDetective.app"
 

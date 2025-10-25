@@ -1,9 +1,9 @@
 cask "joplin" do
   arch arm: "-arm64"
 
-  version "3.0.13"
-  sha256 arm:   "2ba1aff68aae017464b59903722a70601f18b8e7c3286374e6c0bad064c5b02c",
-         intel: "52728d4daf4b031bd3447758f6ff53a23835d8a541bf6d322b71bedaa42de7c5"
+  version "3.4.12"
+  sha256 arm:   "d02bdb39d25165921f36eed09fcd7583f65fd565c9aef1ab2a1ab649355efebe",
+         intel: "96a0d256dd43a360277cca8a9b087220414d9c7c4b4ce2828df63e74059b33b2"
 
   url "https://github.com/laurent22/joplin/releases/download/v#{version}/Joplin-#{version}#{arch}.DMG",
       verified: "github.com/laurent22/joplin/"
@@ -15,6 +15,8 @@ cask "joplin" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Joplin.app"
 

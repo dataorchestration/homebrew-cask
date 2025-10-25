@@ -1,11 +1,11 @@
 cask "freecad" do
-  arch arm: "arm64", intel: "intel-x86_64"
+  arch arm: "arm64", intel: "x86_64"
 
-  version "0.21.2"
-  sha256 arm:   "88f51e816075c586bcde89eab0b5edc4a260294eefc11bf5a917d7818330ad50",
-         intel: "e22dfd804c2b09aa559cd3ec2de6e1d7321022c04a354857fc9936b7b6d2e5bb"
+  version "1.0.2"
+  sha256 arm:   "2fde16da356b62cfce656cd12effaa79f97f2f28a71f1520dd90fabb88f9d3fd",
+         intel: "8d68ef4f8d91a5ecda64d0f27bc2b87b782c534f02ebda27984f69d081a48601"
 
-  url "https://github.com/FreeCAD/FreeCAD/releases/download/#{version}/FreeCAD-#{version}-macOS-#{arch}.dmg",
+  url "https://github.com/FreeCAD/FreeCAD/releases/download/#{version}/FreeCAD_#{version}-conda-macOS-#{arch}-py311.dmg",
       verified: "github.com/FreeCAD/FreeCAD/"
   name "FreeCAD"
   desc "3D parametric modeller"
@@ -18,8 +18,6 @@ cask "freecad" do
     url :url
     strategy :github_latest
   end
-
-  depends_on macos: ">= :sierra"
 
   app "FreeCAD.app"
 

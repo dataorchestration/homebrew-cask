@@ -1,9 +1,10 @@
 cask "kstars" do
-  version "3.7.1"
-  sha256 "85b45488dec161c4169703aa84ff922e488aa4b567375f84d3bf69b3a1be47d4"
+  version "3.7.9"
+  sha256 :no_check # required as upstream package is updated in-place
 
   url "https://www.indilib.org/jdownloads/kstars/kstars-#{version}.dmg",
-      verified: "indilib.org/jdownloads/kstars/"
+      user_agent: :browser,
+      verified:   "indilib.org/jdownloads/kstars/"
   name "KStars"
   desc "Astronomy software"
   homepage "https://kstars.kde.org/"
@@ -13,7 +14,7 @@ cask "kstars" do
     regex(/href=.*?kstars[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "kstars.app"
 
@@ -23,4 +24,8 @@ cask "kstars" do
     "~/Library/Preferences/kstars",
     "~/Library/Preferences/kstarsrc",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

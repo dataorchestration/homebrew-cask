@@ -1,8 +1,8 @@
 cask "bluos-controller" do
-  version "4.4.1,2024,07"
-  sha256 "dc748fede7a34a610772f1bd81578d94e5b7be311590b2d05e0f700553935cbe"
+  version "4.12.0"
+  sha256 "981ece99093fc9c6c61d44c577b8c2b8e5de8e5bcec3f4fda9cf106f80175b0e"
 
-  url "https://content-bluesound-com.s3.amazonaws.com/uploads/#{version.csv.second}/#{version.csv.third}/BluOS-Controller-#{version.csv.first}-MacOS.zip",
+  url "https://content-bluesound-com.s3.amazonaws.com/uploads/BluOS-Controller-#{version}-MacOS.zip",
       verified: "content-bluesound-com.s3.amazonaws.com/uploads/"
   name "BluOS Controller"
   desc "Manage audio systems"
@@ -10,13 +10,10 @@ cask "bluos-controller" do
 
   livecheck do
     url "https://www.bluesound.com/downloads/"
-    regex(%r{uploads/(\d+)/(\d+)/BluOS[._-]Controller[._-]v?(\d+(?:\.\d+)+)[._-]MacOS\.zip}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[2]},#{match[0]},#{match[1]}" }
-    end
+    regex(%r{uploads/BluOS[._-]Controller[._-]v?(\d+(?:\.\d+)+)[._-]MacOS\.zip}i)
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "BluOS Controller.app"
 
@@ -26,8 +23,4 @@ cask "bluos-controller" do
     "~/Library/Preferences/com.bluesound.bluos.plist",
     "~/Library/Saved Application State/com.bluesound.bluos.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

@@ -1,9 +1,9 @@
 cask "mcreator" do
   arch arm: "aarch64", intel: "64bit"
 
-  version "2024.2.28714"
-  sha256 arm:   "82140c223287c204ea2a64942bc0e5d77a7caf3ec412d6196a8d48b9cdf1e5c1",
-         intel: "4d4260732e3162e5d48f2f02f6d29f67d924c01c4f4ac84ca823dcf295dc7060"
+  version "2025.2.28610"
+  sha256 arm:   "3c64971ab4415f6891d308256731e2747f97c46f6a1086e5ffcadacb2ea6cbf3",
+         intel: "6f2922e16a4b025da084c533a57bb57f95ba29e7ecbdc169c1bb535572bf8776"
 
   url "https://github.com/MCreator/MCreator/releases/download/#{version}/MCreator.#{version.major_minor}.Mac.#{arch}.dmg",
       verified: "github.com/MCreator/MCreator/"
@@ -12,9 +12,11 @@ cask "mcreator" do
   homepage "https://mcreator.net/"
 
   livecheck do
-    url "https://mcreator.net/changelog"
-    regex(/>v?(\d+(?:\.\d+)+)</i)
+    url :url
+    strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "MCreator.app"
 

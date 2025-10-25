@@ -1,6 +1,6 @@
 cask "keyman" do
-  version "17.0.326"
-  sha256 "b14c1a63b1c20a3ae0413fb82fe7ecb5fdbd1c964ea0759806b18c23af2d4bc0"
+  version "18.0.243"
+  sha256 "94b5b82c88a8ac35dfb031dcb055d992cced7fa0b49971b8a8ed4edb217b5bd8"
 
   url "https://downloads.keyman.com/mac/stable/#{version}/keyman-#{version}.dmg"
   name "Keyman"

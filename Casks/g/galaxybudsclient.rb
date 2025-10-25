@@ -1,9 +1,9 @@
 cask "galaxybudsclient" do
   arch arm: "arm64", intel: "x64"
 
-  version "5.0.1"
-  sha256 arm:   "052c31062af7854cc60191df78fd19a7da99c67d30feb712f560367d2162857f",
-         intel: "4228910f96ed2fe9e8317e8248de39917ff087f3b6c68b1395164dbb476c60c7"
+  version "5.1.2"
+  sha256 arm:   "6f6d9c0111f04e3602f4a6262f3ec2c7e03e162d653433d2d93e70379a6bf5dc",
+         intel: "4779aa8c463dc4b4f717eae7552860f05a59dbb953de1b1582e40a67cc5780f2"
 
   url "https://github.com/ThePBone/GalaxyBudsClient/releases/download/#{version}/GalaxyBudsClient_macOS_#{arch}.pkg"
   name "GalaxyBudsClient"

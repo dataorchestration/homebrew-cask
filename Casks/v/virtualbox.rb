@@ -1,16 +1,26 @@
 cask "virtualbox" do
-  version "7.0.18,162988"
-  sha256 "496002f5d9b4280ffaec9269eeae97b301c3cb30ec569a904d430808cd72c7e2"
+  arch arm: "macOSArm64", intel: "OSX"
 
-  url "https://download.virtualbox.org/virtualbox/#{version.csv.first}/VirtualBox-#{version.csv.first}-#{version.csv.second}-OSX.dmg"
+  version "7.2.4,170995"
+  sha256 arm:   "cef88951ef9da5e609724dca5d50ca8cc898f5f9f29ace529ca9b95305006fdd",
+         intel: "f724ebec6ca738bf21cb55e8693092fce2bc0e63d9c2d81877d460bc84f66279"
+
+  on_arm do
+    desc "Virtualiser for arm64 hardware"
+  end
+  on_intel do
+    desc "Virtualiser for x86 hardware"
+  end
+
+  url "https://download.virtualbox.org/virtualbox/#{version.csv.first}/VirtualBox-#{version.csv.first}-#{version.csv.second}-#{arch}.dmg"
   name "Oracle VirtualBox"
-  desc "Virtualiser for x86 hardware"
   homepage "https://www.virtualbox.org/"
 
   livecheck do
     url "https://www.virtualbox.org/wiki/Downloads"
-    strategy :page_match do |page|
-      match = page.match(/href=.*?VirtualBox[._-]v?(\d+(?:\.\d+)+)[._-](\d+)[._-]OSX.dmg/)
+    regex(/href=.*?VirtualBox[._-]v?(\d+(?:\.\d+)+)[._-](\d+)[._-]OSX\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]}"
@@ -21,16 +31,9 @@ cask "virtualbox" do
     "virtualbox@6",
     "virtualbox@beta",
   ]
-  depends_on macos: ">= :catalina"
-  depends_on arch: :x86_64
 
   pkg "VirtualBox.pkg",
       choices: [
-        {
-          "choiceIdentifier" => "choiceVBoxKEXTs",
-          "choiceAttribute"  => "selected",
-          "attributeSetting" => 1,
-        },
         {
           "choiceIdentifier" => "choiceVBox",
           "choiceAttribute"  => "selected",
@@ -41,16 +44,11 @@ cask "virtualbox" do
           "choiceAttribute"  => "selected",
           "attributeSetting" => 1,
         },
-        {
-          "choiceIdentifier" => "choiceOSXFuseCore",
-          "choiceAttribute"  => "selected",
-          "attributeSetting" => 0,
-        },
       ]
 
   postflight do
-    # If VirtualBox is installed before `/usr/local/lib/pkgconfig` is created by Homebrew, it creates it itself
-    # with incorrect permissions that break other packages
+    # If VirtualBox is installed before `/usr/local/lib/pkgconfig` is created by Homebrew,
+    # it creates it itself with incorrect permissions that break other packages.
     # See https://github.com/Homebrew/homebrew-cask/issues/68730#issuecomment-534363026
     set_ownership "/usr/local/lib/pkgconfig"
   end

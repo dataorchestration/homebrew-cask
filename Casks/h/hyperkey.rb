@@ -1,6 +1,6 @@
 cask "hyperkey" do
-  version "0.38"
-  sha256 "199eed67a16b781ffdcf4801432d75c5b2980354022edd7d08cdd30e72cf6f92"
+  version "0.50"
+  sha256 "c536eac2b6f20f10fa4df6d1cc40ff212bf2baa265c7c0ac9fdeddd3abaa73d7"
 
   url "https://hyperkey.app/downloads/Hyperkey#{version}.dmg"
   name "Hyperkey"
@@ -13,7 +13,6 @@ cask "hyperkey" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Hyperkey.app"
 

@@ -1,6 +1,6 @@
 cask "daedalus-mainnet" do
-  version "5.4.0,67194,8dc751094"
-  sha256 "84cfaeb4734898150a783567fabfe818ede53eaa1d27dbd00b9148a4adca722b"
+  version "7.2.0,77924,1458fc3a2"
+  sha256 "8667b4f740ee689952461fa03195b4133f0c613bec444510b37814590031f918"
 
   url "https://update-cardano-mainnet.iohk.io/daedalus-#{version.csv.first}-#{version.csv.second}-mainnet-#{version.csv.third}-x86_64-darwin.pkg",
       verified: "update-cardano-mainnet.iohk.io/"
@@ -10,14 +10,16 @@ cask "daedalus-mainnet" do
 
   livecheck do
     url "https://update-cardano-mainnet.iohk.io/daedalus-latest-version.json"
-    regex(%r{/daedalus[._-](\d+(?:\.\d+)+)[._-](\d+)[._-]mainnet[._-](\h+)[._-]x86_64[._-]darwin\.pkg}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]},#{match[2]}" }
+    regex(/daedalus[._-]v?(\d+(?:\.\d+)+)[._-](\d+)(?:[._-]mainnet)?[._-](\h+)/i)
+    strategy :json do |json, regex|
+      match = json.dig("platforms", "darwin", "URL")&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]},#{match[3]}"
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   pkg "daedalus-#{version.csv.first}-#{version.csv.second}-mainnet-#{version.csv.third}-x86_64-darwin.pkg"
 

@@ -7,7 +7,12 @@ cask "apple-juice" do
   desc "Battery gauge that displays the remaining battery time and more"
   homepage "https://github.com/raphaelhanneken/apple-juice"
 
-  depends_on macos: ">= :sierra"
+  livecheck do
+    url "https://raphaelhanneken.github.io/apple-juice/sparkle/appcast.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  auto_updates true
 
   app "Apple Juice.app"
 

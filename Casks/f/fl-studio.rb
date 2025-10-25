@@ -1,16 +1,15 @@
 cask "fl-studio" do
-  version "24.1.1.3888"
-  sha256 "5dea7153764f3f4a3c19099c79d7b790993335728600e05e890efac699a00ab5"
+  version "24.1.2.4074"
+  sha256 "9171e4d1d11311744ab84e96a591d474a80d9fe83e3054682acfdafc21bba36a"
 
-  url "https://demodownload.image-line.com/flstudio/flstudio_mac_#{version}.dmg"
+  url "https://demodownload.image-line.com/flstudio/flstudio_mac_#{version}.dmg",
+      referer:    "https://www.image-line.com/fl-studio-download/",
+      user_agent: :browser
   name "FL Studio"
   desc "Digital audio production application"
   homepage "https://www.image-line.com/flstudio/"
 
-  livecheck do
-    url "https://support.image-line.com/redirect/flstudio20_mac_installer"
-    strategy :header_match
-  end
+  disable! date: "2024-12-16", because: "cannot be reliably fetched due to Cloudflare protections"
 
   pkg "Install FL Studio.pkg"
 

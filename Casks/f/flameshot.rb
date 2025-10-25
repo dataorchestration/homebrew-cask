@@ -1,18 +1,26 @@
 cask "flameshot" do
-  version "12.1.0"
-  sha256 "70fa1cb9990093b00d184eace8e6c5f1cfefe33decb8ab051141a3847439ff14"
+  arch arm: "arm64", intel: "intel"
 
-  url "https://github.com/flameshot-org/flameshot/releases/download/v#{version}/flameshot.dmg",
+  version "13.1.0"
+  sha256 arm:   "1e6ec923b95d432ec8fb7222095c47be651adeeb282290ab3fed055c5d710586",
+         intel: "6a05c0f00cca3f92aedb4c76d5c191308c2f343e51e58067f9f09f35cf882d94"
+
+  url "https://github.com/flameshot-org/flameshot/releases/download/v#{version}/Flameshot-#{version}-artifact-macos-#{arch}.dmg",
       verified: "github.com/flameshot-org/flameshot/"
   name "Flameshot"
-  desc "Screenshot software"
+  desc "Screenshot software with built-in annotation tools"
   homepage "https://flameshot.org/"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "flameshot.app"
 
-  zap trash: "~/.config/flameshot/flameshot.ini"
+  uninstall quit: "org.flameshot.flameshot"
 
-  caveats do
-    requires_rosetta
-  end
+  zap trash: "~/.config/flameshot/flameshot.ini"
 end

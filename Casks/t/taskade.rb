@@ -1,6 +1,6 @@
 cask "taskade" do
-  version "4.3.3"
-  sha256 "66151c15144f7a330e09f86fc58a3ffecb218a6bda2b52953ceda01f80ebaf79"
+  version "4.6.13"
+  sha256 "8516cf62fc11ae834aaeafc4466b2cf05bde819c0305f08e4becb8ffe4bc18a9"
 
   url "https://apps.taskade.com/updates/Taskade-#{version}-universal.dmg"
   name "Taskade"
@@ -8,9 +8,11 @@ cask "taskade" do
   homepage "https://www.taskade.com/"
 
   livecheck do
-    url "https://www.taskade.com/downloads"
+    url :homepage
     regex(%r{href=.*?/Taskade[._-]v?(\d+(?:\.\d+)+)[._-]universal\.dmg}i)
   end
+
+  depends_on macos: ">= :monterey"
 
   app "Taskade.app"
 

@@ -1,11 +1,11 @@
 cask "microsoft-openjdk@11" do
   arch arm: "aarch64", intel: "x64"
 
-  version "11.0.23"
-  sha256 arm:   "70425b242f7f2191d13902bab18a367ae9d593ef390f866b89a13b49d2abf70c",
-         intel: "8f01ddce9fbecf7905807314ff9e74659b565e44df209726d432c1d9c93b3a9f"
+  version "11.0.28"
+  sha256 arm:   "5b0f95df3bd91069ac0145c5a5f991036040be0430b6ea21743db9855170b722",
+         intel: "22e5caf31c9c02405ee5f3f8821e7ca2e6e5681a52cac7bd73db566a5543ef25"
 
-  url "https://aka.ms/download-jdk/microsoft-jdk-#{version}-macOS-#{arch}.pkg",
+  url "https://aka.ms/download-jdk/microsoft-jdk-#{version}-macos-#{arch}.pkg",
       verified: "aka.ms/download-jdk/"
   name "Microsoft Build of OpenJDK"
   desc "OpenJDK distribution from Microsoft"
@@ -13,10 +13,10 @@ cask "microsoft-openjdk@11" do
 
   livecheck do
     url "https://docs.microsoft.com/java/openjdk/download"
-    regex(%r{href=.*?/microsoft[._-]jdk[._-]v?(11(?:\.\d+)+)[._-]macOS[._-]#{arch}\.pkg}i)
+    regex(%r{href=.*?/microsoft[._-]jdk[._-]v?(11(?:\.\d+)+)[._-]macos[._-]#{arch}\.pkg}i)
   end
 
-  pkg "microsoft-jdk-#{version}-macOS-#{arch}.pkg"
+  pkg "microsoft-jdk-#{version}-macos-#{arch}.pkg"
 
   uninstall pkgutil: "com.microsoft.#{version.major}.jdk"
 

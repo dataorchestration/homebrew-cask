@@ -1,6 +1,6 @@
 cask "houdahspot" do
-  version "6.5.3"
-  sha256 "b119bdd3a1de19a2d1d0a286c11e70702a53ac2b8dd358c6a8afeff2f72a8d34"
+  version "6.6.1"
+  sha256 "ee98ea919d312c2b007faa28e6e77e8dbe0101f8e3efa9180b647702abe45e52"
 
   url "https://dl.houdah.com/houdahSpot/updates/cast#{version.major}_assets/HoudahSpot#{version}.zip"
   name "HoudahSpot"
@@ -12,7 +12,7 @@ cask "houdahspot" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :mojave"
+  auto_updates true
 
   app "HoudahSpot.app"
 

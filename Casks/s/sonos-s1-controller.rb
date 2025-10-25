@@ -1,6 +1,6 @@
 cask "sonos-s1-controller" do
-  version "57.21-50280,LGeb8h0Gma"
-  sha256 "e65db06684aab6cd70d1b638ebcc28ba04dedd24e63802775543ed680377da19"
+  version "57.22-67080,yNhAXS5QQR"
+  sha256 "7bbcb1bb2c6f6b147e916c72858955c3b055595dc81b02b05d8ede9c1a47cf21"
 
   url "https://update-software.sonos.com/software/#{version.csv.second}/Sonos_#{version.csv.first}.dmg"
   name "Sonos S1"
@@ -9,9 +9,12 @@ cask "sonos-s1-controller" do
 
   livecheck do
     url "https://www.sonos.com/en/redir/controller_software_mac"
-    regex(%r{software/(\w+)/Sonos[._-]v?(\d+(?:.\d+)+)\.dmg}i)
+    regex(%r{software/(\w+)/Sonos[._-]v?(\d+(?:[.-]\d+)+)\.dmg}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[2]},#{match[1]}"
     end
   end
 
@@ -20,4 +23,8 @@ cask "sonos-s1-controller" do
   app "Sonos S1 Controller.app"
 
   zap trash: "~/Library/Application Support/Sonos"
+
+  caveats do
+    requires_rosetta
+  end
 end

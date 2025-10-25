@@ -1,8 +1,8 @@
 cask "font-cozette" do
-  version "1.24.1"
-  sha256 "27176cc4f76259db3e65eecda8999b2167c305bca9e563c272216208d94044f7"
+  version "1.30.0"
+  sha256 "c1515e63ba969d6099168c7a57b68c642025a73cd5112c39f62112d2dd16b709"
 
-  url "https://github.com/slavfox/Cozette/releases/download/v.#{version}/CozetteVector.dfont"
+  url "https://github.com/slavfox/Cozette/releases/download/v.#{version}/CozetteFonts-v-#{version.dots_to_hyphens}.zip"
   name "Cozette"
   homepage "https://github.com/slavfox/Cozette"
 
@@ -11,7 +11,12 @@ cask "font-cozette" do
     strategy :github_latest
   end
 
-  font "CozetteVector.dfont"
+  font "CozetteFonts/cozette.dfont"
+  font "CozetteFonts/cozette_hidpi.dfont"
+  font "CozetteFonts/CozetteCrossedSevenVector.otf"
+  font "CozetteFonts/CozetteCrossedSevenVectorBold.otf"
+  font "CozetteFonts/CozetteVector.otf"
+  font "CozetteFonts/CozetteVectorBold.otf"
 
   # No zap stanza required
 end

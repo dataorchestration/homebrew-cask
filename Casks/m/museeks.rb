@@ -1,11 +1,8 @@
 cask "museeks" do
-  arch arm: "arm64", intel: "x64"
+  version "0.23.1"
+  sha256 "8f7795c5921e2e43ea1bf0438b6f5ae717b05dfb00e017f5c50fea2c8bef5e5d"
 
-  version "0.13.1"
-  sha256 arm:   "97428b9d02dec50a80df8232d166e9460330acfda38b99320424350c33e8e061",
-         intel: "79130a16985aab46e2e0c1c270e3339f96886cc60d2f02b531533dd0307b0d48"
-
-  url "https://github.com/martpie/museeks/releases/download/#{version}/museeks-#{arch}.dmg",
+  url "https://github.com/martpie/museeks/releases/download/#{version}/Museeks_#{version}_universal.dmg",
       verified: "github.com/martpie/museeks/"
   name "Museeks"
   desc "Music player"
@@ -14,6 +11,7 @@ cask "museeks" do
   app "Museeks.app"
 
   zap trash: [
+    "~/.config/museeks",
     "~/Library/Application Support/museeks",
     "~/Library/Saved Application State/com.electron.museeks.savedState",
   ]

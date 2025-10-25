@@ -29,4 +29,8 @@ cask "transocks" do
     "~/Library/Preferences/group.com.transocks.mac.plist",
     "~/Library/Saved Application State/com.transocks.mac.signed.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

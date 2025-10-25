@@ -1,8 +1,11 @@
 cask "digikam" do
-  version "8.4.0"
-  sha256 "eb6502c93a2a843759b219f5127a82b1d146ff2acfdb2708140e78bbbce589e0"
+  arch arm: "Qt6-MacOS-arm64", intel: "Qt5-MacOS-x86_64"
 
-  url "https://download.kde.org/stable/digikam/#{version}/digiKam-#{version}-Qt5-MacOS-x86_64.pkg",
+  version "8.8.0"
+  sha256 arm:   "121001a74b9069e7be22eda13f20a3ded98409203c59e658d25695b3986e71ac",
+         intel: "fd4058246b670ecb7dffe10afbe3ee9bb51419980574ac2ebc879dca94c8b573"
+
+  url "https://download.kde.org/stable/digikam/#{version}/digiKam-#{version}-#{arch}.pkg",
       verified: "kde.org/stable/digikam/"
   name "digiKam"
   desc "Digital photo manager"
@@ -13,15 +16,17 @@ cask "digikam" do
     regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 
-  pkg "digiKam-#{version}-Qt5-MacOS-x86_64.pkg"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
+  pkg "digiKam-#{version}-#{arch}.pkg"
 
   uninstall pkgutil: [
               "org.digiKam",
               "org.kde.digikam",
             ],
             delete:  [
-              "/Applications/digikam.app",
-              "/Applications/showfoto.app",
+              "/Applications/digiKam.org/digikam.app",
+              "/Applications/digiKam.org/showfoto.app",
             ]
 
   zap trash: [
@@ -31,8 +36,4 @@ cask "digikam" do
     "~/Library/Preferences/digikamrc",
     "~/Library/Saved Application State/digikam.savedState",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

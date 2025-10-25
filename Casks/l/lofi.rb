@@ -15,4 +15,8 @@ cask "lofi" do
     "~/Library/Preferences/lofi.rocks.plist",
     "~/Library/Saved Application State/lofi.rocks.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

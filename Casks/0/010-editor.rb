@@ -1,8 +1,11 @@
 cask "010-editor" do
-  version "14.0.1"
-  sha256 "a82255a458541feb2ece91b7dbc9ce4d404c95bc0794cc32c9eecc8d17d7cf59"
+  arch arm: "ARM64", intel: "64"
 
-  url "https://download.sweetscape.com/010EditorMac64Installer#{version}.dmg"
+  version "16.0.2"
+  sha256 arm:   "82d7d3abf7bf0474b1902bff420fe8f0d6a86a8f88f1fcca3a6181d4f5cf4b02",
+         intel: "2b2ec8bcb785a20c7a4766008ab01234d2029442fdfccd1e1320b16c602dd2c5"
+
+  url "https://download.sweetscape.com/010EditorMac#{arch}Installer#{version}.dmg"
   name "010 Editor"
   desc "Text editor"
   homepage "https://www.sweetscape.com/"
@@ -20,8 +23,4 @@ cask "010-editor" do
         "~/Library/Saved Application State/com.SweetScape.010Editor.savedState",
       ],
       rmdir: "~/Documents/SweetScape"
-
-  caveats do
-    requires_rosetta
-  end
 end

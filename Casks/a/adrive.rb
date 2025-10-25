@@ -1,9 +1,9 @@
 cask "adrive" do
   arch arm: "-arm64"
 
-  version "6.0.0"
-  sha256 arm:   "d92505611beee945393a858af8ca5cce33b253aa64dc62dc33f9c03cc1149860",
-         intel: "1b12cb60fad5258e2404cc867228aaf04a21c18b542bb78581992f4e34a0fa33"
+  version "6.8.7"
+  sha256 arm:   "a5fac122ff59da06a75b3cddc99f3c6709b1984cdb4ed669bc4f3bcd6b0ced2e",
+         intel: "6143981df9189d58ea213d5d3eb088559ed10510ec4e9b0c1f02960947f59fef"
 
   url "https://cdn.aliyundrive.net/downloads/apps/desktop/aDrive-#{version}#{arch}.dmg",
       verified:   "cdn.aliyundrive.net/",
@@ -15,11 +15,10 @@ cask "adrive" do
 
   livecheck do
     url "https://www.aliyundrive.com/download"
-    regex(/aDrive[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    regex(/aDrive[._-]v?(\d+(?:\.\d+)+)#{arch}\.dmg/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "aDrive.app"
 

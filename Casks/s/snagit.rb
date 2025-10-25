@@ -1,6 +1,6 @@
 cask "snagit" do
-  version "2024.2.5"
-  sha256 "879f9fe721bda3e88cc58b126129cc60b60da41be33a20a340d21105d39726f7"
+  version "2025.3.2"
+  sha256 "275c4ce5b3af7f6a68f7d9303f243f2ca1a222f43e7361b5f62827a010429694"
 
   url "https://download.techsmith.com/snagitmac/releases/#{version.major[-2..]}#{version.minor_patch.no_dots}/snagit.dmg"
   name "Snagit"
@@ -18,9 +18,9 @@ cask "snagit" do
     end
   end
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :sonoma"
 
-  app "Snagit #{version.major}.app"
+  app "Snagit.app"
 
   zap trash: [
     "~/Library/Caches/com.TechSmith.Snagit*",

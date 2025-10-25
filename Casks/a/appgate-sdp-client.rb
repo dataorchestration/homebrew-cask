@@ -1,24 +1,15 @@
 cask "appgate-sdp-client" do
-  on_mojave :or_older do
-    version "5.4.4"
-    sha256 "d9d0ffbaf628ee0b8e2d3457dc7b82d1a65ce34952d1f5edc4c4bf407a3d0f1b"
+  on_catalina :or_older do
+    version "6.0.4"
+    sha256 "bceed509db9fd8dab10f31686264ff7f073048d78470f85f06bbd6233eb9b111"
 
     livecheck do
       skip "Legacy version"
     end
   end
-  on_catalina do
-    version "6.0.4"
-    sha256 "bceed509db9fd8dab10f31686264ff7f073048d78470f85f06bbd6233eb9b111"
-
-    livecheck do
-      url "https://www.appgate.com/support/software-defined-perimeter-support/sdp-v6-0"
-      regex(%r{href=.*?/Appgate[._-]SDP[._-]v?(\d+(?:\.\d+)+)[._-]Installer\.dmg}i)
-    end
-  end
   on_big_sur :or_newer do
-    version "6.3.2"
-    sha256 "9d87fb048f08b5e669e6bfe545ca748c9ff39bf0b8ccd64c77a4acadab3d2efb"
+    version "6.5.3"
+    sha256 "a3ce60ab9bfe838201c749ae22cbcad2e7c2d5348d5b17b8f0c33d109946d57e"
 
     livecheck do
       url :homepage
@@ -27,7 +18,7 @@ cask "appgate-sdp-client" do
         support_versions =
           page.scan(%r{href=["']?([^"' >]*?/software-defined-perimeter-support/sdp[._-]v?(\d+(?:[.-]\d+)+))["' >]}i)
               .sort_by { |match| Version.new(match[1]) }
-        next [] if support_versions.blank?
+        next if support_versions.blank?
 
         # Assume the last-sorted version is newest
         version_page_path, = support_versions.last
@@ -37,7 +28,7 @@ cask "appgate-sdp-client" do
         version_page = Homebrew::Livecheck::Strategy.page_content(
           URI.join("https://www.appgate.com/", version_page_path).to_s,
         )
-        next [] if version_page[:content].blank?
+        next if version_page[:content].blank?
 
         version_page[:content].scan(regex).map(&:first)
       end
@@ -49,8 +40,6 @@ cask "appgate-sdp-client" do
   name "AppGate SDP Client for macOS"
   desc "Software-defined perimeter for secure network access"
   homepage "https://www.appgate.com/support/software-defined-perimeter-support"
-
-  depends_on macos: ">= :mojave"
 
   pkg "AppGate SDP Installer.pkg"
 

@@ -12,7 +12,14 @@ cask "outguess" do
     regex(/Version\s+(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :el_capitan"
-
   app "Outguess.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.rbcafe.Outguess",
+    "~/Library/Saved Application State/com.rbcafe.Outguess.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

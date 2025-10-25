@@ -1,6 +1,6 @@
 cask "the-unofficial-homestuck-collection" do
-  version "2.5.1"
-  sha256 "692dfecd05d28c0566334111de13543ba8b2a3bfbe4a001e74c70a9866323293"
+  version "2.7.2"
+  sha256 "a71d5a14e631c3721a96302679e0531fbc367b7712886e28fc2547fa988f44c2"
 
   url "https://github.com/Bambosh/unofficial-homestuck-collection/releases/download/v#{version}/The-Unofficial-Homestuck-Collection-#{version}.dmg",
       verified: "github.com/Bambosh/unofficial-homestuck-collection/"
@@ -12,6 +12,8 @@ cask "the-unofficial-homestuck-collection" do
     url :url
     strategy :github_latest
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "The Unofficial Homestuck Collection.app"
 

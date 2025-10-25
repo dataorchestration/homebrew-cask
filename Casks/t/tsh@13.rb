@@ -8,13 +8,13 @@ cask "tsh@13" do
   desc "SSH server for teams managing distributed infrastructure"
   homepage "https://goteleport.com/"
 
-  livecheck do
-    url "https://goteleport.com/download/"
-    regex(/tsh[._-]v?(13(?:\.\d+)+)\.pkg/i)
-  end
+  disable! date: "2024-11-18", because: :discontinued
 
-  conflicts_with cask:    "tsh",
-                 formula: "teleport"
+  conflicts_with cask: [
+    "teleport",
+    "teleport@16",
+    "tsh",
+  ]
 
   pkg "tsh-#{version}.pkg"
 

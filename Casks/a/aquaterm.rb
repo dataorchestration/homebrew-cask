@@ -9,8 +9,7 @@ cask "aquaterm" do
 
   # No releases since 2013
   deprecate! date: "2024-01-04", because: :unmaintained
-
-  depends_on macos: ">= :high_sierra"
+  disable! date: "2025-01-06", because: :unmaintained
 
   pkg "AquaTermInstaller.pkg"
 

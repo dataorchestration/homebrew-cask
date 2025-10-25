@@ -1,10 +1,10 @@
 cask "gitify" do
-  version "5.10.0"
-  sha256 "7499a9443c32e364eb4d5d725def8bd9cdfe66cbbff62acb362cfc664b3060c0"
+  version "6.10.0"
+  sha256 "dbdf5a1aefe4892ccb73396caed0cc84f5c0808bcb41debca67d9247cf4ce51e"
 
   url "https://github.com/gitify-app/gitify/releases/download/v#{version}/Gitify-#{version}-universal-mac.zip"
   name "Gitify"
-  desc "GitHub Notifications on your menu bar"
+  desc "GitHub notifications on your menu bar"
   homepage "https://github.com/gitify-app/gitify"
 
   livecheck do
@@ -13,6 +13,7 @@ cask "gitify" do
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Gitify.app"
 

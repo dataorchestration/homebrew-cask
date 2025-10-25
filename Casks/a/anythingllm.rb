@@ -1,22 +1,19 @@
 cask "anythingllm" do
   arch arm: "-Silicon"
 
-  version "1.5.9"
-  sha256 arm:   "abdf5a7c22df20768e9c311debf71b563ba62f1a285684da4fa713123822f3f3",
-         intel: "63769bb80bbaeb2216bacccef8e4c9098023ba009d522368509cf87de970e292"
+  version "1.9.0"
+  sha256 :no_check
 
-  url "https://s3-us-west-1.amazonaws.com/public.useanything.com/latest/AnythingLLMDesktop#{arch}.dmg",
-      verified: "s3-us-west-1.amazonaws.com/public.useanything.com/"
+  url "https://cdn.anythingllm.com/latest/AnythingLLMDesktop#{arch}.dmg",
+      referer: "homebrew-cask"
   name "AnythingLLM"
   desc "Private desktop AI chat application"
-  homepage "https://useanything.com/"
+  homepage "https://anythingllm.com/"
 
   livecheck do
-    url "https://s3-us-west-1.amazonaws.com/public.useanything.com/latest/version.txt"
+    url "https://cdn.anythingllm.com/latest/version.txt"
     regex(/(\d+(?:\.\d+)+)/i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "AnythingLLM.app"
 

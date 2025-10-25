@@ -1,14 +1,14 @@
 cask "pcoipclient" do
-  version "24.03.4"
-  sha256 "dc83c059cd8b81c50e60bb444d9febcca3ac4570e2870403ef17bc3f362f4ec6"
+  version "25.06.3"
+  sha256 "77a22bc551b7869cb82206500d86f7105e6ede4ecdd23361040cc82291951c67"
 
-  url "https://dl.teradici.com/DeAdBCiUYInHcSTy/pcoip-client/raw/names/pcoip-client-dmg/versions/#{version}/pcoip-client_#{version}.dmg"
+  url "https://dl.anyware.hp.com/DeAdBCiUYInHcSTy/pcoip-client/raw/names/pcoip-client-dmg/versions/#{version}/pcoip-client_#{version}.dmg"
   name "Teradici PCoIP Software Client for macOS"
   desc "Client for VM agents and remote workstation cards"
-  homepage "https://docs.teradici.com/find/product/software-and-mobile-clients/"
+  homepage "https://anyware.hp.com/find/product/hp-anyware"
 
   livecheck do
-    url "https://dl.teradici.com/DeAdBCiUYInHcSTy/pcoip-client/raw/names/pcoip-client-dmg/versions/latest/pcoip-client_latest.dmg"
+    url "https://dl.anyware.hp.com/DeAdBCiUYInHcSTy/pcoip-client/raw/names/pcoip-client-dmg/versions/latest/pcoip-client_latest.dmg"
     strategy :header_match
   end
 

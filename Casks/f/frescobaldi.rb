@@ -1,11 +1,11 @@
 cask "frescobaldi" do
-  arch arm: "arm64", intel: "x86_64"
+  arch intel: "-Intel"
 
-  version "3.3.0"
-  sha256 arm:   "ff7074123b780929343958e7fe6654c5517ea6c875f6c89105620c5da302e791",
-         intel: "82f4377c3c9e787a079cfe1cf269c7c3ba41bd933fba4fc4a60347aeb1ed32f0"
+  version "4.0.4"
+  sha256 arm:   "3bcc732ecf2fa07e58a04bf52ff96dbc861dbc6405ab616cca64fe0275eed466",
+         intel: "4fea231545831a21ff432c84743dfdc1e3f89695784e78fae82b27f008195cb1"
 
-  url "https://github.com/frescobaldi/frescobaldi/releases/download/v#{version}/Frescobaldi-#{version}-#{arch}.dmg",
+  url "https://github.com/frescobaldi/frescobaldi/releases/download/v#{version}/Frescobaldi-#{version}#{arch}.dmg",
       verified: "github.com/frescobaldi/frescobaldi/"
   name "Frescobaldi"
   desc "LilyPond editor"
@@ -16,6 +16,8 @@ cask "frescobaldi" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "Frescobaldi.app"
 

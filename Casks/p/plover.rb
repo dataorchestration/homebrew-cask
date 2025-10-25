@@ -1,8 +1,8 @@
 cask "plover" do
-  version "4.0.0rc2"
-  sha256 "46659da04b7fe04b9b21bda469e292ac53ec005713e5d2d970a90e99e9c2014f"
+  version "5.0.0"
+  sha256 "fa37dea58136ab3ae8da50f32dc697a59ba45158aa01e7a12e75a99f9a9679bf"
 
-  url "https://github.com/openstenoproject/plover/releases/download/v#{version}/plover-#{version}-macosx_10_13_x86_64.dmg",
+  url "https://github.com/openstenoproject/plover/releases/download/v#{version}/plover-#{version}-macosx_12_0_universal2.dmg",
       verified: "github.com/openstenoproject/plover/"
   name "Plover"
   desc "Stenotype engine"
@@ -14,12 +14,13 @@ cask "plover" do
     strategy :github_latest
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   app "Plover.app"
 
-  zap trash: "~/Library/Application Support/plover/"
+  zap trash: "~/Library/Application Support/plover"
 
   caveats do
-    requires_rosetta
     <<~EOS
       Version 4 is a major change and the configuration file it creates is not
       compatible with Plover 3 or earlier. Please backup your plover.cfg.

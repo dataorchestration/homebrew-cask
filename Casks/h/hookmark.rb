@@ -1,19 +1,19 @@
 cask "hookmark" do
-  version "6.2,2024.05"
-  sha256 "dc13baafba9fb3512f2e8bd8f18752d8d50097c83574da7f275db9ae33b5b242"
+  version "6.11.1"
+  sha256 "f60e5e31b397add7e00067ed2118b3492cad14145b89c0f8fa4cb1aa7aa1fe97"
 
-  url "https://hookproductivity.com/wp-content/uploads/#{version.csv.second.major}/#{version.csv.second.minor}/Hookmark-app-#{version.csv.first}.dmg_.zip",
+  url "https://updates.hookproductivity.com/downloads/Hookmark-app-#{version}.dmg",
       user_agent: :fake
   name "Hook"
   desc "Link and retrieve key information"
   homepage "https://hookproductivity.com/"
 
   livecheck do
-    skip "No reliable way to get version info"
+    url "https://updates.hookproductivity.com/updates/a77a1a87-7d69-435d-90ea-7365b2f7bddb"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Hookmark.app"
 

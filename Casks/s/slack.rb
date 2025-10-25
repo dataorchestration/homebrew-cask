@@ -1,10 +1,10 @@
 cask "slack" do
   arch arm: "arm64", intel: "x64"
 
-  on_catalina do
-    version "4.33.90"
-    sha256 arm:   "8c060d33c7c451b58abaed380da4e6781089530d3b9c12da70e738e27c4eb47c",
-           intel: "7e0ba8a18a9cf95090ad80f58437d647eee5d1842ac4f15ea053c16c1629edde"
+  on_big_sur :or_older do
+    version "4.45.69"
+    sha256 arm:   "31a3f08f49e27a1c0d6224a5f0677329217599eccab481620266730566f0abd0",
+           intel: "88ee611b36189ab1e84f39f0fbe0048468d32a24e783303dfe1a3ea0519755e2"
 
     url "https://downloads.slack-edge.com/releases/macos/#{version}/prod/#{arch}/Slack-#{version}-macOS.dmg",
         verified: "downloads.slack-edge.com/"
@@ -13,10 +13,10 @@ cask "slack" do
       skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "4.39.90"
-    sha256 arm:   "4bffe2d86fcac56280027b9ab46801de97a5473d5a57da9ad01d2fe1169ca066",
-           intel: "e38e14f68412b841d0385b3b875f45f6c681e0eb0b97d56a4103cb90d4b47960"
+  on_monterey :or_newer do
+    version "4.46.104"
+    sha256 arm:   "63428d78ff28845c0f80070a0ceb0f0a321ccff714284dd8b84ec28b48ac6f45",
+           intel: "a25a840f8952b8d009f2fa22e5c344e6e45838a7e0677c0e94bc5c3b42311ffe"
 
     url "https://downloads.slack-edge.com/desktop-releases/mac/#{arch}/#{version}/Slack-#{version}-macOS.dmg",
         verified: "downloads.slack-edge.com/"
@@ -33,13 +33,14 @@ cask "slack" do
 
   auto_updates true
   conflicts_with cask: "slack@beta"
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Slack.app"
 
   uninstall quit: "com.tinyspeck.slackmacgap"
 
   zap trash: [
+    "/Library/Logs/DiagnosticReports/Slack_*",
     "~/Library/Application Scripts/com.tinyspeck.slackmacgap",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.tinyspeck.slackmacgap.sfl*",
     "~/Library/Application Support/Slack",

@@ -13,7 +13,6 @@ cask "mimecast" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
 
   app "Mimecast.app"
 
@@ -26,4 +25,8 @@ cask "mimecast" do
     "~/Library/Logs/Mimecast",
     "~/Library/Preferences/com.mimecast.Mimecast-Mail.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

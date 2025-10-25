@@ -30,7 +30,6 @@ cask "kaleidoscope@2" do
     kaleidoscope@3
     ksdiff
   ]
-  depends_on macos: ">= :sierra"
 
   app "Kaleidoscope.app"
   binary "#{appdir}/Kaleidoscope.app/Contents/Resources/bin/ksdiff"
@@ -42,4 +41,8 @@ cask "kaleidoscope@2" do
     "~/Library/Preferences/com.blackpixel.kaleidoscope.plist",
     "~/Library/Saved Application State/com.blackpixel.kaleidoscope.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

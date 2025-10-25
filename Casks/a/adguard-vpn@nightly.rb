@@ -1,19 +1,22 @@
 cask "adguard-vpn@nightly" do
-  version "2.4.0.641"
-  sha256 :no_check
+  version "2.8.0.901"
+  sha256 "76239333baa0a9a9580a6d60c7d3f1edf60aea5e8fd502146a17b1b5545ef292"
 
-  url "https://static.adguard-vpn.com/mac/nightly/AdGuardVPN.dmg"
+  url "https://static.adguard-vpn.com/mac/nightly/AdGuardVPN-#{version}.dmg"
   name "AdGuard VPN"
   desc "VPN for privacy and security"
   homepage "https://adguard-vpn.com/"
 
   livecheck do
-    url "https://adguard-vpn.com/en/versions/mac/nightly.html"
-    regex(/Version\s(\d+(?:\.\d+)+)/i)
+    url "https://static.adguard-vpn.com/mac/adguard-nightly-appcast.xml"
+    strategy :sparkle do |item|
+      item.short_version.delete_suffix(" nightly")
+    end
   end
 
+  auto_updates true
   conflicts_with cask: "adguard-vpn"
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :big_sur"
 
   pkg "AdGuard VPN.pkg"
 

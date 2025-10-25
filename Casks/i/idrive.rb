@@ -1,6 +1,6 @@
 cask "idrive" do
-  version "3.5.10.80,070924"
-  sha256 "51053d6bc00b6cffb4b40925e9d850299172060dc4b05daa53bb1f13343c6c8d"
+  version "4.0.0.49,101725"
+  sha256 "f9c39e9db7664449d179df4f1c46984f988e61ce7380a7fdc5ef7f21df8c710c"
 
   url "https://static.idriveonlinebackup.com/downloads/#{version.csv.second}/IDrive.dmg",
       verified: "static.idriveonlinebackup.com/downloads/"
@@ -8,8 +8,10 @@ cask "idrive" do
   desc "Cloud backup and storage solution"
   homepage "https://www.idrive.com/"
 
+  # The upstream download page appends a UNIX epoch timestamp (in milliseconds)
+  # to the JavaScript URL, so we do the same (in case it affects the returned data).
   livecheck do
-    url "https://static.idriveonlinebackup.com/downloads/version_mac.js"
+    url "https://static.idriveonlinebackup.com/downloads/version_mac.js?v=#{DateTime.now.strftime("%Q")}"
     strategy :page_match do |page|
       version_match = page.match(/Version:?\s*v?(\d+(?:\.\d+)+)/i)
       next if version_match.blank?
@@ -26,6 +28,8 @@ cask "idrive" do
   uninstall launchctl: [
               "com.iDrive.FinderPluginApp",
               "com.prosoftnet.DaemonHelper",
+              "com.prosoftnet.idrivedaemon",
+              "com.prosoftnet.idsyncdaemon",
               "IDriveDaemon",
               "IDSyncDaemon",
               "IDWifiManager",
@@ -36,7 +40,10 @@ cask "idrive" do
               "com.prosoftnet.IDriveDaemon",
               "com.prosoftnet.IDriveMonitor",
             ],
-            pkgutil:   "com.profsoftnet.idrive.*"
+            pkgutil:   [
+              "com.idrive.IDrive",
+              "com.profsoftnet.idrive.*",
+            ]
 
   zap trash: [
     "/Library/Application Support/IDriveforMac",

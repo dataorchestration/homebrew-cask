@@ -1,18 +1,27 @@
 cask "duplicati" do
-  version "2.0.8.1_beta_2024-05-07"
-  sha256 "c5576c52e838f81c12b7988a70d34562d8622013e024356d28df450835a34523"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://updates.duplicati.com/beta/duplicati-#{version}.dmg"
+  version "2.2.0.0,2025-10-23"
+  sha256 arm:   "d892c79b3af34ee72f411a974b3ef8e14b9afc3a3ef6836f51838eb127d42348",
+         intel: "afae3bc72eaa69b72c6a05a73568d5239c93f5c3faa5f7e4e757c60cda249987"
+
+  url "https://updates.duplicati.com/stable/duplicati-#{version.csv.first}_stable_#{version.csv.second}-osx-#{arch}-gui.dmg"
   name "Duplicati"
   desc "Store securely encrypted backups in the cloud"
-  homepage "https://www.duplicati.com/"
+  homepage "https://duplicati.com/"
 
   livecheck do
-    url "https://updates.duplicati.com/beta/latest-installers.js"
-    regex(/^\s+"name":\s+"duplicati[._-]v?(.+)\.dmg",$/i)
+    url "https://updates.duplicati.com/stable/latest-v2.manifest"
+    regex(/duplicati[._-]v?(\d+(?:\.\d+)+)[._-]stable[._-](\d+(?:[.-]\d+)+)[._-]osx[._-]#{arch}[._-]gui\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
   end
 
-  depends_on formula: "mono"
+  depends_on macos: ">= :big_sur"
 
   app "Duplicati.app"
 
@@ -20,8 +29,4 @@ cask "duplicati" do
     "~/.config/Duplicati",
     "~/Library/Application Support/Duplicati",
   ]
-
-  caveats do
-    requires_rosetta
-  end
 end

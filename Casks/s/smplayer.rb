@@ -1,6 +1,6 @@
 cask "smplayer" do
-  version "24.5.0"
-  sha256 "747cbe26b49b87b3c115405670ea128ae673631a478fa104f28033a0b8f5ab40"
+  version "25.6.0"
+  sha256 "de88cc07f128f4e99cb36fa0dc5ae38dea261e4d8f51cd0235eca427cb23672e"
 
   url "https://github.com/smplayer-dev/smplayer/releases/download/v#{version}/smplayer-#{version}.dmg",
       verified: "github.com/smplayer-dev/smplayer/"
@@ -19,4 +19,8 @@ cask "smplayer" do
     "~/Library/Preferences/info.smplayer.SMPlayer.plist",
     "~/Library/Saved Application State/info.smplayer.SMPlayer.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

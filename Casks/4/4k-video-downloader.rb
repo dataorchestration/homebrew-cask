@@ -1,6 +1,6 @@
 cask "4k-video-downloader" do
-  version "4.31.2"
-  sha256 "f9e120565175308c5234f6683edfa97092e1c0cd4ac1a40c5bff73dc37d41338"
+  version "4.33.5"
+  sha256 "e16993ebb60f18612fa2444c8b60d95745f14d6fca226a00c5d10eee1fb8d78a"
 
   url "https://dl.4kdownload.com/app/4kvideodownloader_#{version.major_minor_patch}_x64.dmg"
   name "4K Video Downloader"
@@ -11,8 +11,6 @@ cask "4k-video-downloader" do
     url "https://www.4kdownload.com/download"
     regex(%r{href=.*?/4kvideodownloader[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg}i)
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "4K Video Downloader.app"
 

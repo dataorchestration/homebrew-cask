@@ -1,9 +1,9 @@
 cask "lens" do
   arch arm: "-arm64"
 
-  version "2024.5.271333"
-  sha256 arm:   "1dc22728558a423649eaccc8e6fbc7df250fe1231f405a1e70fbd5d2659fad09",
-         intel: "2bb3015c37becbbecbfe305d82f4e5a4b2e0d5589ad65a47699714525dc8812d"
+  version "2025.10.230725"
+  sha256 arm:   "beace928053b9e53734c1e5cf0805d28e9e7bcd2800b58d5651cee6ff606d613",
+         intel: "365f62bf82b6b6af3c5c33000590c7937189d40e91aa665cf76903fa8009009c"
 
   url "https://api.k8slens.dev/binaries/Lens-#{version}-latest#{arch}.dmg"
   name "Lens"
@@ -11,14 +11,14 @@ cask "lens" do
   homepage "https://k8slens.dev/"
 
   livecheck do
-    url "https://api.k8slens.dev/binaries/latest-mac.json/"
-    regex(/(\d+(?:\.\d+)+)/i)
-    strategy :json do |json|
-      json["version"].sub("-latest", "")
+    url "https://api.k8slens.dev/binaries/latest-mac.yml"
+    strategy :electron_builder do |yaml|
+      yaml["version"]&.sub("-latest", "")
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Lens.app"
 

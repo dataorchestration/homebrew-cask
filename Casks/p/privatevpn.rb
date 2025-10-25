@@ -8,11 +8,9 @@ cask "privatevpn" do
   homepage "https://privatevpn.com/"
 
   livecheck do
-    url "https://privatevpn.com/why-privatevpn/view-our-software/"
-    regex(/Mac\s*OS(?:\s+X)?\s+VPN\s+App\s+(?:Version\s+)?v?(\d+(?:\.\d+)+)/i)
+    url "https://privatevpn.com/why-privatevpn/view-our-software"
+    regex(/\\"macVersion\\"\s*:\s*\\"(\d+(?:\.\d+)+)\\"/i)
   end
-
-  depends_on macos: ">= :el_capitan"
 
   app "PrivateVPN.app"
 

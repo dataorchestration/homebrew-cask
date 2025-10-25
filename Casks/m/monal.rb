@@ -1,6 +1,6 @@
 cask "monal" do
-  version "911"
-  sha256 "b8e8f6b8a3f5de889e7e038084baa02c9c2062fa9329f4262359a2e0cf8fc267"
+  version "1046"
+  sha256 "4ed9f5a74af85715158b14f075ef38f9eb092ac79cc898328cf8009470dc8c09"
 
   url "https://downloads.monal-im.org/monal-im/stable/macOS/Monal-#{version}.zip"
   name "Monal"
@@ -13,7 +13,7 @@ cask "monal" do
   end
 
   conflicts_with cask: "monal@beta"
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Monal.app"
 

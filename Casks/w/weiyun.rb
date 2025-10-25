@@ -1,6 +1,6 @@
 cask "weiyun" do
-  version "5.2.1423"
-  sha256 "2159b494872b1749e3a850ca786b247a5340a1ca38257fb03f57cfc0198fa1fc"
+  version "5.2.1540"
+  sha256 "bcf63da68a5843475182615e8f8871b953064e9b2e91c4900b65bd5f264dc30f"
 
   url "https://dldir1.qq.com/weiyun/electron-update/release/#{version}/Weiyun-mac-x64-#{version}.dmg",
       verified: "dldir1.qq.com/weiyun/"
@@ -10,7 +10,9 @@ cask "weiyun" do
 
   livecheck do
     url "https://jsonschema.qpic.cn/2993ffb0f5d89de287319113301f3fca/179b0d35c9b088e5e72862a680864254/config"
-    regex(/Weiyun[._-]mac[._-]x64[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :json do |json|
+      json.dig("electron_mac", "version")
+    end
   end
 
   app "Weiyun.app"

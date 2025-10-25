@@ -1,51 +1,48 @@
 cask "microsoft-edge@dev" do
-  linkid = on_arch_conditional arm: "2099619", intel: "2069340"
+  version "143.0.3624.0,c2b2ecf1-1e76-4829-82ee-1429d45891b3"
+  sha256 "28b487c046d154c2ba3f885f29a1ac60526ea2ad49d043d26fb6b95c9bee2d2e"
 
-  on_arm do
-    version "128.0.2677.1,673b55ea-8721-4fb9-91eb-f31646fa7396"
-    sha256 "714fce1dbea8acad5d40b8f28ef55b40d647c76c105d58db2bf81884d1d3b29b"
-  end
-  on_intel do
-    version "128.0.2677.1,78fd5b2a-772d-4858-a39f-0422319d82ba"
-    sha256 "289907ef07ecd4cb18aed64aea2b5e01170d6e4f653f0e7e4295a8c0d1d044ab"
-  end
-
-  url "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/#{version.csv.second}/MicrosoftEdgeDev-#{version.csv.first}.pkg"
+  url "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/#{version.csv.second}/MicrosoftEdgeDev-#{version.csv.first}.dmg"
   name "Microsoft Edge Dev"
   desc "Multi-platform web browser"
   homepage "https://www.microsoft.com/en-us/edge/download/insider?form="
 
   livecheck do
-    url "https://go.microsoft.com/fwlink/?linkid=#{linkid}"
-    regex(%r{/([^/]+)/MicrosoftEdgeDev[._-]v?(\d+(?:\.\d+)+)\.pkg}i)
+    url "https://go.microsoft.com/fwlink/?linkid=2093292"
+    regex(%r{/([^/]+)/MicrosoftEdgeDev[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[2]},#{match[1]}"
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
-  pkg "MicrosoftEdgeDev-#{version.csv.first}.pkg",
-      choices: [
-        {
-          "choiceIdentifier" => "com.microsoft.package.Microsoft_AutoUpdate.app", # Office16_all_autoupdate.pkg
-          "choiceAttribute"  => "selected",
-          "attributeSetting" => 0,
-        },
-      ]
+  app "Microsoft Edge Dev.app"
 
-  uninstall launchctl: [
-              "com.microsoft.EdgeUpdater.update-internal.109.0.1518.89.system",
-              "com.microsoft.EdgeUpdater.update.system",
-              "com.microsoft.EdgeUpdater.wake.109.0.1518.89.system",
-              "com.microsoft.EdgeUpdater.wake.system",
-            ],
-            pkgutil:   "com.microsoft.edgemac.Dev"
+  uninstall launchctl: "com.microsoft.EdgeUpdater.wake"
 
   zap trash: [
-    "~/Library/Application Support/Microsoft Edge Dev",
-    "~/Library/Caches/Microsoft Edge Dev",
-    "~/Library/Preferences/com.microsoft.edgemac.Dev.plist",
-    "~/Library/Saved Application State/com.microsoft.edgemac.Dev.savedState",
-  ]
+        "~/Library/Application Scripts/com.microsoft.edgemac.wdgExtension.Dev",
+        "~/Library/Application Support/Microsoft Edge Dev",
+        "~/Library/Application Support/Microsoft/EdgeUpdater",
+        "~/Library/Caches/com.microsoft.edgemac.Dev",
+        "~/Library/Caches/com.microsoft.EdgeUpdater",
+        "~/Library/Caches/Microsoft Edge Dev",
+        "~/Library/Containers/com.microsoft.edgemac.wdgExtension.Dev",
+        "~/Library/HTTPStorages/com.microsoft.edgemac.Dev",
+        "~/Library/HTTPStorages/com.microsoft.EdgeUpdater",
+        "~/Library/LaunchAgents/com.microsoft.EdgeUpdater.*.plist",
+        "~/Library/Microsoft/MicrosoftSoftwareUpdate/Actives/com.microsoft.edgemac.Dev",
+        "~/Library/Preferences/com.microsoft.edgemac.Dev.plist",
+        "~/Library/Saved Application State/com.microsoft.edgemac.Dev.savedState",
+        "~/Library/WebKit/com.microsoft.edgemac.Dev",
+      ],
+      rmdir: [
+        "~/Library/Application Support/Microsoft",
+        "~/Library/Microsoft",
+      ]
 end

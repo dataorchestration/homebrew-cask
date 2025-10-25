@@ -8,9 +8,7 @@ cask "goldendict" do
   desc "Feature-rich dictionary lookup program"
   homepage "http://goldendict.org/"
 
-  deprecate! date: "2023-12-17", because: :discontinued
-
-  depends_on macos: ">= :sierra"
+  disable! date: "2024-12-16", because: :discontinued
 
   app "GoldenDict.app"
   binary "#{appdir}/GoldenDict.app/Contents/MacOS/GoldenDict"

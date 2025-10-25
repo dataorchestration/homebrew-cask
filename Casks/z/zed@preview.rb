@@ -1,9 +1,9 @@
 cask "zed@preview" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.144.2"
-  sha256 arm:   "11e270167329abf9b6b411d5a8f0477b5f217b6bbc0b5d0dedf4f9023484783d",
-         intel: "4fb3ab4482cb7f76b494d501c1ee0fcc86fec6116b4f33773d9ffab8133d26dc"
+  version "0.210.1"
+  sha256 arm:   "3466ab8085120068931415e1fb1a37a62e5f3664f4a1179a56a3d8927be4671d",
+         intel: "f0b0ec96584e4370624eac2b6e339ef01ba035e42964708b643ea7065d8a1a1b"
 
   url "https://zed.dev/api/releases/preview/#{version}/Zed-#{arch}.dmg"
   name "Zed Preview"
@@ -11,12 +11,13 @@ cask "zed@preview" do
   homepage "https://zed.dev/"
 
   livecheck do
-    url "https://zed.dev/releases/preview"
-    regex(%r{href=.*?/preview/(\d+(?:\.\d+)+)/Zed(?:-aarch64)?\.dmg}i)
+    url "https://zed.dev/api/releases/latest?asset=Zed.dmg&preview=1&os=macos&arch=#{arch}"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
 
   app "Zed Preview.app"
   binary "#{appdir}/Zed Preview.app/Contents/MacOS/cli", target: "zed-preview"
@@ -26,6 +27,7 @@ cask "zed@preview" do
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/dev.zed.zed-preview.sfl*",
     "~/Library/Application Support/Zed",
     "~/Library/Caches/dev.zed.Zed-Preview",
+    "~/Library/Caches/Zed",
     "~/Library/HTTPStorages/dev.zed.Zed-Preview",
     "~/Library/Logs/Zed",
     "~/Library/Preferences/dev.zed.Zed-Preview.plist",

@@ -2,9 +2,9 @@ cask "libreoffice-still" do
   arch arm: "aarch64", intel: "x86-64"
   folder = on_arch_conditional arm: "aarch64", intel: "x86_64"
 
-  version "7.6.7"
-  sha256 arm:   "17686aff42734ea4feef08e1189bab3011220000f7784061314c1ae9e5942531",
-         intel: "42d2eeaeee7bcb0e76e9decdcb8f5a4beebf133ad31f7d42a5e96ea770860110"
+  version "25.2.6"
+  sha256 arm:   "b1c4b78fdaea8bd42461ad3bee264d5d281827dfcfdc1a567c64bc512ccde8b3",
+         intel: "98cf9a9b72ef805e336f5d0f9b1b3e37fbcfcb62bb5b1e8eb5fd114ae10f2256"
 
   url "https://download.documentfoundation.org/libreoffice/stable/#{version}/mac/#{folder}/LibreOffice_#{version}_MacOS_#{arch}.dmg",
       verified: "download.documentfoundation.org/libreoffice/stable/"
@@ -12,22 +12,50 @@ cask "libreoffice-still" do
   desc "Free cross-platform office suite, stable version recommended for enterprises"
   homepage "https://www.libreoffice.org/"
 
-  # LibreOffice "still" releases are the stable versions with a lower
-  # major/minor.
+  # This checks the same source of version information as the `libreoffice`
+  # cask, so we need to make sure that the former always checks a page that
+  # provides the latest versions for both Fresh and Still.
+  #
+  # This check uses data from endoflife.date to filter out EOL versions, as the
+  # second version on the main Wiki page may be end of life. When this occurs,
+  # Fresh and Still are the same version until there's a new Fresh release with
+  # a higher major/minor. For example, the main Wiki page lists 25.2.5 and
+  # 24.8.7 but 24.8 is EOL, so 25.2.5 is the newest Still release. When neither
+  # version is EOL, the higher version is Fresh and the lower version is Still.
   livecheck do
-    url "https://download.documentfoundation.org/libreoffice/stable/"
-    regex(%r{href=["']v?(\d+(?:\.\d+)+)/?["' >]}i)
+    url "https://wiki.documentfoundation.org/Main_Page"
+    regex(/>\s*Download\s+LibreOffice\s+v?(\d+(?:\.\d+)+)\s*</im)
     strategy :page_match do |page, regex|
+      # Identify the version(s) on the main Wiki page
       versions = page.scan(regex).map(&:first)
-      uniq_major_minor = versions.map { |version| Version.new(version).major_minor }.uniq.sort.reverse
+      uniq_major_minor = versions.map { |version| Version.new(version).major_minor.to_s }.uniq.sort.reverse
       next if uniq_major_minor.length < 2
 
-      versions.select { |version| Version.new(version).major_minor == uniq_major_minor[1] }
+      # Fetch the EOL data from endoflife.date
+      eol_page = Homebrew::Livecheck::Strategy.page_content("https://endoflife.date/api/v1/products/libreoffice/")
+      next if (eol_content = eol_page[:content]).blank?
+
+      # Collect EOL major/minor versions
+      eol_json = Homebrew::Livecheck::Strategy::Json.parse_json(eol_content)
+      eol_major_minor = eol_json.dig("result", "releases")&.filter_map do |release|
+        next unless release["isEol"]
+
+        release["name"]
+      end&.uniq
+      next if eol_major_minor.blank?
+
+      # Identify the major/minor to use as Still
+      still_major_minor = if eol_major_minor.include?(uniq_major_minor[1])
+        uniq_major_minor[0]
+      else
+        uniq_major_minor[1]
+      end
+
+      versions.select { |version| Version.new(version).major_minor == still_major_minor }
     end
   end
 
   conflicts_with cask: "libreoffice"
-  depends_on macos: ">= :catalina"
 
   app "LibreOffice.app"
   binary "#{appdir}/LibreOffice.app/Contents/MacOS/gengal"

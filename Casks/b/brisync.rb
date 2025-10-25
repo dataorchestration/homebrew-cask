@@ -7,7 +7,7 @@ cask "brisync" do
   desc "Utility to automatically control the brightness of external displays"
   homepage "https://github.com/czarny/Brisync/"
 
-  depends_on macos: ">= :sierra"
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "Brisync.app"
 

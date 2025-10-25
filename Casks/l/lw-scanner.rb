@@ -1,8 +1,11 @@
 cask "lw-scanner" do
-  version "0.24.0"
-  sha256 "a2bbd9b615143ca1f63824fa335d49da9dd2744a58776bff1c9a85e6bcd3c34e"
+  arch arm: "arm64", intel: "amd64"
 
-  url "https://github.com/lacework/lacework-vulnerability-scanner/releases/download/v#{version}/lw-scanner-darwin-amd64",
+  version "0.27.8"
+  sha256 arm:   "cc59ef0a957fa06cc67f4bba7df3dcd31fb8390291aa8899310fe5a2094217d8",
+         intel: "3726ec23121655360f6d5c036dfeeb55a4bfa4c720ebd6021591c45509883fb8"
+
+  url "https://github.com/lacework/lacework-vulnerability-scanner/releases/download/v#{version}/lw-scanner-darwin-#{arch}.zip",
       verified: "github.com/lacework/lacework-vulnerability-scanner/"
   name "Lacework vulnerability scanner"
   desc "Lacework inline scanner"
@@ -13,11 +16,7 @@ cask "lw-scanner" do
     strategy :github_latest
   end
 
-  binary "lw-scanner-darwin-amd64", target: "lw-scanner"
+  binary "bin/lw-scanner"
 
   zap trash: "~/.config/lw-scanner"
-
-  caveats do
-    requires_rosetta
-  end
 end

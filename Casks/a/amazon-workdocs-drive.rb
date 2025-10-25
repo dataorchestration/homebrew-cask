@@ -1,24 +1,13 @@
 cask "amazon-workdocs-drive" do
   arch arm: "mac_v2", intel: "mac"
 
+  sha256 :no_check
+
   on_arm do
     version "1.0.11931.0"
-    sha256 :no_check
-
-    livecheck do
-      url :url
-      strategy :extract_plist
-    end
   end
   on_intel do
     version "1.0.10729.0"
-    sha256 :no_check
-
-    livecheck do
-      strategy :extract_plist do |items|
-        items["com.Amazon.WorkDocs.Drive"].short_version
-      end
-    end
   end
 
   url "https://d3f2hupz96ggz3.cloudfront.net/#{arch}/AmazonWorkDocsDrive.pkg",
@@ -27,7 +16,7 @@ cask "amazon-workdocs-drive" do
   desc "Fully managed, secure enterprise storage and sharing service"
   homepage "https://aws.amazon.com/workdocs/"
 
-  depends_on macos: ">= :el_capitan"
+  disable! date: "2025-04-25", because: :discontinued
 
   pkg "AmazonWorkDocsDrive.pkg"
 

@@ -1,9 +1,9 @@
 cask "macwhisper" do
-  version "8.11,825"
-  sha256 "92c5bcd96fb60cff4579337c08cfd82640fd2c211f4b56f4e552191724d1ae50"
+  version "12.18.3,1293,B"
+  sha256 "e9d41224e6e379fc50202cb95919991f209ce0ea87aaa4d3d27e464efd5be165"
 
-  url "https://stickytimers.app/macwhisper/MacWhisper-#{version.csv.second}.zip",
-      verified: "stickytimers.app/macwhisper/"
+  url "https://cdn.macwhisper.com/macwhisper/MacWhisper-#{version.csv.second}#{"_#{version.csv.third}" if version.csv.third}.zip",
+      verified: "cdn.macwhisper.com/"
   name "MacWhisper"
   desc "Speech recognition tool"
   homepage "https://goodsnooze.gumroad.com/l/macwhisper"
@@ -12,13 +12,19 @@ cask "macwhisper" do
   # to work with all of the items in the feed (not just the newest one).
   livecheck do
     url "https://macwhisper-site.vercel.app/appcast.xml"
-    strategy :sparkle do |items|
-      items.map { |item| "#{item.short_version},#{item.version}" }
+    regex(/MacWhisper[._-]v?(?:\d+(?:\.\d+)*)(?:_(\h+))?\.zip/i)
+    strategy :sparkle do |items, regex|
+      items.map do |item|
+        version_suffix = item.url.match(regex)
+        next item.nice_version if version_suffix.blank?
+
+        "#{item.nice_version},#{version_suffix[1]}"
+      end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :sonoma"
 
   app "MacWhisper.app"
 

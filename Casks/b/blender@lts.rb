@@ -1,9 +1,9 @@
 cask "blender@lts" do
   arch arm: "arm64", intel: "x64"
 
-  version "3.6.13"
-  sha256 arm:   "07cf647e30c4b8df757c49531a5e316a1355aab38ba21aab1388696d01be335d",
-         intel: "f8b7c7a42b51a6c721aece77cd40d23b1c97d5c71b3d32ae7c52bee6189176f4"
+  version "4.5.3"
+  sha256 arm:   "73ea841053b55404bb3a71a9a22366f1f8821787fe5c899f8b55a7fff929d01b",
+         intel: "c1fd8f30eef1b37918659ad65c504d30cebd3e5bac74dd54f7df1a311aeebe18"
 
   url "https://download.blender.org/release/Blender#{version.major_minor}/blender-#{version}-macos-#{arch}.dmg"
   name "Blender"
@@ -29,7 +29,7 @@ cask "blender@lts" do
       next if lts_versions.blank?
 
       version_page = Homebrew::Livecheck::Strategy.page_content("https://www.blender.org/download/lts/#{lts_versions.max}/")
-      next [] if version_page[:content].blank?
+      next if version_page[:content].blank?
 
       # If the version page has a download link, return it as the livecheck version
       matched_versions = version_page[:content].scan(regex).flatten
@@ -44,7 +44,7 @@ cask "blender@lts" do
   end
 
   conflicts_with cask: "blender"
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Blender.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

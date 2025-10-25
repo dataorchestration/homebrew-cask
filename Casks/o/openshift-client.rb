@@ -1,9 +1,9 @@
 cask "openshift-client" do
   arch arm: "-arm64"
 
-  version "4.16.3"
-  sha256 arm:   "1418af2fea261e40d63f3194a0a5a517d94e34d7c682cb3e781a513ef8efe0b0",
-         intel: "daaa4ac71947e8962a911f182be81d7cf8884ecbcf6c75895f01f1f13fc01ed1"
+  version "4.20.1"
+  sha256 arm:   "5a8d4d585de7b611ae648cf5570512d18e34fcc205116729caddb89411d80094",
+         intel: "4106e686e04c378779498c275e6b157506bae74db3a80e311b7c16fac3d86bfc"
 
   url "https://mirror.openshift.com/pub/openshift-v#{version.major}/clients/ocp/#{version}/openshift-client-mac#{arch}.tar.gz"
   name "Openshift Client"
@@ -14,6 +14,8 @@ cask "openshift-client" do
     url "https://mirror.openshift.com/pub/openshift-v#{version.major}/clients/ocp/"
     regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   binary "oc"
 

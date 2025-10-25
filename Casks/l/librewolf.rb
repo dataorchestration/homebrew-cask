@@ -1,30 +1,25 @@
 cask "librewolf" do
   arch arm: "arm64", intel: "x86_64"
 
-  on_arm do
-    version "128.0,2"
-    sha256 "caf2d0d855b3a36d980ebaaffba73169762e9f2b4256bb8602c5b259a60e2102"
-  end
-  on_intel do
-    version "128.0,2"
-    sha256 "3de49dc1881d926f2f554a6079134004e1379d54aec316ac7a6ab97bc29de44a"
-  end
+  version "144.0,1"
+  sha256 arm:   "096cc31a22f6a85f6a2141228d00d30eda8fed50cf65d6cd752077d72e85d645",
+         intel: "704f338564d65c3e27da2da85b8fec0491564b4912965f4aca854ce57fa53544"
 
-  url "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/#{version.csv.first}-#{version.csv.second}/librewolf-#{version.csv.first}-#{version.csv.second}-macos-#{arch}-package.dmg",
+  url "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/#{version.tr(",", "-")}/librewolf-#{version.tr(",", "-")}-macos-#{arch}-package.dmg",
       verified: "gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/"
   name "LibreWolf"
   desc "Web browser"
   homepage "https://librewolf.net/"
 
   livecheck do
-    url "https://gitlab.com/api/v4/projects/44042130/releases"
-    regex(/librewolf[._-]v?(\d+(?:\.\d+)+)[._-](\d+)[._-]macos[._-]#{arch}[._-]package\.dmg/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map do |match|
-        "#{match[0]},#{match[1]}"
-      end
+    url "https://gitlab.com/librewolf-community/browser/bsys6.git"
+    regex(/^v?(\d+(?:[.-]\d+)+)$/i)
+    strategy :git do |tags, regex|
+      tags.map { |tag| tag[regex, 1]&.tr("-", ",") }
     end
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   app "LibreWolf.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

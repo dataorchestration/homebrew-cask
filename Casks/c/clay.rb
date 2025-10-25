@@ -1,6 +1,6 @@
 cask "clay" do
-  version "2.17.9"
-  sha256 "c49d5fde435763e16e0fd67b3c452e1a6be79fe94971b4280a4d3c92ec88df09"
+  version "2.18.21"
+  sha256 "91b8ef6b50797c73870a8e906a4ac2c8ea9890c7c551e95942ebec680bdf8b6d"
 
   url "https://assets.clay.earth/desktop/mac/Clay-#{version}-universal.dmg"
   name "Clay"
@@ -13,7 +13,7 @@ cask "clay" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :monterey"
 
   app "Clay.app"
 

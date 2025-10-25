@@ -1,9 +1,9 @@
 cask "prowlarr" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.20.1.4603"
-  sha256 arm:   "a90ab43a3e15d409f9952a81c2d2477bef04a3804b819aec66c74b905bdbebc2",
-         intel: "a7eb608fd13439508dc667799c6b71f41d63279f8e2038195c74bf1d1c52cc30"
+  version "2.0.5.5160"
+  sha256 arm:   "28bf4cf0a0c01d74d09cbe35a3d6bedbc75a1ac87a23bfad2ee4023733c43381",
+         intel: "3b9972b8d270af07213dbfd4e7fc0e038c113d1582ef3c38787694fe59235bd2"
 
   url "https://github.com/Prowlarr/Prowlarr/releases/download/v#{version}/Prowlarr.master.#{version}.osx-app-core-#{arch}.zip",
       verified: "github.com/Prowlarr/Prowlarr/"
@@ -12,12 +12,15 @@ cask "prowlarr" do
   homepage "https://prowlarr.com/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://prowlarr.servarr.com/v1/update/master/changes?os=osx&arch=#{arch}"
+    strategy :json do |json|
+      json.map { |item| item["version"] }
+    end
   end
 
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
+
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Prowlarr.app"
 

@@ -1,9 +1,9 @@
 cask "tinkerwell" do
   arch arm: "-arm64"
 
-  version "4.18.0"
-  sha256 arm:   "7d05048f972cf0a7026e8de9f2007b0deca55a8c827738406c811b7a1b3b5b34",
-         intel: "35a09a2a7e93d544aa2bf493ac385b5e6f9df9d51177af6333bf0bfef97f82c1"
+  version "5.5.0"
+  sha256 arm:   "79fd0e9fe3f6949229ba3e63c508ec57184289d5896d665d613239bde106ed9a",
+         intel: "bef79bdc78dac80b79ccb31fce404cde326c7924cd9a1c37df0097e92b83344c"
 
   url "https://download.tinkerwell.app/tinkerwell/Tinkerwell-#{version}#{arch}.dmg"
   name "Tinkerwell"
@@ -14,6 +14,8 @@ cask "tinkerwell" do
     url "https://download.tinkerwell.app/tinkerwell/latest-mac.yml"
     strategy :electron_builder
   end
+
+  disable! date: "2026-09-01", because: :fails_gatekeeper_check
 
   auto_updates true
 

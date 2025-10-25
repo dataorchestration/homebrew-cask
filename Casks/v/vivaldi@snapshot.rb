@@ -1,6 +1,6 @@
 cask "vivaldi@snapshot" do
-  version "6.9.3405.3"
-  sha256 "eb6983ee17768915851d7e3d88f3436a3f09c4beaedb4341a8985c58fc8f49b7"
+  version "7.7.3845.3"
+  sha256 "8f3380a633f7e22afd6827c59ac90425f35b7e989e88dbb60ca7b78e453bccdc"
 
   url "https://downloads.vivaldi.com/snapshot-auto/Vivaldi.#{version}.universal.tar.xz"
   name "Vivaldi Snapshot"
@@ -13,13 +13,16 @@ cask "vivaldi@snapshot" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "Vivaldi Snapshot.app"
 
   uninstall quit: "com.vivaldi.Vivaldi.snapshot"
 
   zap trash: [
+    "/Library/Logs/DiagnosticReports/Vivaldi Helper (Renderer)_*.diag",
+    "/Library/Logs/DiagnosticReports/Vivaldi Snapshot_*.diag",
+    "~/Library/Application Support/CrashReporter/Vivaldi Snapshot_*.plist",
     "~/Library/Application Support/Vivaldi Snapshot",
     "~/Library/Caches/com.vivaldi.Vivaldi.snapshot",
     "~/Library/Caches/Vivaldi Snapshot",

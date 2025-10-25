@@ -1,9 +1,9 @@
 cask "phoenix-code" do
   arch arm: "aarch64", intel: "x64"
 
-  version "3.8.8"
-  sha256 arm:   "5e22f890b090ff3313d58a47f0b7efc616855bcbf98d8d487f8cffa71db451f2",
-         intel: "0b22b912b44ba4cfd41dfef26839ce86111621107ea9c37ef87ec1bfb60f37eb"
+  version "4.0.3"
+  sha256 arm:   "6eb5238eb6e2bf53b4ec976faf9ae5a035a409dc74776ad56f09eed6020702d2",
+         intel: "c88f999d6d51f1a70a8463b6d7f30da97dfc442dac917819dee391a2c201f885"
 
   url "https://github.com/phcode-dev/phoenix-desktop/releases/download/prod-app-v#{version}/Phoenix.Code_#{version}_#{arch}.dmg",
       verified: "github.com/phcode-dev/phoenix-desktop/"
@@ -12,12 +12,13 @@ cask "phoenix-code" do
   homepage "https://phcode.io/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://updates.phcode.io/tauri/update-latest-stable-prod.json"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "Phoenix Code.app"
 

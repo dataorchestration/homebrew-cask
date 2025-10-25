@@ -1,8 +1,9 @@
 cask "rustrover" do
   arch arm: "-aarch64"
 
-  version "2024.1.5,241.17890.39"
-  sha256 :no_check
+  version "2025.2.3,252.26830.136"
+  sha256 arm:   "3ebf05feabd5858df21b0215dec39142427b4df50d929c0d94751425478d295d",
+         intel: "7c9e08ded178f233cabc8b0bebdda8504ef10a6afaf1856b33da582d69ca378d"
 
   url "https://download.jetbrains.com/rustrover/RustRover-#{version.csv.first}#{arch}.dmg"
   name "RustRover"
@@ -12,17 +13,29 @@ cask "rustrover" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=RR&latest=true&type=release"
     strategy :json do |json|
-      json["RR"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["RR"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "RustRover.app"
-  binary "#{appdir}/RustRover.app/Contents/MacOS/rustrover"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/rustrover.wrapper.sh"
+  binary shimscript, target: "rustrover"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/RustRover.app/Contents/MacOS/rustrover' "$@"
+    EOS
+  end
 
   zap trash: [
     "~/Library/Application Support/JetBrains/RustRover#{version.major_minor}",

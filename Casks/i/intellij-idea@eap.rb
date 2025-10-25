@@ -1,9 +1,9 @@
 cask "intellij-idea@eap" do
   arch arm: "-aarch64"
 
-  version "2024.2,242.20224.38"
-  sha256 arm:   "e174a98b60ffc9b3bd0eae154a7acc03885475507805816867ded641dcd32474",
-         intel: "5437ddaea984500ab9c2f2fadf54cf3743e74e916f8f8c7c7eacc615be39f012"
+  version "2025.3,253.27864.23"
+  sha256 arm:   "b82916ec072587ee8cd973cc8434fd6c1b1e813019b3138b42329adff71cfe13",
+         intel: "61c59c14f952220b0596e40c41096ccbd822361622e51641c8f00628ae98505c"
 
   url "https://download.jetbrains.com/idea/ideaIU-#{version.csv.second}#{arch}.dmg"
   name "IntelliJ IDEA EAP"
@@ -13,16 +13,24 @@ cask "intellij-idea@eap" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=IIU&release.type=eap"
     strategy :json do |json|
-      json["IIU"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["IIU"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  conflicts_with cask: "intellij-idea"
 
-  app "IntelliJ IDEA #{version.csv.first} EAP.app"
+  # The application path is often inconsistent between version
+  rename "IntelliJ IDEA*.app", "IntelliJ IDEA.app"
+
+  app "IntelliJ IDEA.app"
+  binary "#{appdir}/IntelliJ IDEA.app/Contents/MacOS/idea"
 
   uninstall_postflight do
     ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "idea") }.each do |path|

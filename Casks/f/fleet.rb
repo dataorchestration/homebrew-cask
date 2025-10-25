@@ -2,9 +2,9 @@ cask "fleet" do
   arch arm: "aarch64", intel: "x64"
   arch_suffix = on_arch_conditional arm: "-aarch64"
 
-  version "1.37.84"
-  sha256 arm:   "07ff70820e64c57b32b2fad269486d9208ae37a21b6f0b1fd712f33377bb8adc",
-         intel: "51c7d9cca576799264d8e8774e314a92cf7178336730f963bb818fc86a037d34"
+  version "1.48.261"
+  sha256 arm:   "09e0d68820830e3ef43161f1d3d39a5ff3075ae90b0bfaa48b9b33a6bcf5d4ae",
+         intel: "5a0fddbdbd28f108ecaee818e3859028cf215a7aa001c04163fe3800fb6da1b6"
 
   url "https://download.jetbrains.com/fleet/installers/macos_#{arch}/Fleet-#{version}#{arch_suffix}.dmg"
   name "Fleet"
@@ -17,8 +17,6 @@ cask "fleet" do
       json["FL"]&.map { |release| release["version"] }
     end
   end
-
-  depends_on macos: ">= :high_sierra"
 
   app "Fleet.app"
   binary "#{appdir}/Fleet.app/Contents/app/bin/fleet"

@@ -1,6 +1,6 @@
 cask "abstract" do
-  version "98.3.3"
-  sha256 "e19e3de0f26d13094a9f8b540ae041bb0cad24c8b0797578ad622036712ed442"
+  version "98.6.2"
+  sha256 "744dd1dfcafaf43d7c1216e10f38bb6888d91ddfec207852652158bc78636bc3"
 
   url "https://downloads.goabstract.com/mac/Abstract-#{version}.zip"
   name "Abstract"
@@ -8,12 +8,14 @@ cask "abstract" do
   homepage "https://www.goabstract.com/"
 
   livecheck do
-    url "https://api.goabstract.com/releases/latest/download"
-    strategy :header_match
+    url "https://api.goabstract.com/releases/latest"
+    strategy :json do |json|
+      json["version"]
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Abstract.app"
 

@@ -1,12 +1,12 @@
 cask "font-monocraft-nerd-font" do
-  version "3.0"
-  sha256 "431329f14c1c4635b248d1d6a0d797dac5fdb5e678fad0858fe0c6e356b3b17c"
+  version "4.1"
+  sha256 "114879c755a8fed955e658868998371cabbb531b0ba7b994d5478c63d29b22d8"
 
-  url "https://github.com/IdreesInc/Monocraft/releases/download/v#{version}/Monocraft-nerd-fonts-patched.ttf"
+  url "https://github.com/IdreesInc/Monocraft/releases/download/v#{version}/Monocraft-nerd-fonts-patched.ttc"
   name "Monocraft with Nerd glyphs"
   homepage "https://github.com/IdreesInc/Monocraft"
 
-  font "Monocraft-nerd-fonts-patched.ttf"
+  font "Monocraft-nerd-fonts-patched.ttc"
 
   # No zap stanza required
 end

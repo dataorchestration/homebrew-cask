@@ -1,9 +1,9 @@
 cask "tiger-trade" do
-  version "8.27.2,6C0EF9"
-  sha256 "a7fde299d6855913e98b85b588bbfd822f10b6b01070f44467df0fe6eb68b126"
+  version "9.10.3"
+  sha256 "daa9f3537d65a0d9a052f6042aed93ad463761c654891daf8de71ad5fc83fb3e"
 
-  url "https://s.tigerfintech.com/desktop/cdn/f/TigerTrade_#{version.tr(",", "_")}.dmg",
-      verified: "s.tigerfintech.com/"
+  url "https://download.tigerfintech.com/desktop/cdn/f/TigerTrade_#{version}.dmg",
+      verified: "download.tigerfintech.com/"
   name "Tiger Trade"
   name "老虎证券"
   desc "Trading platform"
@@ -11,15 +11,11 @@ cask "tiger-trade" do
 
   livecheck do
     url "https://up.play-analytics.com/app/upgrade/latest?lang=zh_CN&platform=darwin&appVer=1"
-    strategy :page_match do |page|
-      match = page.match(/downloadUrl.*?TigerTrade[._-]v?(\d+(?:\.\d+)+)[._-](\h+).dmg/i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
+    regex(/TigerTrade[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :json do |json, regex|
+      json["downloadUrl"]&.[](regex, 1)
     end
   end
-
-  depends_on macos: ">= :sierra"
 
   app "Tiger Trade.app"
 

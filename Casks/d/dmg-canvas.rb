@@ -1,6 +1,6 @@
 cask "dmg-canvas" do
-  version "4.0.9"
-  sha256 "8669199eaea768cf8c71a6fe6939a8508d45d8040566e220a6a79055396288ca"
+  version "4.2"
+  sha256 "ca45ca04c6550a0699a6ac7f9834a516e13651d1a7e41cb2df9e480ba7c5bbf2"
 
   url "https://arweb-assets.s3.amazonaws.com/downloads/dmgcanvas/versions/DMGCanvas#{version}.zip",
       verified: "arweb-assets.s3.amazonaws.com/downloads/dmgcanvas/"

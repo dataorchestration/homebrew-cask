@@ -1,6 +1,6 @@
 cask "favro" do
-  version "1.0.124"
-  sha256 "7d2f607636567ceeca2410bb61d722c7942ba4ccb3108dda5224aa1566dec68c"
+  version "1.0.185"
+  sha256 "73bbef57897f731042e660d88dc00bc0df7569fe06539f5aca083dcb401f90d5"
 
   url "https://download.favro.com/FavroDesktop/macOS/x64/Favro-#{version}.dmg"
   name "Favro"
@@ -9,8 +9,12 @@ cask "favro" do
 
   livecheck do
     url "https://download.favro.com/FavroDesktop/macOS/x64/Latest.json"
-    regex(/Favro[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :json do |json|
+      json["VersionString"]
+    end
   end
+
+  depends_on macos: ">= :monterey"
 
   app "Favro.app"
 

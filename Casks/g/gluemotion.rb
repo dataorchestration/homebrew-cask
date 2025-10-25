@@ -1,6 +1,6 @@
 cask "gluemotion" do
-  version "2.2.2"
-  sha256 "cd9fe2194cef815948d3fabfcb27a6a8e532b8658eeadc820a76ae137c16b873"
+  version "2.2.4"
+  sha256 "2b08b4799596a56e0dfae2cdf20202cd3e644c3e817c73e4ca46c5bf47891887"
 
   url "https://neededapps.com/appcasts/gluemotion/versions/#{version}"
   name "GlueMotion"
@@ -12,6 +12,7 @@ cask "gluemotion" do
     strategy :sparkle, &:short_version
   end
 
+  auto_updates true
   depends_on macos: ">= :big_sur"
 
   app "GlueMotion.app"

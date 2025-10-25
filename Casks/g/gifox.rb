@@ -1,6 +1,6 @@
 cask "gifox" do
-  version "2.6.4,020604.00"
-  sha256 "bde0124b76de0232f1ba85dcbe95e1cdd9a399e482198eaedfad3b9ae6aa1558"
+  version "2.7.2+0,020702.00"
+  sha256 "468a344f5585941914d1a048cab96b02b6caf9846716f0c0b825744357a6df8b"
 
   url "https://d1fqctmfkpkkcg.cloudfront.net/gifox/#{version.csv.second}.dmg",
       verified: "d1fqctmfkpkkcg.cloudfront.net/gifox/"
@@ -8,17 +8,21 @@ cask "gifox" do
   desc "GIF recording and sharing"
   homepage "https://gifox.io/"
 
+  # The Sparkle feed contains unstable versions that contain `beta` in the
+  # title and `shortVersionString`, so we only match stable versions.
   livecheck do
-    url "https://gifox.io/download/latest"
-    regex(%r{/(\d(\d)\d(\d)\d(\d).\d\d)\.dmg}i)
-    strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        "#{match[1]}.#{match[2]}.#{match[3]},#{match[0]}"
+    url "https://d1fqctmfkpkkcg.cloudfront.net/gifox/appcast.xml"
+    regex(/^v?(\d+(?:[.+]\d+)+)$/i)
+    strategy :sparkle do |items, regex|
+      items.filter_map do |item|
+        next unless item.short_version&.match?(regex)
+
+        item.nice_version
       end
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  auto_updates true
 
   app "Gifox.app"
 

@@ -1,19 +1,19 @@
 cask "proxyman" do
-  version "5.6.1,50601"
-  sha256 "c3436362b236a44c4a7238bf216ca7a9910fa8999f1dd4930963b70fd5ad528f"
+  version "6.0.1,60001"
+  sha256 "6617c11c3f8516a2f1b72c801f9d2e3b66f5584c4e2e23cce486119d40ab9ecd"
 
-  url "https://download.proxyman.io/#{version.csv.second}/Proxyman_#{version.csv.first}.dmg"
+  url "https://download.proxyman.com/#{version.csv.second}/Proxyman_#{version.csv.first}.dmg"
   name "Proxyman"
   desc "HTTP debugging proxy"
-  homepage "https://proxyman.io/"
+  homepage "https://proxyman.com/"
 
   livecheck do
-    url "https://proxyman.io/osx/version.xml"
+    url "https://proxyman.com/osx/version.xml"
     strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "Proxyman.app"
   binary "#{appdir}/Proxyman.app/Contents/MacOS/proxyman-cli"

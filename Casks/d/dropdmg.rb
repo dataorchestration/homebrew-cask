@@ -1,6 +1,6 @@
 cask "dropdmg" do
-  version "3.6.7"
-  sha256 "22ac8e669b96cdf460757b7d1eb90755fd2a89c9da34d861b74b5a05797123ae"
+  version "3.7"
+  sha256 "73e1fac3314297903a623c34fc9968a902d074eaacdddc3428d3193c1c2e7dbd"
 
   url "https://c-command.com/downloads/DropDMG-#{version}.dmg"
   name "DropDMG"
@@ -8,9 +8,19 @@ cask "dropdmg" do
   homepage "https://c-command.com/dropdmg/"
 
   livecheck do
-    url :homepage
-    regex(%r{href=.*?/DropDMG[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
+    url "https://c-command.com/versions.plist"
+    strategy :xml do |xml|
+      item = xml.elements["//key[text()='com.c-command.DropDMG']"]&.next_element
+      next unless item
+
+      version = item.elements["key[text()='Version']"]&.next_element&.text
+      next if version.blank?
+
+      version.strip
+    end
   end
+
+  auto_updates true
 
   app "DropDMG.app"
 
@@ -19,6 +29,8 @@ cask "dropdmg" do
     "~/Library/Automator/DropDMG.action",
     "~/Library/Automator/Expand Disk Image.action",
     "~/Library/Caches/com.c-command.DropDMG",
+    "~/Library/HTTPStorages/com.c-command.DropDMG",
+    "~/Library/Logs/DropDMG",
     "~/Library/Preferences/com.c-command.DropDMG.plist",
   ]
 end

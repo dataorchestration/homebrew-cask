@@ -1,9 +1,9 @@
 cask "webstorm" do
   arch arm: "-aarch64"
 
-  version "2024.1.5,241.18034.50"
-  sha256 arm:   "e55e4671316ad2c2bfc5564516e261b59d139267c18d06d7a62b8f665d86da5e",
-         intel: "45475fda7a66ba5da23091a7d9ec3314c9482b0a31fe9cc40a3a02f243c86e48"
+  version "2025.2.4,252.27397.92"
+  sha256 arm:   "9b0cbc4745a6e1ec2e9fdff4b3df5a12897ccd814746d515dfd52ccb2744fc4e",
+         intel: "dadcde8679597d7bb9d11518207b36a0b44a76407b84bbe7ebedba54db7bd8de"
 
   url "https://download.jetbrains.com/webstorm/WebStorm-#{version.csv.first}#{arch}.dmg"
   name "WebStorm"
@@ -13,17 +13,29 @@ cask "webstorm" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=WS&latest=true&type=release"
     strategy :json do |json|
-      json["WS"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["WS"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
 
   app "WebStorm.app"
-  binary "#{appdir}/WebStorm.app/Contents/MacOS/webstorm"
+  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
+  shimscript = "#{staged_path}/webstorm.wrapper.sh"
+  binary shimscript, target: "webstorm"
+
+  preflight do
+    File.write shimscript, <<~EOS
+      #!/bin/sh
+      exec '#{appdir}/WebStorm.app/Contents/MacOS/webstorm' "$@"
+    EOS
+  end
 
   zap trash: [
     "~/Library/Application Support/JetBrains/WebStorm#{version.major_minor}",

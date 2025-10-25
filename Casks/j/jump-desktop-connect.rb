@@ -1,16 +1,18 @@
 cask "jump-desktop-connect" do
-  version "6.10.28,61028"
-  sha256 :no_check
+  version "7.1.48"
+  sha256 "6e8c0420b4ab36181cc59df74c3184e96e01559dd4ad2470441575f566f2693b"
 
-  url "https://mirror.jumpdesktop.com/downloads/connect/JumpDesktopConnect.dmg"
+  url "https://mirror.jumpdesktop.com/downloads/connect/JumpDesktopConnect-#{version}.dmg"
   name "Jump Desktop Connect"
   desc "Remote desktop app"
   homepage "https://jumpdesktop.com/connect/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://mirror.jumpdesktop.com/downloads/connect/connect-mac.xml"
+    strategy :sparkle, &:short_version
   end
+
+  auto_updates true
 
   pkg ".jdc.sparkle_guided.pkg"
 
@@ -24,7 +26,7 @@ cask "jump-desktop-connect" do
             delete:    "/Library/Application Support/Jump Desktop/Connect/sharedconfig.plist",
             rmdir:     [
               "/Library/Application Support/Jump Desktop",
-              "/Library/Application Support/Jump Desktop/Connect/",
+              "/Library/Application Support/Jump Desktop/Connect",
             ]
 
   zap trash: [

@@ -1,6 +1,6 @@
 cask "subsurface" do
-  version "6.0.5214"
-  sha256 "d40aa79ec9bcc1c4b601bd76b1a49b22a207989901637add55963a8c865e306d"
+  version "6.0.5436"
+  sha256 "2bbfccc666fdfd089cad4c8013aa276d45a093e42b45c71b5c160aecaff1a607"
 
   url "https://subsurface-divelog.org/downloads/Subsurface-#{version}-CICD-release.dmg",
       user_agent: :fake
@@ -13,6 +13,8 @@ cask "subsurface" do
     regex(/href=.*?Subsurface[._-]v?(\d+(?:\.\d+)+)[._-]CICD[._-]release\.dmg/i)
   end
 
+  depends_on macos: ">= :monterey"
+
   app "Subsurface.app"
 
   zap trash: [
@@ -20,4 +22,8 @@ cask "subsurface" do
     "~/Library/Caches/Subsurface",
     "~/Library/Preferences/org.hohndel.subsurface.Subsurface.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

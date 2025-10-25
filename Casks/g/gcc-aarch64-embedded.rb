@@ -3,21 +3,32 @@ cask "gcc-aarch64-embedded" do
   # https://github.com/Homebrew/homebrew-core/pull/45780#issuecomment-569246452
   arch arm: "arm64", intel: "x86_64"
 
-  version "13.3.rel1"
-  pkg_version = "13.3.rel1"
-  gcc_version = "13.3.1"
-  sha256 arm:   "e8d1b044546df16d4f654d72eafe2f68950d39838078d6f32f132de0d6649eee",
-         intel: "2a3e1c4364f401cb206bc95b2fd0c3e58f3dc539db3c4e4b0ecdfcba8267d6a2"
+  pkg_version = nil
+  gcc_version = nil
+  on_arm do
+    version "14.3.rel1"
+    sha256 "82a4987c670f589d3c5b97bc579561365116670ff3c1c67a07fc29fa23aef3b2"
+    pkg_version = "14.3.rel1"
+    gcc_version = "14.3.1"
+    livecheck do
+      url "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads"
+      regex(/href=.*?arm-gnu-toolchain-(\d+\.\d+\.\w+)-darwin-(?:\w+)-aarch64-none-elf\.pkg/i)
+    end
+  end
+  on_intel do
+    version "14.2.rel1"
+    sha256 "4e0da7bc82d316deb7f385d249bf7f87ce06d31b9d6f8b63f9b981a2203cf2ce"
+    pkg_version = "14.2.rel1"
+    gcc_version = "14.2.1"
+    livecheck do
+      skip "Legacy version"
+    end
+  end
 
   url "https://developer.arm.com/-/media/Files/downloads/gnu/#{version}/binrel/arm-gnu-toolchain-#{version}-darwin-#{arch}-aarch64-none-elf.pkg"
   name "GCC ARM Embedded"
   desc "Pre-built GNU bare-metal toolchain for 64-bit Arm processors"
   homepage "https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain"
-
-  livecheck do
-    url "https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads"
-    regex(/href=.*?arm-gnu-toolchain-(\d+\.\d+\.\w+)-darwin-(?:\w+)-aarch64-none-elf.pkg/i)
-  end
 
   pkg "arm-gnu-toolchain-#{version}-darwin-#{arch}-aarch64-none-elf.pkg"
   binary "/Applications/ArmGNUToolchain/#{pkg_version}/aarch64-none-elf/bin/aarch64-none-elf-addr2line"

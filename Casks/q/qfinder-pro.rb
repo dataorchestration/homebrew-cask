@@ -1,15 +1,27 @@
 cask "qfinder-pro" do
-  version "7.11.0.0529"
-  sha256 "2eec8c296f01d29e8f498d6db2146c9685260e38b15b481dfd864c2d1084295f"
+  version "7.13.0,1014"
+  sha256 "40b70d7437d682745fd86f1df5fe9abf64b182c0beb1390bd1f346207a987586"
 
-  url "https://download.qnap.com/Storage/Utility/QNAPQfinderProMac-#{version}.dmg"
+  url "https://download.qnap.com/Storage/Utility/QNAPQfinderProMac-#{version.csv.first}.#{version.csv.second}.dmg"
   name "Qnap Qfinder Pro"
   desc "NAS management application"
   homepage "https://www.qnap.com/en/utilities#utliity_5"
 
   livecheck do
     url "https://update.qnap.com/SoftwareRelease.xml"
-    regex(/QNAPQfinderProMac[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :xml do |xml|
+      item = xml.elements[
+        "//application[productName[text()='Qfinder']]" \
+        "/platform[platformName[text()='Mac_for_QT']]/software",
+      ]
+      next if item.blank?
+
+      version = item.elements["version"]&.text&.strip
+      build = item.elements["buildNumber"]&.text&.strip
+      next if version.blank? || build.blank?
+
+      "#{version},#{build}"
+    end
   end
 
   pkg "Qfinder Pro.pkg"
